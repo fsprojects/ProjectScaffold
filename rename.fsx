@@ -71,10 +71,28 @@ let rev (s:string) =
 let replaceFirst input from to' =
   let r = new System.Text.RegularExpressions.Regex(from)
   r.Replace(input = input,replacement = to', count = 1)
-let rename' path path' =
+let isGit =
+  let exe  = "git"
+  let args = sprintf "status"
+  let git  = (exe,args,root) |||> executeProcess
+  git |> function | Some (x,y,z) -> x = 0 | None -> false
+let renameGit path path' =
   let exe  = "git"
   let args = sprintf "mv \"%s\" \"%s\"" path path'
   (exe,args,root) |||> executeProcess, path, path'
+let renameDirs path path' =
+  System.IO.Directory.Move(path,path') |> ignore
+  (0,"","") |> Some,path,path'
+let renameFiles path path' =
+  System.IO.File.Move(path,path') |> ignore
+  (0,"","") |> Some,path,path'
+let rename' path path' =
+  match isGit with
+  | true -> (path,path') ||> renameGit
+  | false ->
+    match System.IO.File.GetAttributes(path) with
+    | System.IO.FileAttributes.Directory -> (path,path') ||> renameDirs 
+    | _ -> (path,path') ||> renameFiles
 let rename (path:string) from to' =
   let from' = from  |> rev
   let to''  = to'   |> rev
@@ -126,9 +144,13 @@ let updateContent exts atomic' =
     |> Seq.iter(fun (x,y) -> (y,x) ||> copy; y |> delete)
     |> Some
   with ex ->
-    let exe  = "git"
-    let args = sprintf "checkout -- *"
-    let git  = (exe,args,root) |||> executeProcess
+    let git =
+      match isGit with
+      | false -> (0,"","") |> Some // Not really rollback but ...
+      | true ->
+        let exe  = "git"
+        let args = sprintf "checkout -- *"
+        (exe,args,root) |||> executeProcess
     atomic' |> rollback
     log LogLevel.Error (exts,git) ex; None
 
