@@ -150,6 +150,40 @@ as well as using some more general libraries (e.g. <a href="http://www.nunit.org
   </thead>
   <tbody>
     <tr>
+      <td><a href="rename.cmd">rename.cmd</a></td>
+      <td>
+        <p>A simple command script to rename FSharp.ProjectScaffold and
+        FSharp.ProjectTemplate (i.e. calls <a href="rename.fsx">rename.fsx</a>)
+        from the command prompt</p>
+        <p>Example: <code>rename.cmd lib=FSharp.Library
+        proj=FSharp.Project</code> (If called without arguments, the default
+        values for <code>lib=FSharp.Foo</code> and <code>proj=FSharp.Bar</code>
+        will be used)</p>
+      </td>
+    </tr>
+    <tr>
+      <td><a href="rename.sh">rename.sh</a></td>
+      <td>
+        <p>A simple terminal script to rename FSharp.ProjectScaffold and
+        FSharp.ProjectTemplate (i.e. calls <a href="rename.fsx">rename.fsx</a>)
+        from the terminal</p>
+        <p>Example: <code>./rename.sh lib=FSharp.Library
+        proj=FSharp.Project</code> (If called without arguments, the default
+        values for <code>lib=FSharp.Foo</code> and <code>proj=FSharp.Bar</code>
+        will be used)</p>
+      </td>
+    </tr>
+    <tr>
+      <td><a href="rename.fsx">rename.fsx</a></td>
+      <td>
+        <p>A simple F# script to rename FSharp.ProjectScaffold and
+        FSharp.ProjectTemplate to a custom user defined names. The renaming as
+        well as the neccesary changes to content of the files containing
+        FSharp.ProjectScaffold and FSharp.ProjectTemplate will be done
+        atomically (rollback if something fails)</p>
+      </td>
+    </tr>
+    <tr>
       <td><a href="build.cmd">build.cmd</a></td>
       <td>
         <p>A simple command script which allows the build to be started (i.e. calls <a href="build.fsx">build.fsx</a>) from the command prompt or the file system explorer.
