@@ -243,7 +243,7 @@ After initialization, you can
       <td><p>This file contains all the relevant legal-ese for your project.</p></td>
     </tr>
     <tr>
-      <td><a href="RELEASE_NOTES.md">RELEASE_NOTES.md</a></td>
+      <td><a href="RELEASE-NOTES.md">RELEASE-NOTES.md</a></td>
       <td>
         <p>This file details verion-by-version changes in your code.
         It is used for documentation and to populate nuget package details.
