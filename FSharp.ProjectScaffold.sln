@@ -17,7 +17,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "project", "project", "{BF60
 		build.fsx = build.fsx
 		nuget\FSharp.ProjectTemplate.nuspec = nuget\FSharp.ProjectTemplate.nuspec
 		README.md = README.md
-		RELEASE_NOTES.md = RELEASE_NOTES.md
+		RELEASE-NOTES.md = RELEASE-NOTES.md
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tools", "tools", "{83F16175-43B1-4C90-A1EE-8E351C33435D}"
