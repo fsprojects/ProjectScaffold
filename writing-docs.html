@@ -46,22 +46,30 @@
 </tr>
 </table>
 
+<p>This starts the <a href="https://github.com/tpetricek/FSharp.Formatting">FSharp.Formatting</a> process.</p>
+
 <p><img src="img/keep-running.png" alt="alt text" title="Keep running in order to edit docs" /></p>
 
-<ul>
-<li>open <code>docs/output/index.html</code></li>
-<li>edit the files in <code>docs/content</code> - the build script will update the output automatically</li>
-<li>refresh browser</li>
-<li>press any key in command line window when you are ready.</li>
-</ul>
+<p>Now open <code>docs/output/index.html</code> and start to edit the files in <code>docs/content</code>. The build script will update the output automatically.
+You just have to refresh the browser. Press any key in command line window when you are ready.</p>
 
 <h2><a name="Releasing-docs" class="anchor" href="#Releasing-docs">Releasing docs</a></h2>
 
-<p>In order to release the docs:</p>
+<p>In order to release the docs run:</p>
 
-<ul>
-<li>run <code>build ReleaseDocs</code></li>
-</ul>
+<table class="pre"><tr><td class="lines"><pre class="fssnip">
+<span class="l">1: </span>
+</pre>
+</td>
+<td class="snippet"><pre class="fssnip">
+<span class="o">$</span> <span class="i">build</span> <span class="i">ReleaseDocs</span></pre>
+</td>
+</tr>
+</table>
+
+<p>This will start the build process and <a href="https://github.com/tpetricek/FSharp.Formatting">FSharp.Formatting</a> again. The output will then be pushed to your <code>gh-pages</code> branch where [GitHub] will pick it up and finishs the release process.</p>
+
+<p>The release of the documentation is also done during the <a href="release-process.html">Release process</a>.</p>
 
 
         </div>
