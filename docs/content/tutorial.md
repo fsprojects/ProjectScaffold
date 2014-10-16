@@ -1,6 +1,6 @@
 # Getting started
 
-### Initializing
+## Initializing
 
 In order to start the scaffolding process run 
 
@@ -13,7 +13,7 @@ During the init process you will be prompted for the name of your project and so
 
 The project structure will then be generated from templates.
 
-### Build and Release
+## Build 
 
 After initialization, you can 
 
@@ -22,4 +22,7 @@ After initialization, you can
 - Build and test release packages using ``build.cmd Release`` or ``build.sh Release`` 
 - Build and publish release docs using ``build.cmd ReleaseDocs`` or ``build.sh ReleaseDocs``
 - Add assets to the GitHub releases (Look into the Release target in ``build.fsx``) 
+ 
+## Release
+
 - Publish packages using ``build.cmd Release`` or ``build.sh Release`` (and specify the NugetAccessKey) 

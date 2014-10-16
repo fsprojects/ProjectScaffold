@@ -1,9 +1,10 @@
-F# Project Scaffold
-===================
+# Project Scaffold
 
 A prototypical .NET solution (file system layout and tooling), recommended by the F# Foundation.
 
-This scaffolding can be used to generate the suggested structure of a typical .NET library. 
+This scaffolding can be used to generate the suggested structure of a typical .NET library.
+
+Read the [Getting started tutorial](tutorial.html) to learn how you can set up your own build process. 
 
 ### Technologies
 
