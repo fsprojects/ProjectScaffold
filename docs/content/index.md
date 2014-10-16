@@ -25,8 +25,9 @@ Read the [Getting started tutorial](tutorial.html) to learn how you can set up y
  Contributing and copyright
 --------------------------
 
-The project is hosted on [GitHub][gh] where you can [report issues][issues], fork 
-the project and submit pull requests.
+The project is hosted on [GitHub][gh] where you can [report issues][issues], fork  the project and submit pull requests.
+
+If you want to contribute to the documentation the please checkout the [docs](https://github.com/fsprojects/ProjectScaffold/tree/docs) branch.  
 
 The library is available under Public Domain license, which allows modification and 
 redistribution for both commercial and non-commercial purposes. For more information see the 
