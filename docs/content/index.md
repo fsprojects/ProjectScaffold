@@ -23,8 +23,7 @@ This scaffolding can be used to generate the suggested structure of a typical .N
 | Default Package Hosting   | [nuget.org](http://nuget.org)             |
 | Default Documentation Hosting  | [GitHub Pages](https://help.github.com/articles/what-are-github-pages)   |
 
- 
-Contributing and copyright
+ Contributing and copyright
 --------------------------
 
 The project is hosted on [GitHub][gh] where you can [report issues][issues], fork 
