@@ -25,7 +25,7 @@ The `build.cmd` is listed in the `.gitignore` file. This prevents accidental com
 
 ## GitHub releases
 
-The automatic release process is creating a [GitHub release](https://github.com/blog/1547-release-your-software). If you want to upload files to GitHub during the release the Release target in ``build.fsx``. You will find the following:
+The automatic release process is creating a [GitHub release](https://github.com/blog/1547-release-your-software). If you want to upload files to GitHub during the release process then locate the `Release` target in ``build.fsx``. You will find the following:
 
     // release on github
     createClient (getBuildParamOrDefault "github-user" "") (getBuildParamOrDefault "github-pw" "")
