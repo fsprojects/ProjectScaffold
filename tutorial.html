@@ -74,7 +74,9 @@
 <li>Add assets to the GitHub releases (Look into the Release target in <code>build.fsx</code>)</li>
 </ul>
 
-<h2><a name="Release" class="anchor" href="#Release">Release</a></h2>
+<h2><a name="Release-process" class="anchor" href="#Release-process">Release process</a></h2>
+
+<h3><a name="Setup-release-script" class="anchor" href="#Setup-release-script">Setup release script</a></h3>
 
 <p>In order to get your first release process started you have to do a manual step. Please create a <code>build.cmd</code> with the following content:</p>
 
@@ -95,6 +97,26 @@ packages\FAKE\tools\FAKE.exe build.fsx &quot;target=Release&quot; &quot;NugetKey
 
 <p>Of course you gave to fill in the <code>NUGETKEY</code>, <code>GITHUBUSERNAME</code> and <code>GITHUBPW</code> with your own credentials.
 The <code>build.cmd</code> is listed in the <code>.gitignore</code> file. This prevents accidental commits of your login.</p>
+
+<h3><a name="Release-your-software" class="anchor" href="#Release-your-software">Release your software</a></h3>
+
+<p>All your tests pass, the documentation is in good shape then it's time to release your software.</p>
+
+<p>The first step is to edit the <a href="https://github.com/fsprojects/ProjectScaffold/blob/master/RELEASE_NOTES.md">release notes</a></p>
+
+<table class="pre"><tr><td><pre lang="batchfile">### 1.0 - Unreleased
+* More awesome stuff comming
+* Added SourceLink for Source Indexing PDB
+
+#### 0.5.1-beta - November 6 2013
+* Improved quality of solution-wide README.md files
+
+#### 0.5.0-beta - October 29 2013
+* Improved quality of solution-wide README.md files
+
+#### 0.0.1-beta - October 24 2013
+* Changed name from fsharp-project-scaffold to FSharp.ProjectScaffold
+* Initial release</pre></td></tr></table>
 
 <p>After that you can release your software by calling:</p>
 
