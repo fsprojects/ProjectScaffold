@@ -23,6 +23,17 @@ In order to get your first release process started you have to do a manual step.
 Of course you gave to fill in the ``NUGETKEY``, ``USER`` and ``PW`` with your own credentials.
 The `build.cmd` is listed in the `.gitignore` file. This prevents accidental commits of your login.
 
+## GitHub releases
+
+If you want to upload files to GitHub during the release the Release target in ``build.fsx``. You will find the following:
+
+    // release on github
+    createClient (getBuildParamOrDefault "github-user" "") (getBuildParamOrDefault "github-pw" "")
+    |> createDraft gitOwner gitName release.NugetVersion (release.SemVer.PreRelease <> None) release.Notes 
+    // TODO: |> uploadFile "PATH_TO_FILE"    
+    |> releaseDraft
+    |> Async.RunSynchronously 
+
 ## Release your software
 
 All your tests pass, the documentation is in good shape then it's time to release your software.
