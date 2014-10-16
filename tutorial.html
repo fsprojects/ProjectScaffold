@@ -78,41 +78,20 @@
 
 <p>In order to get your first release process started you have to do a manual step. Please create a <code>build.cmd</code> with the following content:</p>
 
-<table class="pre"><tr><td class="lines"><pre class="fssnip">
-<span class="l"> 1: </span>
-<span class="l"> 2: </span>
-<span class="l"> 3: </span>
-<span class="l"> 4: </span>
-<span class="l"> 5: </span>
-<span class="l"> 6: </span>
-<span class="l"> 7: </span>
-<span class="l"> 8: </span>
-<span class="l"> 9: </span>
-<span class="l">10: </span>
-<span class="l">11: </span>
-<span class="l">12: </span>
-<span class="l">13: </span>
-<span class="l">14: </span>
-</pre>
-</td>
-<td class="snippet"><pre class="fssnip">
-<span class="o">@</span><span class="i">echo</span> <span class="i">off</span>
-<span class="i">cls</span>
+<table class="pre"><tr><td><pre lang="batchfile">@echo off
+cls
 
-<span class="o">.</span><span class="i">paket</span><span class="o">/</span><span class="i">paket</span><span class="o">.</span><span class="i">bootstrapper</span><span class="o">.</span><span class="i">exe</span> <span class="i">prerelease</span>
-<span class="k">if</span> <span class="i">errorlevel</span> <span class="n">1</span> (
-  <span onmouseout="hideTip(event, 'fs1', 1)" onmouseover="showTip(event, 'fs1', 1)" class="i">exit</span> <span class="o">/</span><span class="i">b</span> <span class="o">%</span><span class="i">errorlevel</span><span class="o">%</span>
+.paket/paket.bootstrapper.exe prerelease
+if errorlevel 1 (
+  exit /b %errorlevel%
 )
 
-<span class="o">.</span><span class="i">paket</span><span class="o">/</span><span class="i">paket</span><span class="o">.</span><span class="i">exe</span> <span class="i">restore</span> <span class="o">-</span><span class="i">v</span>
-<span class="k">if</span> <span class="i">errorlevel</span> <span class="n">1</span> (
-  <span onmouseout="hideTip(event, 'fs1', 2)" onmouseover="showTip(event, 'fs1', 2)" class="i">exit</span> <span class="o">/</span><span class="i">b</span> <span class="o">%</span><span class="i">errorlevel</span><span class="o">%</span>
+.paket/paket.exe restore -v
+if errorlevel 1 (
+  exit /b %errorlevel%
 )
 
-<span class="i">packages</span></pre>
-</td>
-</tr>
-</table>
+packages\\FAKE/tools/FAKE.exe build.fsx &quot;target=Release&quot; &quot;NugetKey=NUGETKEY&quot; &quot;github-user=GITHUBUSERNAME&quot;  &quot;github-pw=GITHUBPW&quot;</pre></td></tr></table>
 
 <p>Of course you gave to fill in the <code>NUGETKEY</code>, <code>GITHUBUSERNAME</code> and <code>GITHUBPW</code> with your own credentials.
 The <code>build.cmd</code> is listed in the <code>.gitignore</code> file. This prevents accidental commits of your login.</p>
@@ -129,7 +108,6 @@ The <code>build.cmd</code> is listed in the <code>.gitignore</code> file. This p
 </tr>
 </table>
 
-<div class="tip" id="fs1">val exit : exitcode:int -&gt; &#39;T<br /><br />Full name: Microsoft.FSharp.Core.Operators.exit</div>
 
         </div>
         <div class="span3">
