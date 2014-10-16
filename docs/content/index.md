@@ -8,7 +8,7 @@ This includes a build process which:
 * compiles the application and runs all test projects
 * generates [SourceLinks](https://github.com/ctaggart/SourceLink)
 * generates [API docs based on XML document tags](writing-docs.html#API-docs)
-* generates [documentation based on Markdown files](writing-docs.html)
+* generates [documentation based on Markdown files](writing-docs.html#Markdown-files)
 * denerates [NuGet](http://www.nuget.org) packages
 * and allows a simple [one step release process](release-process.html). 
 

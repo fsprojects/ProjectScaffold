@@ -1,4 +1,8 @@
-# Writing docs
+# Writing documentation
+
+ProjectScaffold allows to you generate HTML documentation like this page.  
+
+## Markdown files
 
 In order to edit the docs run:
 
