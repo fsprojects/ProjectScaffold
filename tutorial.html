@@ -62,6 +62,19 @@
 
 <p>You will be prompted for the name of your project and some other details. The project structure will then be generated from templates.</p>
 
+<h3><a name="Build-and-Release" class="anchor" href="#Build-and-Release">Build and Release</a></h3>
+
+<p>After initialization, you can</p>
+
+<ul>
+<li>Open, edit, build and test using <code>ProjectName.sln</code></li>
+<li>Build and test release binaries using <code>build.cmd</code> or <code>build.sh</code></li>
+<li>Build and test release packages using <code>build.cmd Release</code> or <code>build.sh Release</code></li>
+<li>Build and publish release docs using <code>build.cmd ReleaseDocs</code> or <code>build.sh ReleaseDocs</code></li>
+<li>Add assets to the GitHub releases (Look into the Release target in <code>build.fsx</code>)</li>
+<li>Publish packages using <code>build.cmd Release</code> or <code>build.sh Release</code> (and specify the NugetAccessKey)</li>
+</ul>
+
 
         </div>
         <div class="span3">
