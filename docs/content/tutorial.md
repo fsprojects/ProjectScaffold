@@ -31,8 +31,9 @@ After initialization, you can
  
 ## Release
 
-In order to get release process started you have to do a manual step. Please create a `build.cmd` with the following content:
+In order to get your first release process started you have to do a manual step. Please create a `build.cmd` with the following content:
 
+    [lang=batchfile]
     @echo off
     cls
     
