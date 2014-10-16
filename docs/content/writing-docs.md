@@ -33,12 +33,12 @@ The result will be nice looking docs like the following sample:
 
 As you can see it can even create links back to your source code on [GitHub.com](http://github.com).
 
-## Releasing docs
+## Releasing process
 
 In order to release the docs run:
 
     $ build ReleaseDocs
 
-This will start the build process and [FSharp.Formatting](https://github.com/tpetricek/FSharp.Formatting) again. The output will then be pushed to your `gh-pages` branch where [GitHub] will pick it up and finishs the release process.
+This will start the build process and [FSharp.Formatting](https://github.com/tpetricek/FSharp.Formatting) again. The output will then be pushed to your `gh-pages` branch where [GitHub](http://www.github.com) will pick it up and finishs the release process.
 
 The release of the documentation is also done during the [Release process](release-process.html). 
