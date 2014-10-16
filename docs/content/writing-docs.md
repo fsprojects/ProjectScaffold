@@ -14,19 +14,20 @@ You just have to refresh the browser. Press any key in command line window when 
 ## API docs
 
 ProjectScaffold generates a build target which automatically generates nice looking API docs for your assemblies.
-It uses the [FSharp.Formatting](https://github.com/tpetricek/FSharp.Formatting) library to do so. 
 
 To configure this process look into `docs/tools/generate.fsx` and you will find:
 
     let referenceBinaries = [ "##ProjectName##.dll" ]
     
-This will be configured automatically during the init process, but you can add more libraries if you want.
+This will be configured automatically during the init process, but you can add more libraries if you want. In order to start the process run:
+
+    $ build GenerateReferenceDocs
 
 The result will be nice looking docs like the following sample:
 
 ![alt text](img/api-docs.png "API docs with Github Links")  
 
-As you can see it can even create links back to your source code on [GitHub.com](http://github.com)
+As you can see it can even create links back to your source code on [GitHub.com](http://github.com).
 
 ## Releasing docs
 
