@@ -1,8 +1,10 @@
 # Writing documentation
 
-ProjectScaffold allows to you generate HTML documentation like this page.  
+ProjectScaffold allows to you generate HTML documentation similar this page.  
 
 ## Markdown files
+
+The project is configured to convert all `*.md` files in `docs/content` to HTML pages and put it into `docs/output`.
 
 In order to edit the docs run:
 
