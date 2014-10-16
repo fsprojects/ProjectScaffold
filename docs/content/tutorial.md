@@ -2,14 +2,16 @@
 
 ### Initializing
 
-Run 
+In order to start the scaffolding process run 
 
-    ./build.sh
-or
+    $ build.cmd // on windows    
+    $ build.sh  // on mono
 
-    ./build.cmd
+During the init process you will be prompted for the name of your project and some other details: 
 
-You will be prompted for the name of your project and some other details. The project structure will then be generated from templates.
+![alt text](img/init-script.png "Init script asking for project details")
+
+The project structure will then be generated from templates.
 
 ### Build and Release
 
