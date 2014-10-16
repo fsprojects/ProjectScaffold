@@ -23,18 +23,6 @@ This scaffolding can be used to generate the suggested structure of a typical .N
 | Default Package Hosting   | [nuget.org](http://nuget.org)             |
 | Default Documentation Hosting  | [GitHub Pages](https://help.github.com/articles/what-are-github-pages)   |
 
-Samples & documentation
------------------------
-
-The library comes with comprehensible documentation. 
-It can include a tutorials automatically generated from `*.fsx` files in [the content folder][content]. 
-The API reference is automatically generated from Markdown comments in the library implementation.
-
- * [Tutorial](tutorial.html) contains a further explanation of this sample library.
-
- * [API Reference](reference/index.html) contains automatically generated documentation for all types, modules
-   and functions in the library. This includes additional brief samples on using most of the
-   functions.
  
 Contributing and copyright
 --------------------------
