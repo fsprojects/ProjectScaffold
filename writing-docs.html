@@ -53,6 +53,25 @@
 <p>Now open <code>docs/output/index.html</code> and start to edit the files in <code>docs/content</code>. The build script will update the output automatically.
 You just have to refresh the browser. Press any key in command line window when you are ready.</p>
 
+<h2><a name="API-docs" class="anchor" href="#API-docs">API docs</a></h2>
+
+<p>ProjectScaffold generates a build target which automatically generates nice looking API docs for your assemblies.
+It uses the <a href="https://github.com/tpetricek/FSharp.Formatting">FSharp.Formatting</a> library to do so.</p>
+
+<p>To configure this process look into <code>docs/tools/generate.fsx</code> and you will find:</p>
+
+<table class="pre"><tr><td class="lines"><pre class="fssnip">
+<span class="l">1: </span>
+</pre>
+</td>
+<td class="snippet"><pre class="fssnip">
+<span class="k">let</span> <span class="i">referenceBinaries</span> <span class="o">=</span> [ <span class="s">&quot;</span><span class="s">#</span><span class="s">#</span><span class="s">ProjectName</span><span class="s">#</span><span class="s">#</span><span class="s">.</span><span class="s">dll</span><span class="s">&quot;</span> ]</pre>
+</td>
+</tr>
+</table>
+
+<p>This will be configured automatically during the init process, but you can add more libraries if you want.</p>
+
 <h2><a name="Releasing-docs" class="anchor" href="#Releasing-docs">Releasing docs</a></h2>
 
 <p>In order to release the docs run:</p>
