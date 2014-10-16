@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8"/>
-    <title>Getting started
+    <title>ProjectScaffold docs
 </title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="description" content="A prototypical .NET solution (file system layout and tooling), recommended by the F# Foundation."/>
@@ -32,53 +32,22 @@
       <div class="row">
         <div class="span9" id="main">
           
-<h1><a name="Getting-started" class="anchor" href="#Getting-started">Getting started</a></h1>
+<h1><a name="ProjectScaffold-docs" class="anchor" href="#ProjectScaffold-docs">ProjectScaffold docs</a></h1>
 
-<p>This scaffolding process can be used to generate the suggested structure of a typical .NET library.</p>
-
-<h2><a name="Cloning-the-project" class="anchor" href="#Cloning-the-project">Cloning the project</a></h2>
-
-<p>This first thing to do is to clone or copy the ProjectScaffold repository to your own workspace.</p>
-
-<h2><a name="Initializing" class="anchor" href="#Initializing">Initializing</a></h2>
-
-<p>In order to start the scaffolding process run</p>
-
-<table class="pre"><tr><td class="lines"><pre class="fssnip">
-<span class="l">1: </span>
-<span class="l">2: </span>
-</pre>
-</td>
-<td class="snippet"><pre class="fssnip">
-<span class="o">$</span> <span class="i">build</span><span class="o">.</span><span class="i">cmd</span> <span class="c">// on windows</span>
-<span class="o">$</span> <span class="i">build</span><span class="o">.</span><span class="i">sh</span>  <span class="c">// on mono</span></pre>
-</td>
-</tr>
-</table>
-
-<p>During the init process you will be prompted for the name of your project and some other details:</p>
-
-<p><img src="img/init-script.png" alt="alt text" title="Init script asking for project details" /></p>
-
-<p>The project structure will then be generated from templates.</p>
-
-<h2><a name="Build" class="anchor" href="#Build">Build</a></h2>
-
-<p>After initialization, you can</p>
+<p>In order to edit the docs:</p>
 
 <ul>
-<li>Open, edit, build and test using <code>ProjectName.sln</code></li>
-<li>Build and test release binaries using <code>build.cmd</code> or <code>build.sh</code></li>
-<li>Build and test release packages using <code>build.cmd Release</code> or <code>build.sh Release</code></li>
-<li>Build and publish release docs using <code>build.cmd ReleaseDocs</code> or <code>build.sh ReleaseDocs</code></li>
-<li>Add assets to the GitHub releases (Look into the Release target in <code>build.fsx</code>)</li>
+<li>run <code>build KeepRunning</code></li>
+<li>open <code>docs/output/index.html</code></li>
+<li>edit the files in <code>docs/content</code> - FAKE will update the output</li>
+<li>refresh browser</li>
+<li>press any key in command line window when you are ready.</li>
 </ul>
 
-<h2><a name="Further-topics" class="anchor" href="#Further-topics">Further topics</a></h2>
+<p>In order to release the docs:</p>
 
 <ul>
-<li><a href="writing-docs.html">Writing docs</a></li>
-<li><a href="release-process.html">Release process</a></li>
+<li>run <code>build ReleaseDocs</code></li>
 </ul>
 
 

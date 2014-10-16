@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8"/>
-    <title>Getting started
+    <title>Release process
 </title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="description" content="A prototypical .NET solution (file system layout and tooling), recommended by the F# Foundation."/>
@@ -32,54 +32,58 @@
       <div class="row">
         <div class="span9" id="main">
           
-<h1><a name="Getting-started" class="anchor" href="#Getting-started">Getting started</a></h1>
+<h1><a name="Release-process" class="anchor" href="#Release-process">Release process</a></h1>
 
-<p>This scaffolding process can be used to generate the suggested structure of a typical .NET library.</p>
+<h2><a name="Setup-release-script" class="anchor" href="#Setup-release-script">Setup release script</a></h2>
 
-<h2><a name="Cloning-the-project" class="anchor" href="#Cloning-the-project">Cloning the project</a></h2>
+<p>In order to get your first release process started you have to do a manual step. Please create a <code>build.cmd</code> with the following content:</p>
 
-<p>This first thing to do is to clone or copy the ProjectScaffold repository to your own workspace.</p>
+<table class="pre"><tr><td><pre lang="batchfile">@echo off
+cls
 
-<h2><a name="Initializing" class="anchor" href="#Initializing">Initializing</a></h2>
+.paket\paket.bootstrapper.exe prerelease
+if errorlevel 1 (
+  exit /b %errorlevel%
+)
 
-<p>In order to start the scaffolding process run</p>
+.paket\paket.exe restore -v
+if errorlevel 1 (
+  exit /b %errorlevel%
+)
+
+packages\FAKE\tools\FAKE.exe build.fsx &quot;target=Release&quot; &quot;NugetKey=NUGETKEY&quot; &quot;github-user=GITHUBUSERNAME&quot;  &quot;github-pw=GITHUBPW&quot;</pre></td></tr></table>
+
+<p>Of course you gave to fill in the <code>NUGETKEY</code>, <code>GITHUBUSERNAME</code> and <code>GITHUBPW</code> with your own credentials.
+The <code>build.cmd</code> is listed in the <code>.gitignore</code> file. This prevents accidental commits of your login.</p>
+
+<h2><a name="Release-your-software" class="anchor" href="#Release-your-software">Release your software</a></h2>
+
+<p>All your tests pass, the documentation is in good shape then it's time to release your software.</p>
+
+<p>The first step is to edit the <a href="https://github.com/fsprojects/ProjectScaffold/blob/master/RELEASE_NOTES.md">RELEASE_NOTES.md</a> file. Add an entry with the version no., date and describe the changes.</p>
+
+<table class="pre"><tr><td><pre lang="batchfile">### 1.0.0-rc001 - July 25 2014
+* More awesome stuff comming
+* Added SourceLink for Source Indexing PDB
+
+#### 0.5.0-beta002 - October 29 2013
+* Improved quality of solution-wide README.md files
+
+#### 0.5.0-beta001 - October 24 2013
+* Changed name from fsharp-project-scaffold to FSharp.ProjectScaffold
+* Initial release                                                                                                     </pre></td></tr></table>
+
+<p>After that you can release your software by calling:</p>
 
 <table class="pre"><tr><td class="lines"><pre class="fssnip">
 <span class="l">1: </span>
-<span class="l">2: </span>
 </pre>
 </td>
 <td class="snippet"><pre class="fssnip">
-<span class="o">$</span> <span class="i">build</span><span class="o">.</span><span class="i">cmd</span> <span class="c">// on windows</span>
-<span class="o">$</span> <span class="i">build</span><span class="o">.</span><span class="i">sh</span>  <span class="c">// on mono</span></pre>
+<span class="o">$</span> <span class="i">release</span><span class="o">.</span><span class="i">cmd</span></pre>
 </td>
 </tr>
 </table>
-
-<p>During the init process you will be prompted for the name of your project and some other details:</p>
-
-<p><img src="img/init-script.png" alt="alt text" title="Init script asking for project details" /></p>
-
-<p>The project structure will then be generated from templates.</p>
-
-<h2><a name="Build" class="anchor" href="#Build">Build</a></h2>
-
-<p>After initialization, you can</p>
-
-<ul>
-<li>Open, edit, build and test using <code>ProjectName.sln</code></li>
-<li>Build and test release binaries using <code>build.cmd</code> or <code>build.sh</code></li>
-<li>Build and test release packages using <code>build.cmd Release</code> or <code>build.sh Release</code></li>
-<li>Build and publish release docs using <code>build.cmd ReleaseDocs</code> or <code>build.sh ReleaseDocs</code></li>
-<li>Add assets to the GitHub releases (Look into the Release target in <code>build.fsx</code>)</li>
-</ul>
-
-<h2><a name="Further-topics" class="anchor" href="#Further-topics">Further topics</a></h2>
-
-<ul>
-<li><a href="writing-docs.html">Writing docs</a></li>
-<li><a href="release-process.html">Release process</a></li>
-</ul>
 
 
         </div>
