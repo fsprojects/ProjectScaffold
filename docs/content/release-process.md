@@ -18,9 +18,9 @@ In order to get your first release process started you have to do a manual step.
       exit /b %errorlevel%
     )
     
-    packages\FAKE\tools\FAKE.exe build.fsx "target=Release" "NugetKey=NUGETKEY" "github-user=GITHUBUSERNAME"  "github-pw=GITHUBPW"
+    packages\FAKE\tools\FAKE.exe build.fsx "target=Release" "NugetKey=NUGETKEY" "github-user=USER"  "github-pw=PW"
     
-Of course you gave to fill in the ``NUGETKEY``, ``GITHUBUSERNAME`` and ``GITHUBPW`` with your own credentials.
+Of course you gave to fill in the ``NUGETKEY``, ``USER`` and ``PW`` with your own credentials.
 The `build.cmd` is listed in the `.gitignore` file. This prevents accidental commits of your login.
 
 ## Release your software

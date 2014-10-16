@@ -1,5 +1,6 @@
-ProjectScaffold docs
-====================
+# Writing docs
+
+
 
 In order to edit the docs:
 

@@ -2,25 +2,7 @@
 
 A prototypical .NET solution (file system layout and tooling), recommended by the F# Foundation.
 
-Read the [Getting started tutorial](tutorial.html) to learn how you can set up your own build process. 
-
-### Technologies
-
- The ProjectScaffold project uses a lot of different open source technologies.
- This documentation gives an overview.
-
-| Area                      |  Technologies                             |
-|:--------------------------|:------------------------------------------|
-| Platforms                 | Linux, Windows, OSX                       |
-| Build Automation          | [FAKE](http://fsharp.github.io/FAKE/)     |
-| Unit Testing              | [NUnit](http://www.nunit.org/)            |
-| Package Formats           | Nuget packages                            |
-| Dependency Manager        | [Paket](http://fsprojects.github.io/Paket/) |
-| Documentation Authoring   | Markdown, HTML and F# Literate Scripts    |
-| Source Code Linking       | SourceLink                                |
-| Continuous Build and Test | [Travis](http://travis-ci.org) (Linux/OSX) and [AppVeyor](http://appveyor.com) (Windows) |
-| Default Package Hosting   | [nuget.org](http://nuget.org)             |
-| Default Documentation Hosting  | [GitHub Pages](https://help.github.com/articles/what-are-github-pages)   |
+Read the [Getting started tutorial](tutorial.html) to learn how you can set up your own build process.
 
  Contributing and copyright
 --------------------------
