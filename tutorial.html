@@ -81,17 +81,17 @@
 <table class="pre"><tr><td><pre lang="batchfile">@echo off
 cls
 
-.paket/paket.bootstrapper.exe prerelease
+.paket\paket.bootstrapper.exe prerelease
 if errorlevel 1 (
   exit /b %errorlevel%
 )
 
-.paket/paket.exe restore -v
+.paket\paket.exe restore -v
 if errorlevel 1 (
   exit /b %errorlevel%
 )
 
-packages\\FAKE/tools/FAKE.exe build.fsx &quot;target=Release&quot; &quot;NugetKey=NUGETKEY&quot; &quot;github-user=GITHUBUSERNAME&quot;  &quot;github-pw=GITHUBPW&quot;</pre></td></tr></table>
+packages\FAKE\tools\FAKE.exe build.fsx &quot;target=Release&quot; &quot;NugetKey=NUGETKEY&quot; &quot;github-user=GITHUBUSERNAME&quot;  &quot;github-pw=GITHUBPW&quot;</pre></td></tr></table>
 
 <p>Of course you gave to fill in the <code>NUGETKEY</code>, <code>GITHUBUSERNAME</code> and <code>GITHUBPW</code> with your own credentials.
 The <code>build.cmd</code> is listed in the <code>.gitignore</code> file. This prevents accidental commits of your login.</p>
