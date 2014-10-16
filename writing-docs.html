@@ -55,8 +55,7 @@ You just have to refresh the browser. Press any key in command line window when 
 
 <h2><a name="API-docs" class="anchor" href="#API-docs">API docs</a></h2>
 
-<p>ProjectScaffold generates a build target which automatically generates nice looking API docs for your assemblies.
-It uses the <a href="https://github.com/tpetricek/FSharp.Formatting">FSharp.Formatting</a> library to do so.</p>
+<p>ProjectScaffold generates a build target which automatically generates nice looking API docs for your assemblies.</p>
 
 <p>To configure this process look into <code>docs/tools/generate.fsx</code> and you will find:</p>
 
@@ -70,13 +69,23 @@ It uses the <a href="https://github.com/tpetricek/FSharp.Formatting">FSharp.Form
 </tr>
 </table>
 
-<p>This will be configured automatically during the init process, but you can add more libraries if you want.</p>
+<p>This will be configured automatically during the init process, but you can add more libraries if you want. In order to start the process run:</p>
+
+<table class="pre"><tr><td class="lines"><pre class="fssnip">
+<span class="l">1: </span>
+</pre>
+</td>
+<td class="snippet"><pre class="fssnip">
+<span class="o">$</span> <span class="i">build</span> <span class="i">GenerateReferenceDocs</span></pre>
+</td>
+</tr>
+</table>
 
 <p>The result will be nice looking docs like the following sample:</p>
 
 <p><img src="img/api-docs.png" alt="alt text" title="API docs with Github Links" /></p>
 
-<p>As you can see it can even create links back to your source code on <a href="http://github.com">GitHub.com</a></p>
+<p>As you can see it can even create links back to your source code on <a href="http://github.com">GitHub.com</a>.</p>
 
 <h2><a name="Releasing-docs" class="anchor" href="#Releasing-docs">Releasing docs</a></h2>
 
