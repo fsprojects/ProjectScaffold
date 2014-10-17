@@ -6,7 +6,7 @@ By default ProjectScaffold uses [NUnit](http://www.nunit.org/) as test framework
 
 ## Changing the test framework
 
-[FAKE](http://fsharp.github.io/FAKE/) supports many different test frameworks including xUnit, Machine.Specifications and many more.    
+[FAKE](http://fsharp.github.io/FAKE/) supports many different test frameworks including [xUnit](https://xunit.codeplex.com/), [Machine.Specifications](https://github.com/machine/machine.specifications) and many more.    
 If you want to use a different test framework the look for the `RunTest` target in the `build.fsx` file:
 
     Target "RunTests" (fun _ ->

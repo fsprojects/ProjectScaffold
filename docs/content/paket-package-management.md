@@ -15,4 +15,17 @@ If you want to update your package dependencies just run:
 
     $ .paket/paket.exe update
     
-This will update the packages in the `paket.lock` file. More details can be found in the [Paket docs](http://fsprojects.github.io/Paket/).
+This will update the packages in the `paket.lock` file. 
+
+## Installing new packages
+
+In order to install new packages you can use the [paket add command](http://fsprojects.github.io/Paket/paket-add.html):
+
+    $ .paket/paket.exe add nuget PACKAGENAME [version VERSION] -i
+    
+This will update the `paket.dependencies` file and allow you to select the projects for which you want to install the package:
+
+![alt text](img/interactive-add.png "Interactive paket add") 
+
+
+More details can be found in the [Paket docs](http://fsprojects.github.io/Paket/).
