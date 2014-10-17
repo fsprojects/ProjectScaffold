@@ -57,7 +57,27 @@ This folder is listed in <code>.gitignore</code>, so you don't have to worry abo
 </tr>
 </table>
 
-<p>This will update the packages in the <code>paket.lock</code> file. More details can be found in the <a href="http://fsprojects.github.io/Paket/">Paket docs</a>.</p>
+<p>This will update the packages in the <code>paket.lock</code> file.</p>
+
+<h2><a name="Installing-new-packages" class="anchor" href="#Installing-new-packages">Installing new packages</a></h2>
+
+<p>In order to install new packages you can use the <a href="http://fsprojects.github.io/Paket/paket-add.html">paket add command</a>:</p>
+
+<table class="pre"><tr><td class="lines"><pre class="fssnip">
+<span class="l">1: </span>
+</pre>
+</td>
+<td class="snippet"><pre class="fssnip">
+<span class="o">$</span> <span class="o">.</span><span class="i">paket</span><span class="o">/</span><span class="i">paket</span><span class="o">.</span><span class="i">exe</span> <span class="i">add</span> <span class="i">nuget</span> <span class="i">PACKAGENAME</span> [<span class="i">version</span> <span class="i">VERSION</span>] <span class="o">-</span><span class="i">i</span></pre>
+</td>
+</tr>
+</table>
+
+<p>This will update the <code>paket.dependencies</code> file and allow you to select the projects for which you want to install the package:</p>
+
+<p><img src="img/interactive-add.png" alt="alt text" title="Interactive paket add" /></p>
+
+<p>More details can be found in the <a href="http://fsprojects.github.io/Paket/">Paket docs</a>.</p>
 
 
         </div>
