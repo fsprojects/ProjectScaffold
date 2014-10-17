@@ -41,6 +41,7 @@ After the initialisation you can open, edit, build and test using ``ProjectName.
 * [Running tests](running-tests.html)
 * [Paket dependency management](paket-package-management.html)
 * [Writing docs](writing-docs.html)
+* [Using build servers](build-servers.html)
 * [Release process](release-process.html)
 
 ## Contributing and copyright
