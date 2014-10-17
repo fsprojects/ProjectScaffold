@@ -10,7 +10,7 @@ This includes [Paket](paket-package-management.html) dependency management and a
 * generates [SourceLinks](https://github.com/ctaggart/SourceLink)
 * generates [API docs based on XML document tags](writing-docs.html#API-docs)
 * generates [documentation based on Markdown files](writing-docs.html#Markdown-files)
-* generates [NuGet](http://www.nuget.org) packages
+* generates and push [NuGet](http://www.nuget.org) packages
 * and allows a simple [one step release process](release-process.html). 
 
 ## Getting started

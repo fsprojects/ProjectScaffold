@@ -1,5 +1,8 @@
 # Release process
 
+During the release process the build script will generate a NuGet package and pushes it to [NuGet.org](http://www.nuget.org). 
+It will also create a git tag and a github release entry.
+ 
 ## Setup release script
  
 In order to get your first release process started you have to do a manual step. Please create a `build.cmd` with the following content:
