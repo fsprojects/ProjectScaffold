@@ -3,11 +3,13 @@
 The ProjectScaffold uses [FAKE](http://fsharp.github.io/FAKE/) to automate the complete build and release process.
 The `build.fsx` file contains this logic and is written in FAKE's build DSL.
 
+## Running targets 
 
-After initialization, you can 
+You can run any target in the build script using:
 
-- Open, edit, build and test using ``ProjectName.sln``
-- Build and test release binaries using ``build.cmd`` or ``build.sh `` 
-- Build and test release packages using ``build.cmd Release`` or ``build.sh Release`` 
-
-More details can be found in the [FAKE docs](http://fsharp.github.io/FAKE/). 
+    $ build.cmd [TARGETNAME] // on windows
+    $ build.sh [TARGETNAME] // on mono
+    
+If you don't specify a specific target it will run the default process, which includes running tests and building docs.
+    
+More details can be found in the [FAKE docs](http://fsharp.github.io/FAKE/).
