@@ -1,7 +1,8 @@
-### Structure
+# Project Structure
+
+The following table gives an overview over the generated project structure:
 
 <table>
-  <caption>Summary of solution folders</caption>
   <thead>
     <tr>
       <th>Folder</th>
@@ -10,7 +11,7 @@
   </thead>
   <tbody>
     <tr>
-      <td><a href="../../tree/master/.paket">.paket</a></td>
+      <td><a href="https://github.com/fsprojects/ProjectScaffold/tree/master/.paket">.paket</a></td>
       <td>
         <p>These files are used to get NuGet dependencies on a clean build and for other Paket-related tasks including
         Visual Studio <em>Package Restore<em>.</p>
@@ -119,97 +120,3 @@
     </tr>
   </tbody>
 </table>
-
-### Files
-
-<table>
-  <caption>Summary of important solution files</caption>
-  <thead>
-    <tr>
-      <th>Path</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-    </tr>
-    <tr>
-      <td><a href="FSharp.ProjectScaffold.sln">FSharp.ProjectScaffold.sln</a></td>
-      <td>
-        <p>This is a standard Visual Studio solution file. Use it to collect you projects, including tests. 
-        Additionally, this example solution includes many of the important non-project files.
-        It is compatible with Visual Studio 2012 and Visual Studio 2013.</p></td>
-    </tr>
-    <tr>
-      <td><a href="LICENSE.txt">LICENSE.txt</a></td>
-      <td><p>This file contains all the relevant legal-ese for your project.</p></td>
-    </tr>
-    <tr>
-      <td><a href="RELEASE_NOTES.md">RELEASE_NOTES.md</a></td>
-      <td>
-        <p>This file details verion-by-version changes in your code.
-        It is used for documentation and to populate nuget package details.
-        It uses a proper subset of Markdown, with a few simple conventions.
-        More details of this format may be found 
-        in the documenation for <a href="http://fsharp.github.io/FAKE/apidocs/fake-releasenoteshelper.html" target="_blank">F# Make's ReleaseNotesHelper</a>.</p>
-      </td>
-    </tr>
-    <tr>
-      <td><a href="README.md">README.md</a></td>
-      <td><p>Use this file to provide an overview of your repository.</p></td>
-    </tr>
-    <tr>
-      <td><a href="docs/content/index.fsx">docs/content/index.fsx</a></td>
-      <td><p>Use this file to provide a narrative overview of your project.
-      You can write actual, executable F# code in this file. Additionally,
-      you may use Markdown comments. As part of the build process, this file
-      (along with any other <code>*.fsx</code> or <code>*.md</code> files in the <a href="https://github.com/fsprojects/ProjectScaffold/tree/master/docs/content">docs/content</a> directory) will be
-      processed into HTML documentation. There is also a build target to deploy
-      the generated documentation to a GitHub pages branch (assuming 
-      one has been setup in your repository).</p> 
-      <p>For further details about documentation generation, 
-      please see the <a href="http://tpetricek.github.io/FSharp.Formatting/" target="_blank">FSharp.Formatting library</a>.</p></td>
-    </tr>
-    <tr>
-      <td><a href="docs/content/tutorial.fsx">docs/content/tutorial.fsx</a></td>
-      <td><p>This file follows the format of <a href="docs/content/index.fsx">docs/content/index.fsx</a>.
-      It's mainly included to demonstrate that narrative documenation is not limited to a single file,
-      and documentation files maybe hyperlinked to one another.</p></td>
-    </tr>
-    <tr>
-      <td><a href="docs/tools/generate.fsx">docs/tools/generate.fsx</a></td>
-      <td>
-        <p>This file controls the generation of narrative and API documentation.
-        In most projects, you'll simply need to edit some values located at the top of the file.
-        They are as follows:</p>
-        <dl>
-          <dt><code>referenceBinaries</code></dt>
-          <dd>A list of the binaries for which documentation should be cretaed.
-          The files listed should each have a corresponding XMLDoc file, and reside in the <a href="https://github.com/fsprojects/ProjectScaffold/tree/master/bin">bin</a> folder (as handled by the build process).</dd>
-          <dt><code>website</code></dt>
-          <dd>The root URL to which generated documenation should be uploaded. 
-          In the included example, this points to the GitHub Pages root for this project.</dd>
-          <dt><code>info</code></dt>
-          <dd><p>A list of key/value pairs which further describe the details of your project.
-          This list is exposed to <a href="docs/tools/templates/template.cshtml">template.cshtml</a> for data-binding purposes.
-          You may include any information deemed necessary.</p>
-          <p><em>Note: the pairs defined in the included example are 
-          being used by the sample template.</em></p></dd>
-        </dl>
-      </td>
-    </tr>
-    <tr>
-      <td><a href="docs/tools/templates/template.cshtml">docs/tools/templates/template.cshtml</a></td>
-      <td>
-        <p>This file provides the basic HTML layout for generated documentation.
-        It uses the C# variant of the Razor templating engine, and leverages jQuery and Bootstrap.
-        Change this file to alter the non-content portions of your documentation.</p>
-        <p><em>Note: Much of the data passed to this template (i.e. items preceeded with '@') 
-        is configured in <a href="docs/tools/generate.fsx">generate.fsx</a></em></p>
-      </td>
-    </tr>
-  </tbody>
-</table>
-
----
-

@@ -4,6 +4,7 @@ This project can be used to scaffold a prototypical .NET solution including file
 
 This includes [Paket](paket-package-management.html) dependency management and a [FAKE](fake-build.html) build process which: 
 
+* which works with most [build servers](build-servers.html) 
 * updates all AssemblyInfo files
 * compiles the application and [runs all test projects](running-tests.html)
 * generates [SourceLinks](https://github.com/ctaggart/SourceLink)

@@ -5,6 +5,7 @@ The `build.fsx` file contains this logic and is written in FAKE's build DSL.
 It uses the [FAKE - F# Make](http://fsharp.github.io/FAKE/) library to manage many aspects of maintaining a solution.
 It contains a number of common tasks (i.e. build targets) such as directory cleaning, unit test execution, and NuGet package assembly.
 You are encouraged to adapt existing build targets and/or add new ones as necessary. 
+
 However, if you are leveraging the default conventions, as setup in this scaffold project, you can start by simply supplying some values at the top of this file.
 
 They are as follows:
