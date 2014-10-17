@@ -35,7 +35,25 @@
 <h1><a name="FAKE-build" class="anchor" href="#FAKE-build">FAKE build</a></h1>
 
 <p>The ProjectScaffold uses <a href="http://fsharp.github.io/FAKE/">FAKE</a> to automate the complete build and release process.
-The <code>build.fsx</code> file contains this logic and is written in FAKE's build DSL.</p>
+The <code>build.fsx</code> file contains this logic and is written in FAKE's build DSL.
+It uses the <a href="http://fsharp.github.io/FAKE/">FAKE - F# Make</a> library to manage many aspects of maintaining a solution.
+It contains a number of common tasks (i.e. build targets) such as directory cleaning, unit test execution, and NuGet package assembly.
+You are encouraged to adapt existing build targets and/or add new ones as necessary. 
+However, if you are leveraging the default conventions, as setup in this scaffold project, you can start by simply supplying some values at the top of this file.</p>
+
+<p>They are as follows:</p>
+
+<ul>
+<li><code>project</code> - The name of your project, which is used in serveral places: in the generation of AssemblyInfo, as the name of a NuGet package, and for locating a directory under <code>src</code>.</li>
+<li><code>summary</code> - A short summary of your project, used as the description in AssemblyInfo. It also provides a short summary for your NuGet package.</li>
+<li><code>description</code> - A longer description of the project used as a description for your NuGet package.</li>
+<li><code>authors</code> - A list of author names, as should be displayed in the NuGet package metadata.</li>
+<li><code>tags</code> - A string containing space-separated tags, as should be included in the NuGet package metadata.</li>
+<li><code>solutionFile</code> - The name of your solution file (sans-extension). It is used as part of the build process.</li>
+<li><code>testAssemblies</code> - A list of <a href="http://fsharp.github.io/FAKE/">FAKE</a> globbing patterns to be searched for unit-test assemblies.</li>
+<li><code>gitHome</code> - The URL of user profile hosting this project's GitHub repository. This is used for publishing documentation.</li>
+<li><code>gitName</code> - The name of this project's GitHub repository. This is used for publishing documentation.</li>
+</ul>
 
 <h2><a name="Running-targets" class="anchor" href="#Running-targets">Running targets</a></h2>
 
@@ -74,6 +92,7 @@ The <code>build.fsx</code> file contains this logic and is written in FAKE's bui
             <li><a href="./running-tests.html">Running tests</a></li>
             <li><a href="./paket-package-management.html">Package management</a></li>
             <li><a href="./writing-docs.html">Writing docs</a></li>
+            <li><a href="./build-servers.html">Using build servers</a></li>
             <li><a href="./release-process.html">Release process</a></li>
             <li class="divider"></li>
             <li><a href="./structure.html">Project structure</a></li>
