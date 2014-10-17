@@ -11,7 +11,7 @@
 | Package Formats           | Nuget packages                            |
 | Dependency Manager        | [Paket](http://fsprojects.github.io/Paket/) |
 | Documentation Authoring   | Markdown, HTML and F# Literate Scripts    |
-| Source Code Linking       | SourceLink                                |
+| Source Code Linking       | [SourceLinks](https://github.com/ctaggart/SourceLink) |
 | Continuous Build and Test | [Travis](http://travis-ci.org) (Linux/OSX) and [AppVeyor](http://appveyor.com) (Windows) |
 | Default Package Hosting   | [nuget.org](http://nuget.org)             |
 | Default Documentation Hosting  | [GitHub Pages](https://help.github.com/articles/what-are-github-pages)   |

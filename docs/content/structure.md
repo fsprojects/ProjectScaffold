@@ -10,12 +10,11 @@
   </thead>
   <tbody>
     <tr>
-      <td><a href="../../tree/master/.nuget">.nuget</a></td>
+      <td><a href="../../tree/master/.paket">.paket</a></td>
       <td>
-        <p>These files are used to get NuGet dependencies on a clean build and for other NuGet-related tasks including
+        <p>These files are used to get NuGet dependencies on a clean build and for other Paket-related tasks including
         Visual Studio <em>Package Restore<em>.</p>
         <p>Do not put anything else in this directory.</p>
-        <p>Do commit the contents of this directory to source control.</p>
       </td>
     </tr>
     <tr>
