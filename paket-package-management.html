@@ -2,7 +2,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8"/>
-    <title>license</title>
+    <title>Dependency management using Paket
+</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="description" content="A prototypical .NET solution (file system layout and tooling), recommended by the F# Foundation."/>
     <meta name="author" content="F# Foundation"/>
@@ -31,30 +32,32 @@
       <div class="row">
         <div class="span9" id="main">
           
-<p>This is free and unencumbered software released into the public domain.</p>
+<h1><a name="Dependency-management-using-Paket" class="anchor" href="#Dependency-management-using-Paket">Dependency management using Paket</a></h1>
 
-<p>Anyone is free to copy, modify, publish, use, compile, sell, or
-distribute this software, either in source code form or as a compiled
-binary, for any purpose, commercial or non-commercial, and by any
-means.</p>
+<p>By default ProjectScaffold uses <a href="http://fsprojects.github.io/Paket/">Paket</a> to manage <a href="http://www.nuget.org">NuGet</a> packages.
+This gives you a sane way to manage your dependencies, especially in solutions which contain F# projects or have lots of dependencies.</p>
 
-<p>In jurisdictions that recognize copyright laws, the author or authors
-of this software dedicate any and all copyright interest in the
-software to the public domain. We make this dedication for the benefit
-of the public at large and to the detriment of our heirs and
-successors. We intend this dedication to be an overt act of
-relinquishment in perpetuity of all present and future rights to this
-software under copyright law.</p>
+<h2><a name="Package-restore" class="anchor" href="#Package-restore">Package restore</a></h2>
 
-<p>THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
-IN NO EVENT SHALL THE AUTHORS BE LIABLE FOR ANY CLAIM, DAMAGES OR
-OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
-ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
-OTHER DEALINGS IN THE SOFTWARE.</p>
+<p>The build process will use <code>.paket/paket.bootstrapper.exe</code> to download the latest <code>paket.exe</code>.
+It then looks into the <code>paket.lock</code> file and restores all listed NuGet packages into the <code>packages</code> folder.
+This folder is listed in <code>.gitignore</code>, so you don't have to worry about accidentally commiting binaries.</p>
 
-<p>For more information, please refer to <a href="http://unlicense.org/">http://unlicense.org/</a></p>
+<h2><a name="Updating-packages" class="anchor" href="#Updating-packages">Updating packages</a></h2>
+
+<p>If you want to update your package dependencies just run:</p>
+
+<table class="pre"><tr><td class="lines"><pre class="fssnip">
+<span class="l">1: </span>
+</pre>
+</td>
+<td class="snippet"><pre class="fssnip">
+<span class="o">$</span> <span class="o">.</span><span class="i">paket</span><span class="o">/</span><span class="i">paket</span><span class="o">.</span><span class="i">exe</span> <span class="i">update</span></pre>
+</td>
+</tr>
+</table>
+
+<p>This will update the packages in the <code>paket.lock</code> file. More details can be found in the <a href="http://fsprojects.github.io/Paket/">Paket docs</a>.</p>
 
 
         </div>

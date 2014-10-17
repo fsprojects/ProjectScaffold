@@ -36,19 +36,59 @@
 
 <p>This project can be used to scaffold a prototypical .NET solution including file system layout and tooling.</p>
 
-<p>This includes a build process which:</p>
+<p>This includes <a href="paket-package-management.html">Paket</a> dependency management and a <a href="fake-build.html">FAKE</a> build process which:</p>
 
 <ul>
 <li>updates all AssemblyInfo files</li>
-<li>compiles the application and runs all test projects</li>
+<li>compiles the application and <a href="running-tests.html">runs all test projects</a></li>
 <li>generates <a href="https://github.com/ctaggart/SourceLink">SourceLinks</a></li>
 <li>generates <a href="writing-docs.html#API-docs">API docs based on XML document tags</a></li>
 <li>generates <a href="writing-docs.html#Markdown-files">documentation based on Markdown files</a></li>
-<li>denerates <a href="http://www.nuget.org">NuGet</a> packages</li>
+<li>generates <a href="http://www.nuget.org">NuGet</a> packages</li>
 <li>and allows a simple <a href="release-process.html">one step release process</a>.</li>
 </ul>
 
-<p>Read the <a href="tutorial.html">Getting started tutorial</a> to learn how you can set up your own project.</p>
+<h2><a name="Getting-started" class="anchor" href="#Getting-started">Getting started</a></h2>
+
+<p>This scaffolding process can be used to generate the suggested structure of a typical .NET library.</p>
+
+<h3><a name="Cloning-the-project" class="anchor" href="#Cloning-the-project">Cloning the project</a></h3>
+
+<p>This first thing to do is to clone or copy the ProjectScaffold repository to your own workspace.</p>
+
+<h3><a name="Initializing" class="anchor" href="#Initializing">Initializing</a></h3>
+
+<p>In order to start the scaffolding process run</p>
+
+<table class="pre"><tr><td class="lines"><pre class="fssnip">
+<span class="l">1: </span>
+<span class="l">2: </span>
+</pre>
+</td>
+<td class="snippet"><pre class="fssnip">
+<span class="o">$</span> <span class="i">build</span><span class="o">.</span><span class="i">cmd</span> <span class="c">// on windows</span>
+<span class="o">$</span> <span class="i">build</span><span class="o">.</span><span class="i">sh</span>  <span class="c">// on mono</span></pre>
+</td>
+</tr>
+</table>
+
+<p>During the init process you will be prompted for the name of your project and some other details:</p>
+
+<p><img src="img/init-script.png" alt="alt text" title="Init script asking for project details" /></p>
+
+<p>The project structure will then be generated from templates.</p>
+
+<p>After the initialisation you can open, edit, build and test using <code>ProjectName.sln</code>.</p>
+
+<h3><a name="Further-topics" class="anchor" href="#Further-topics">Further topics</a></h3>
+
+<ul>
+<li><a href="fake-build.html">Running builds</a></li>
+<li><a href="running-tests.html">Running tests</a></li>
+<li><a href="paket-package-management.html">Paket dependency management</a></li>
+<li><a href="writing-docs.html">Writing docs</a></li>
+<li><a href="release-process.html">Release process</a></li>
+</ul>
 
 <h2><a name="Contributing-and-copyright" class="anchor" href="#Contributing-and-copyright">Contributing and copyright</a></h2>
 
@@ -73,7 +113,9 @@ redistribution for both commercial and non-commercial purposes. For more informa
             <li><a href="./license.html">License</a></li>
 
             <li class="nav-header">Documentation</li>
-            <li><a href="./tutorial.html">Getting started</a></li>
+            <li><a href="./fake-build.html">Running builds</a></li>
+            <li><a href="./running-tests.html">Running tests</a></li>
+            <li><a href="./paket-package-management.html">Package management</a></li>
             <li><a href="./writing-docs.html">Writing docs</a></li>
             <li><a href="./release-process.html">Release process</a></li>
             <li class="divider"></li>
