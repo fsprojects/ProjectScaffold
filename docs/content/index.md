@@ -5,7 +5,7 @@ This project can be used to scaffold a prototypical .NET solution including file
 This includes [Paket](paket-package-management.html) dependency management and a [FAKE](fake-build.html) build process which: 
 
 * updates all AssemblyInfo files
-* compiles the application and runs all test projects with [NUnit](http://www.nunit.org/)
+* compiles the application and [runs all test projects](running-tests.html)
 * generates [SourceLinks](https://github.com/ctaggart/SourceLink)
 * generates [API docs based on XML document tags](writing-docs.html#API-docs)
 * generates [documentation based on Markdown files](writing-docs.html#Markdown-files)
@@ -38,6 +38,7 @@ After the initialisation you can open, edit, build and test using ``ProjectName.
 ### Further topics
 
 * [Running builds](fake-build.html)
+* [Running tests](running-tests.html)
 * [Paket dependency management](paket-package-management.html)
 * [Writing docs](writing-docs.html)
 * [Release process](release-process.html)
