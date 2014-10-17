@@ -34,11 +34,24 @@
           
 <h1><a name="Writing-documentation" class="anchor" href="#Writing-documentation">Writing documentation</a></h1>
 
-<p>ProjectScaffold allows to you generate HTML documentation similar this page.</p>
+<p>ProjectScaffold allows to you generate HTML documentation similar to this page by using <a href="https://github.com/tpetricek/FSharp.Formatting">FSharp.Formatting</a>.</p>
+
+<p>The <code>docs/tools/generate.fsx</code> file controls the generation of narrative and API documentation.
+In most projects, you'll simply need to edit some values located at the top of the file.</p>
+
+<p>They are as follows:</p>
+
+<ul>
+<li><code>referenceBinaries</code> - A list of the binaries for which documentation should be cretaed. The files listed should each have a corresponding XMLDoc file, and reside in the <code>bin</code> folder as handled by the build process.</li>
+<li><code>website</code> - The root URL to which generated documenation should be uploaded. In the included example, this points to the GitHub Pages root for this project.</li>
+<li><code>info</code> - A list of key/value pairs which further describe the details of your project. This list is exposed to <code>docs/tools/templates/template.cshtml</code> file for data-binding purposes.</li>
+</ul>
 
 <h2><a name="Markdown-files" class="anchor" href="#Markdown-files">Markdown files</a></h2>
 
-<p>The project is configured to convert all <code>*.md</code> files in <code>docs/content</code> to HTML pages and put it into <code>docs/output</code>.</p>
+<p>The project is configured to convert all <code>*.md</code> and <code>*.fsx</code> files in <code>docs/content</code> to HTML pages and put it into <code>docs/output</code>.
+The <code>docs/content/index.fsx</code> file acts as a strating point. Use this file to provide a narrative overview of your project.
+You can write actual, executable F# code in this file. Additionally, you may use Markdown comments.</p>
 
 <p>In order to edit the docs run:</p>
 
@@ -93,7 +106,13 @@ You just have to refresh the browser. Press any key in command line window when 
 
 <p>As you can see it can even create links back to your source code on <a href="http://github.com">GitHub.com</a>.</p>
 
-<h2><a name="Releasing-process" class="anchor" href="#Releasing-process">Releasing process</a></h2>
+<h2><a name="Changing-the-layout" class="anchor" href="#Changing-the-layout">Changing the layout</a></h2>
+
+<p>The layout is determined by the <code>docs/tools/templates/template.cshtml</code> file. 
+It uses the Razor templating engine, and leverages jQuery and Bootstrap. 
+Change this file to alter the non-content portions of your documentation.</p>
+
+<h2><a name="Release-process" class="anchor" href="#Release-process">Release process</a></h2>
 
 <p>In order to release the docs run:</p>
 
@@ -124,6 +143,7 @@ You just have to refresh the browser. Press any key in command line window when 
             <li><a href="./license.html">License</a></li>
 
             <li class="nav-header">Documentation</li>
+            <li><a href="./index.html#Getting-started">Getting started</a></li>
             <li><a href="./fake-build.html">Running builds</a></li>
             <li><a href="./running-tests.html">Running tests</a></li>
             <li><a href="./paket-package-management.html">Package management</a></li>
