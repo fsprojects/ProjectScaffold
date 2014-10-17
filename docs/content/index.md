@@ -1,6 +1,8 @@
 # ProjectScaffold
 
-This project can be used to scaffold a prototypical .NET solution including file system layout and tooling.
+## Getting started
+
+This project can be used to scaffold a prototypical .NET/mono solution including file system layout and tooling.
 
 This includes [Paket](paket-package-management.html) dependency management and a [FAKE](fake-build.html) build process which: 
 
@@ -12,10 +14,6 @@ This includes [Paket](paket-package-management.html) dependency management and a
 * generates [documentation based on Markdown files](writing-docs.html#Markdown-files)
 * generates and push [NuGet](http://www.nuget.org) packages
 * and allows a simple [one step release process](release-process.html). 
-
-## Getting started
-
-This scaffolding process can be used to generate the suggested structure of a typical .NET library.
 
 ### Cloning the project
 
