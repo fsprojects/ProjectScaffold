@@ -6,14 +6,14 @@ Used to initialialize a prototypical .NET/mono solution including file system la
 
 This includes [Paket](paket-package-management.html) dependency management and a [FAKE](fake-build.html) build process that: 
 
+* allows a simple [one step release process](release-process.html). 
 * works with most [build servers](build-servers.html) 
-* synchronizes all ``AssemblyInfo`` files
 * compiles the application and [runs all test projects](running-tests.html)
+* synchronizes all ``AssemblyInfo`` files prior to compilation
 * generates [SourceLinks](https://github.com/ctaggart/SourceLink)
-* generates [API docs based on XML document tags](writing-docs.html#API-docs)
+* generates [API docs based on XML documentation tags](writing-docs.html#API-docs)
 * generates [documentation based on Markdown files](writing-docs.html#Markdown-files)
 * generates and/or pushes [NuGet](http://www.nuget.org) packages
-* allows a simple [one step release process](release-process.html). 
 
 ### Cloning the project
 
