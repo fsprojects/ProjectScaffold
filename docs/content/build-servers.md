@@ -16,4 +16,4 @@ CI builds for open source projects are free.
 
 ## TeamCity
 
-To configure your project to buiild in TeamCity, create a build configuration using the Console Runner referring to `build.cmd`.
+To configure your project to build in TeamCity, create a build configuration using the Console Runner referring to `build.cmd`.
