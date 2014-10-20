@@ -1,7 +1,7 @@
 # Dependency management using Paket
 
 By default ProjectScaffold uses [Paket](http://fsprojects.github.io/Paket/) to manage [NuGet](http://www.nuget.org) packages.
-This gives you a sane way to manage your dependencies, especially in solutions which contain F# projects or have lots of dependencies.
+This gives you a sane way to manage your dependencies, especially in solutions that contain F# projects or have lots of dependencies.
 
 ## Package restore
 
@@ -27,5 +27,4 @@ This will update the `paket.dependencies` file and allow you to select the proje
 
 ![alt text](img/interactive-add.png "Interactive paket add") 
 
-
-More details can be found in the [Paket docs](http://fsprojects.github.io/Paket/).
+More details can be found in the [Paket documentation](http://fsprojects.github.io/Paket/).
