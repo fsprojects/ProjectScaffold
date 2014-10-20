@@ -34,25 +34,30 @@
           
 <h1><a name="FAKE-build" class="anchor" href="#FAKE-build">FAKE build</a></h1>
 
-<p>The ProjectScaffold uses <a href="http://fsharp.github.io/FAKE/">FAKE</a> to automate the complete build and release process.
-The <code>build.fsx</code> file contains this logic and is written in FAKE's build DSL.
-It uses the <a href="http://fsharp.github.io/FAKE/">FAKE - F# Make</a> library to manage many aspects of maintaining a solution.
-It contains a number of common tasks (i.e. build targets) such as directory cleaning, unit test execution, and NuGet package assembly.
-You are encouraged to adapt existing build targets and/or add new ones as necessary.</p>
+<p>ProjectScaffold uses the <a href="http://fsharp.github.io/FAKE/">FAKE</a> build tool to automate the complete build and release process for a application/solution.</p>
 
-<p>However, if you are leveraging the default conventions, as setup in this scaffold project, you can start by simply supplying some values at the top of this file.</p>
+<p>The <code>build.fsx</code> file contains this logic and is written in FAKE's build DSL. It contains a number of common tasks (i.e. build targets) such as directory cleaning, unit test execution, and NuGet package creation. You are encouraged to adapt existing build targets and/or add new ones as necessary.</p>
 
-<p>They are as follows:</p>
+<p>However, if you are leveraging the default conventions, as established in this scaffold project, you can start by simply supplying some values at the top of this file. They are as follows:</p>
 
 <ul>
-<li><code>project</code> - The name of your project, which is used in serveral places: in the generation of AssemblyInfo, as the name of a NuGet package, and for locating a directory under <code>src</code>.</li>
-<li><code>summary</code> - A short summary of your project, used as the description in AssemblyInfo. It also provides a short summary for your NuGet package.</li>
+<li><code>project</code> - The name of your project, which is used in serveral places:
+<ul>
+<li>the generation of AssemblyInfo.</li>
+<li>the name of a NuGet package.</li>
+<li>naming/finding a directory under <code>src</code>.</li>
+</ul></li>
+<li><code>summary</code> - A short summary of your project, used as:
+<ul>
+<li>the description in AssemblyInfo.</li>
+<li>the short summary for the NuGet package.</li>
+</ul></li>
 <li><code>description</code> - A longer description of the project used as a description for your NuGet package.</li>
-<li><code>authors</code> - A list of author names, as should be displayed in the NuGet package metadata.</li>
-<li><code>tags</code> - A string containing space-separated tags, as should be included in the NuGet package metadata.</li>
+<li><code>authors</code> - A list of author names, to be displayed in the NuGet package metadata.</li>
+<li><code>tags</code> - A string containing space-separated tags, to be included in the NuGet package metadata.</li>
 <li><code>solutionFile</code> - The name of your solution file (sans-extension). It is used as part of the build process.</li>
 <li><code>testAssemblies</code> - A list of <a href="http://fsharp.github.io/FAKE/">FAKE</a> globbing patterns to be searched for unit-test assemblies.</li>
-<li><code>gitHome</code> - The URL of user profile hosting this project's GitHub repository. This is used for publishing documentation.</li>
+<li><code>gitHome</code> - The base URL / user profile hosting this project's GitHub repository. This is used for publishing documentation.</li>
 <li><code>gitName</code> - The name of this project's GitHub repository. This is used for publishing documentation.</li>
 </ul>
 
