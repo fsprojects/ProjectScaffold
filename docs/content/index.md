@@ -2,18 +2,18 @@
 
 ## Getting started
 
-This project can be used to scaffold a prototypical .NET/mono solution including file system layout and tooling.
+Used to initialialize a prototypical .NET/mono solution including file system layout and tooling.
 
-This includes [Paket](paket-package-management.html) dependency management and a [FAKE](fake-build.html) build process which: 
+This includes [Paket](paket-package-management.html) dependency management and a [FAKE](fake-build.html) build process that: 
 
-* which works with most [build servers](build-servers.html) 
-* updates all AssemblyInfo files
+* works with most [build servers](build-servers.html) 
+* synchronizes all ``AssemblyInfo`` files
 * compiles the application and [runs all test projects](running-tests.html)
 * generates [SourceLinks](https://github.com/ctaggart/SourceLink)
 * generates [API docs based on XML document tags](writing-docs.html#API-docs)
 * generates [documentation based on Markdown files](writing-docs.html#Markdown-files)
-* generates and push [NuGet](http://www.nuget.org) packages
-* and allows a simple [one step release process](release-process.html). 
+* generates and/or pushes [NuGet](http://www.nuget.org) packages
+* allows a simple [one step release process](release-process.html). 
 
 ### Cloning the project
 
@@ -21,7 +21,7 @@ This first thing to do is to clone or copy the ProjectScaffold repository to you
 
 ### Initializing
 
-In order to start the scaffolding process run 
+In order to start the scaffolding process run:
 
     $ build.cmd // on windows
     $ build.sh  // on mono
@@ -32,7 +32,7 @@ During the init process you will be prompted for the name of your project and so
 
 The project structure will then be generated from templates.
 
-After the initialisation you can open, edit, build and test using ``ProjectName.sln``.
+After the initialization you can open, edit, build and test using ``ProjectName.sln``.
  
 ### Further topics
 
@@ -45,11 +45,11 @@ After the initialisation you can open, edit, build and test using ``ProjectName.
 
 ## Contributing and copyright
 
-The project is hosted on [GitHub][gh] where you can [report issues][issues], fork  the project and submit pull requests.
+The project is hosted on [GitHub][gh] where you can [report issues][issues], fork the project and submit pull requests.
 
-If you want to contribute to the documentation the please checkout the [docs](https://github.com/fsprojects/ProjectScaffold/tree/docs) branch.  
+If you want to contribute to the documentation, please do so by doing a ``checkout`` of the [``docs`` branch of the repo](https://github.com/fsprojects/ProjectScaffold/tree/docs).
 
-The library is available under Public Domain license, which allows modification and 
+The library is released under a Public Domain license, which allows modification and 
 redistribution for both commercial and non-commercial purposes. For more information see the 
 [License file][license] in the GitHub repository. 
 
