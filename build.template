@@ -68,27 +68,48 @@ let gitRaw = environVarOrDefault "gitRaw" "https://raw.github.com/##GitHome##"
 // Read additional information from the release notes document
 let release = LoadReleaseNotes "RELEASE_NOTES.md"
 
+// --------------------------------------------------------------------------------------
+// Helper functions for generating assembly info file
+// --------------------------------------------------------------------------------------
+
+// For com interop projects a guid is required, GUID should only ever change explicitly
+// Getting GUID from a simple textfile named interop.guid in the project folder.
+// file should be checked into source control
+let getComInteropGuid projectName = 
+    let readComInteropGuidFile (file) = 
+        match Guid.TryParse(File.ReadAllText(file).Trim ()) with
+        | true, guid -> Some(guid)
+        | false, _   -> failwith "Content of %s not a valid GUID string" file
+
+    let guidFile = ((__SOURCE_DIRECTORY__ @@ "src") @@ projectName) @@ "interop.guid"
+
+    match fileExists guidFile with
+    | true  -> readComInteropGuidFile guidFile
+    | false -> None 
+
+let getAssemblyInfoAttributes projectName =
+    let attributes =
+         [ Attribute.Title (projectName)
+           Attribute.Product project
+           Attribute.Description summary
+           Attribute.Version release.AssemblyVersion
+           Attribute.FileVersion release.AssemblyVersion ]
+
+    match getComInteropGuid projectName with
+    | Some(guid) -> attributes @ [Attribute.Guid (guid.ToString ())]
+    | None       -> attributes
+
 let genFSAssemblyInfo (projectPath) =
     let projectName = System.IO.Path.GetFileNameWithoutExtension(projectPath)
     let basePath = "src/" + projectName
     let fileName = basePath + "/AssemblyInfo.fs"
-    CreateFSharpAssemblyInfo fileName
-      [ Attribute.Title (projectName)
-        Attribute.Product project
-        Attribute.Description summary
-        Attribute.Version release.AssemblyVersion
-        Attribute.FileVersion release.AssemblyVersion ]
+    CreateFSharpAssemblyInfo fileName (getAssemblyInfoAttributes projectName)
 
 let genCSAssemblyInfo (projectPath) =
     let projectName = System.IO.Path.GetFileNameWithoutExtension(projectPath)
     let basePath = "src/" + projectName + "/Properties"
     let fileName = basePath + "/AssemblyInfo.cs"
-    CreateCSharpAssemblyInfo fileName
-      [ Attribute.Title (projectName)
-        Attribute.Product project
-        Attribute.Description summary
-        Attribute.Version release.AssemblyVersion
-        Attribute.FileVersion release.AssemblyVersion ]
+    CreateCSharpAssemblyInfo fileName (getAssemblyInfoAttributes projectName)
 
 // Generate assembly info files with the right version & up-to-date information
 Target "AssemblyInfo" (fun _ ->
