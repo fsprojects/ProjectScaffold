@@ -40,7 +40,7 @@
 
 <h2><a name="Setup-release-script" class="anchor" href="#Setup-release-script">Setup release script</a></h2>
 
-<p>Prior to the first release from a given working area, you need to do a manual step. Please create a <code>build.cmd</code> with the following content:</p>
+<p>Prior to the first release from a given working area, you need to do a manual step. Please create a <code>release.cmd</code> with the following content:</p>
 
 <table class="pre"><tr><td><pre lang="batchfile">@echo off
 cls
@@ -59,7 +59,11 @@ packages\FAKE\tools\FAKE.exe build.fsx &quot;target=Release&quot; &quot;NugetKey
 
 <p>(Substitute your specific credentials for <code>NUGETKEY</code>, <code>USER</code> and <code>PW</code>).</p>
 
-<p>NB The <code>build.cmd</code> is listed in the <code>.gitignore</code> file. This prevents accidental commits of your credentials.</p>
+<p>The <code>release.cmd</code> is listed in the <code>.gitignore</code> file. This prevents accidental commits of your credentials.</p>
+
+<h3><a name="Setup-documentation-release" class="anchor" href="#Setup-documentation-release">Setup documentation release</a></h3>
+
+<p>Make sure you have a <code>gh-pages</code> branch locally. If it doesn't exist, then just create it.</p>
 
 <h2><a name="GitHub-releases" class="anchor" href="#GitHub-releases">GitHub releases</a></h2>
 
