@@ -56,10 +56,13 @@ Change this file to alter the non-content aspects of your documentation.
 
 ## Release process
 
+Make sure you have a `gh-pages` branch locally. If it doesn't exist, then just create it.
+
 In order to release the docs run:
 
     $ build ReleaseDocs
 
-This will start the build process and [FSharp.Formatting](https://github.com/tpetricek/FSharp.Formatting) again. The output will then be pushed to your `gh-pages` branch where [GitHub](http://www.github.com) will pick it up and complete the release process.
+This will start the build process and [FSharp.Formatting](https://github.com/tpetricek/FSharp.Formatting) again. 
+The output will then be pushed to your `gh-pages` branch where [GitHub](http://www.github.com) will pick it up and complete the release process.
 
 The release of the documentation is also done during the [Release process](release-process.html).

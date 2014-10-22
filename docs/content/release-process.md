@@ -6,7 +6,7 @@ It will also create a git tag and a github release entry.
  
 ## Setup release script
  
-Prior to the first release from a given working area, you need to do a manual step. Please create a `build.cmd` with the following content:
+Prior to the first release from a given working area, you need to do a manual step. Please create a `release.cmd` with the following content:
 
     [lang=batchfile]
     @echo off
@@ -26,7 +26,11 @@ Prior to the first release from a given working area, you need to do a manual st
     
 (Substitute your specific credentials for ``NUGETKEY``, ``USER`` and ``PW``).
 
-NB The `build.cmd` is listed in the `.gitignore` file. This prevents accidental commits of your credentials.
+The `release.cmd` is listed in the `.gitignore` file. This prevents accidental commits of your credentials.
+
+### Setup documentation release
+
+Make sure you have a `gh-pages` branch locally. If it doesn't exist, then just create it.
 
 ## GitHub releases
 
