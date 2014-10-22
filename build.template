@@ -158,6 +158,7 @@ Target "SourceLink" (fun _ ->
 Target "NuGet" (fun _ ->
     NuGet (fun p ->
         { p with
+            ToolPath = "packages/NuGet.CommandLine/tools/Nuget.exe"
             Authors = authors
             Project = project
             Summary = summary
