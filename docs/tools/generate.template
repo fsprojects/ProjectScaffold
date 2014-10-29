@@ -3,8 +3,6 @@
 // (the generated documentation is stored in the 'docs/output' directory)
 // --------------------------------------------------------------------------------------
 
-// Binaries that have XML documentation (in a corresponding generated XML file)
-let referenceBinaries = [ "##ProjectName##.dll" ]
 // Web site location for the generated documentation
 let website = "/##ProjectName##"
 
@@ -67,18 +65,28 @@ let copyFiles () =
   CopyRecursive (formatting @@ "styles") (output @@ "content") true 
     |> Log "Copying styles and scripts: "
 
+let findBinaries () =
+    directoryInfo bin 
+    |> subDirectories
+    |> Array.map (fun d -> d.FullName @@ (sprintf "%s.dll" d.Name))
+    |> List.ofArray
+
+let findLibDirs () =
+    directoryInfo bin 
+    |> subDirectories
+    |> Array.map (fun d -> d.FullName)
+    |> List.ofArray
+
 // Build API reference from XML comments
 let buildReference () =
   CleanDir (output @@ "reference")
-  let binaries =
-    referenceBinaries
-    |> List.map (fun lib-> bin @@ lib)
+  let binaries = findBinaries ()
   MetadataFormat.Generate
     ( binaries, output @@ "reference", layoutRoots, 
       parameters = ("root", root)::info,
       sourceRepo = githubLink @@ "tree/master",
       sourceFolder = __SOURCE_DIRECTORY__ @@ ".." @@ "..",
-      publicOnly = true, libDirs = [bin] )
+      publicOnly = true,libDirs = (findLibDirs ()) )
 
 // Build documentation from `fsx` and `md` files in `docs/content`
 let buildDocumentation () =

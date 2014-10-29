@@ -1,13 +1,16 @@
-// --------------------------------------------------------------------------------------
+﻿// --------------------------------------------------------------------------------------
 // FAKE build script
 // --------------------------------------------------------------------------------------
 
 #r @"packages/FAKE/tools/FakeLib.dll"
-
+#r @"packages/Paket.Core/lib/Paket.Core.dll"
 open Fake
 open Fake.Git
 open Fake.AssemblyInfoFile
 open Fake.ReleaseNotesHelper
+open Paket
+open Paket.PackageResolver
+open Paket.Requirements
 open System
 open System.IO
 #if MONO
@@ -98,6 +101,16 @@ Target "AssemblyInfo" (fun _ ->
   csProjs |> Seq.iter genCSAssemblyInfo
 )
 
+// Copies binaries from default VS location to exepcted bin folder
+// But keeps a subdirectory structure for each project in the 
+// src folder to support multiple project outputs
+Target "CopyBinaries" (fun _ ->
+    directoryInfo "src" 
+    |> subDirectories 
+    |> Array.map (fun d -> (d.Name,  sprintf "%s/Bin/Release" d.FullName)) 
+    |> Array.iter (fun (n, p) -> CopyDir (sprintf "bin/%s" n) p (fun _ -> true)) 
+)
+
 // --------------------------------------------------------------------------------------
 // Clean build results
 
@@ -155,21 +168,126 @@ Target "SourceLink" (fun _ ->
 // --------------------------------------------------------------------------------------
 // Build a NuGet package
 
+type FrameworkVersion (projectFwVersion:string) =
+    let nugetFwVersion = projectFwVersion.Replace("v","net")
+    member x.NugetFwVersion = nugetFwVersion
+
+type Output =
+| Exe 
+| Library
+
+let dirI = 
+    directoryInfo ((__SOURCE_DIRECTORY__ @@ "bin") @@ "Tu.Tu")
+
+let getProjectFile (d:IO.DirectoryInfo) =
+    let dirI = directoryInfo ((__SOURCE_DIRECTORY__ @@ "src") @@ d.Name)
+    if not dirI.Exists then failwith (sprintf "%s does not exist" dirI.FullName )
+    let pfile =  match dirI.GetFiles("*.?sproj") with
+                 | [|unique|] -> ProjectFile.Load unique.FullName
+                 | [||]       -> failwith (sprintf "No project files found in %s" d.FullName)
+                 | many       -> failwith (sprintf "More than one project file was found in %s: %A" d.FullName many)
+
+    match pfile with
+    | Some(p) -> p
+    | None    -> failwith "Unable to load project file"
+    
+let getNodes (p:ProjectFile) name =
+    let query = (sprintf "//ns:%s" name)
+    let nodes = p.Document.SelectNodes((sprintf "//ns:%s" name), p.Namespaces)    
+    match nodes.Count with
+    | 0 -> None
+    | _ -> Some(nodes)
+
+let getNode (p:ProjectFile) name =
+    match getNodes p name with
+    | None -> failwith (sprintf "%s Not found in project file %s" name p.FileName)
+    | Some(n) when n.Count > 1 -> failwith (sprintf "More than one element of %s found in project file %s" name p.FileName)
+    | Some(n) -> n.[0]
+
+let getOutputType (d:IO.DirectoryInfo) =
+    let projFile = getProjectFile  d
+    let output = (getNode projFile "OutputType").InnerText    
+    let fw = (getNode projFile "TargetFrameworkVersion").InnerText   
+    match output with
+    | "Exe" -> (Exe, (new FrameworkVersion(fw)))
+    | _     -> (Library, (new FrameworkVersion(fw)))
+
+let getFilenamesForLibraryOutput (d:IO.DirectoryInfo) =
+    [d.FullName @@ (sprintf "%s.dll" d.Name)
+     d.FullName @@ (sprintf "%s.pdb" d.Name)] 
+    
+let getFilenamesForExeOutput (d:IO.DirectoryInfo) =
+    d.GetFiles("*", IO.SearchOption.AllDirectories) 
+    |> Array.map (fun f -> f.FullName) 
+    |> Array.toList 
+
+let getFilenames (d:IO.DirectoryInfo) =
+    let (output, fwVersion) = getOutputType d
+    let files = match output with 
+                | Exe     -> getFilenamesForExeOutput d
+                | Library -> getFilenamesForLibraryOutput d
+    files |> List.map(fun f -> (f, Some("lib" @@ fwVersion.NugetFwVersion), None))
+
+let getAllPackages () =
+    let dep = (DependenciesFile.ReadFromFile (__SOURCE_DIRECTORY__ @@ "paket.dependencies"))
+    let lock = (LockFileParser.Parse (IO.File.ReadAllLines (__SOURCE_DIRECTORY__ @@ "paket.lock")))
+    (dep.Packages, lock.Packages)
+
+let getReferencedPackageNamesFromProject projectRefFile =
+    IO.File.ReadAllLines projectRefFile
+
+let getCurrentlyInstalledVersion p (resolved:ResolvedPackage List) =
+    (resolved |> List.find (fun rp -> rp.Name = p)).Version
+
+let getVersionRequirement (p:PackageRequirement) (resolved:ResolvedPackage List) =
+    match p.VersionRequirement.Range with
+    | Minimum(semver) when (semver.ToString()) = "0" -> Minimum(getCurrentlyInstalledVersion p.Name resolved)
+    | version                                        -> version
+
+let getReferencedPackagesFromProject projectRefFile =
+    let referencedPackages = getReferencedPackageNamesFromProject projectRefFile
+    let (dep, lock) = getAllPackages  () 
+    dep 
+    |> List.filter (fun p -> referencedPackages |> Array.exists (fun r -> p.Name = r))
+    |> List.map (fun p -> let version = getVersionRequirement p lock |> NugetVersionRangeParser.format
+                          (p.Name, version))
+
+let getInterProjectDependencies (d:IO.DirectoryInfo) =
+    let projFile = getProjectFile d   
+    match getNodes projFile "ProjectReference" with
+    | None -> []
+    | Some(nodes) -> [for n in nodes -> (n.SelectSingleNode("ns:Name", projFile.Namespaces).InnerText, release.NugetVersion)] 
+
+let getDependencies (d:IO.DirectoryInfo) =
+    match getOutputType d with
+    | Exe,_  -> []
+    |  _ ,_  -> let projectSourceDir = (__SOURCE_DIRECTORY__ @@ "src") @@ d.Name
+                let referencesFile = projectSourceDir @@ "paket.references"
+                let externalDependencies = match fileExists referencesFile with
+                                           | false -> []
+                                           | true  -> getReferencedPackagesFromProject referencesFile
+                (getInterProjectDependencies d) @ externalDependencies
+    
 Target "NuGet" (fun _ ->
-    NuGet (fun p ->
-        { p with
-            Authors = authors
-            Project = project
-            Summary = summary
-            Description = description
-            Version = release.NugetVersion
-            ReleaseNotes = String.Join(Environment.NewLine, release.Notes)
-            Tags = tags
-            OutputPath = "bin"
-            AccessKey = getBuildParamOrDefault "nugetkey" ""
-            Publish = hasBuildParam "nugetkey"
-            Dependencies = [] })
-        ("nuget/" + project + ".nuspec")
+    directoryInfo "bin" 
+    |> subDirectories
+    |> Array.iter (fun d ->
+        NuGet (fun p ->
+            { p with
+                Authors = authors
+                Project = d.Name
+                Summary = summary
+                Description = description
+                Version = release.NugetVersion
+                ReleaseNotes = String.Join(Environment.NewLine, release.Notes)
+                Tags = tags
+                Files = getFilenames d
+                OutputPath = "bin" @@ d.Name
+                AccessKey = getBuildParamOrDefault "nugetkey" ""
+                Publish = hasBuildParam "nugetkey"
+                Dependencies = getDependencies d })
+            ("nuget/" + project + ".nuspec")
+        )
 )
 
 // --------------------------------------------------------------------------------------
@@ -265,6 +383,7 @@ Target "All" DoNothing
 "Clean"
   ==> "AssemblyInfo"
   ==> "Build"
+  ==> "CopyBinaries"
   ==> "RunTests"
   =?> ("GenerateReferenceDocs",isLocalBuild && not isMono)
   =?> ("GenerateDocs",isLocalBuild && not isMono)
