@@ -7,7 +7,7 @@
 |:--------------------------|:------------------------------------------|
 | Platforms                 | Linux, Windows, OSX                       |
 | Build Automation          | [FAKE](http://fsharp.github.io/FAKE/)     |
-| Unit Testing              | [NUnit](http://www.nunit.org/)            |
+| Unit Testing              | [NUnit](http://www.nunit.org/), [xUnit](http://xunit.codeplex.com/), [Machine.Specifications](https://github.com/machine/machine.specifications)            |
 | Package Formats           | Nuget packages                            |
 | Dependency Manager        | [Paket](http://fsprojects.github.io/Paket/) |
 | Documentation Authoring   | Markdown, HTML and F# Literate Scripts    |
