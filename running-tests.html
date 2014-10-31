@@ -50,7 +50,9 @@
 
 <p><a href="http://fsharp.github.io/FAKE/">FAKE</a> supports many different test frameworks including <a href="http://xunit.github.io/">xUnit</a>, <a href="https://github.com/machine/machine.specifications">Machine.Specifications</a> and many more.</p>
 
-<p>If you wish to use a different test framework, look for the <code>RunTest</code> target in the <code>build.fsx</code> file:</p>
+<p>If you wish to use a different test framework, look for the <code>RunTest</code> target in the <code>build.fsx</code> file:
+<a href="http://fsharp.github.io/FAKE/">FAKE</a> supports many different test frameworks including <a href="https://xunit.codeplex.com/">xUnit</a>, <a href="https://github.com/machine/machine.specifications">Machine.Specifications</a> and many more.
+If you want to use a different test framework the look for the <code>RunTest</code> target in the <code>build.fsx</code> file and update accordingly to your preferred testing framework:</p>
 
 <table class="pre"><tr><td class="lines"><pre class="fssnip">
 <span class="l">1: </span>
@@ -77,6 +79,8 @@
 </table>
 
 <p>You will also ant to change the testing framework in the <code>paket.dependencies</code> file and run the <a href="paket-package-management.html#Updating-packages">update process</a>.</p>
+
+<p>You also need to change the testing framework in the <code>paket.dependencies</code> file and run the <a href="paket-package-management.html#Updating-packages">update process</a>.</p>
 
 <p>More details regarding these aspects can be found in the <a href="http://fsharp.github.io/FAKE/">FAKE</a> and <a href="http://fsprojects.github.io/Paket/">Paket</a> documentation sites.</p>
 
