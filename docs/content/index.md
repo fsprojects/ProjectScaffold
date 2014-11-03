@@ -26,7 +26,14 @@ In order to start the scaffolding process run:
     $ build.cmd // on windows
     $ build.sh  // on mono
 
-During the init process you will be prompted for the name of your project and some other details: 
+During the init process you will be prompted for the name of your project and some other details including the following:
+
+* Project summary
+* Project description
+* Author's name for NuGet package
+* Tags for NuGet package (separated by spaces)
+* GitHub username
+* GitHub project name (if different than project name from above)
 
 ![alt text](img/init-script.png "Init script asking for project details")
 
@@ -49,9 +56,9 @@ The project is hosted on [GitHub][gh] where you can [report issues][issues], for
 
 If you want to contribute to the documentation, please do so by doing a ``checkout`` of the [``docs`` branch of the repo](https://github.com/fsprojects/ProjectScaffold/tree/docs).
 
-The library is released under a Public Domain license, which allows modification and 
-redistribution for both commercial and non-commercial purposes. For more information see the 
-[License file][license] in the GitHub repository. 
+The library is available under Public Domain license, which allows modification and
+redistribution for both commercial and non-commercial purposes. For more information see the
+[License file][license] in the GitHub repository.
 
   [content]: https://github.com/fsprojects/FSharp.ProjectScaffold/tree/master/docs/content
   [gh]: https://github.com/fsprojects/FSharp.ProjectScaffold
