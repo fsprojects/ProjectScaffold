@@ -19,6 +19,9 @@ This includes [Paket](paket-package-management.html) dependency management and a
 
 This first thing to do is to clone or copy the ProjectScaffold repository to your own workspace.
 
+    // in target directory
+    git clone https://github.com/fsprojects/ProjectScaffold.git .
+
 ### Initializing
 
 In order to start the scaffolding process run:
