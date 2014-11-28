@@ -15,12 +15,21 @@ This includes [Paket](paket-package-management.html) dependency management and a
 * generates [documentation based on Markdown files](writing-docs.html#Markdown-files)
 * generates and/or pushes [NuGet](http://www.nuget.org) packages
 
-### Cloning the project
+### Getting the project scaffold
 
-This first thing to do is to clone or copy the ProjectScaffold repository to your own workspace.
+This first thing to do is to copy the ProjectScaffold repository to your own workspace.
+Download the [archive](https://github.com/fsprojects/ProjectScaffold/archive/master.zip) or use following script:
 
-    // in target directory
-    git clone https://github.com/fsprojects/ProjectScaffold.git .
+    // on windows in target directory
+    $ git clone --depth 1 https://github.com/fsprojects/ProjectScaffold.git .
+    $ rd /S /Q .git
+    $ git init
+    
+    // on mono in target directory
+    $ git clone --depth 1 https://github.com/fsprojects/ProjectScaffold.git .
+    $ rm -rf .git
+    $ git init
+
 
 ### Initializing
 
