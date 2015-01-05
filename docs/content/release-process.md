@@ -30,7 +30,7 @@ The `release.cmd` is listed in the `.gitignore` file. This prevents accidental c
 
 ### Setup documentation release
 
-Make sure you have a `gh-pages` branch locally. If it doesn't exist, then just create it.
+Make sure you have a `gh-pages` branch. If it doesn't exist, then just create and push it.
 
 ## GitHub releases
 
