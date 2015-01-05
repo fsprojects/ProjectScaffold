@@ -63,5 +63,5 @@ The first step is to edit the [RELEASE_NOTES.md](https://github.com/fsprojects/P
 
 After that you can release your software by simply running:
      
-    $ build.cmd // on Windows
-    $ build.sh  // on mono
+    $ release.cmd // on Windows
+    $ release.sh  // on mono
