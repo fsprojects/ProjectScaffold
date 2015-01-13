@@ -6,7 +6,7 @@ Used to initialialize a prototypical .NET/mono solution including file system la
 
 This includes [Paket](paket-package-management.html) dependency management and a [FAKE](fake-build.html) build process that: 
 
-* allows a simple [one step release process](release-process.html). 
+* allows a simple [one step release process](release-process.html)
 * works with most [build servers](build-servers.html) 
 * compiles the application and [runs all test projects](running-tests.html)
 * synchronizes all ``AssemblyInfo`` files prior to compilation
