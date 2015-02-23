@@ -12,7 +12,7 @@ open System
 open System.IO
 #if MONO
 #else
-#load "packages/SourceLink.Fake/Tools/Fake.fsx"
+#load "packages/SourceLink.Fake/tools/Fake.fsx"
 open SourceLink
 #endif
 
@@ -101,14 +101,16 @@ let getAssemblyInfoAttributes projectName =
 
 let genFSAssemblyInfo (projectPath) =
     let projectName = System.IO.Path.GetFileNameWithoutExtension(projectPath)
-    let basePath = "src/" + projectName
-    let fileName = basePath + "/AssemblyInfo.fs"
+    let folderName = System.IO.Path.GetDirectoryName(projectPath)
+    let basePath = "src" @@ folderName
+    let fileName = basePath @@ "AssemblyInfo.fs"
     CreateFSharpAssemblyInfo fileName (getAssemblyInfoAttributes projectName)
 
 let genCSAssemblyInfo (projectPath) =
     let projectName = System.IO.Path.GetFileNameWithoutExtension(projectPath)
-    let basePath = "src/" + projectName + "/Properties"
-    let fileName = basePath + "/AssemblyInfo.cs"
+    let folderName = System.IO.Path.GetDirectoryName(projectPath)
+    let basePath = folderName @@ "Properties"
+    let fileName = basePath @@ "AssemblyInfo.cs"
     CreateCSharpAssemblyInfo fileName (getAssemblyInfoAttributes projectName)
 
 // Generate assembly info files with the right version & up-to-date information
@@ -185,6 +187,7 @@ Target "NuGet" (fun _ ->
             Description = description
             Version = release.NugetVersion
             ReleaseNotes = String.Join(Environment.NewLine, release.Notes)
+            WorkingDir = "."
             Tags = tags
             OutputPath = "bin"
             AccessKey = getBuildParamOrDefault "nugetkey" ""
@@ -342,10 +345,10 @@ Target "All" DoNothing
   ==> "AssemblyInfo"
   ==> "Build"
   ==> "RunTests"
-  =?> ("GenerateReferenceDocs",isLocalBuild && not isMono)
-  =?> ("GenerateDocs",isLocalBuild && not isMono)
+  =?> ("GenerateReferenceDocs",isLocalBuild)
+  =?> ("GenerateDocs",isLocalBuild)
   ==> "All"
-  =?> ("ReleaseDocs",isLocalBuild && not isMono)
+  =?> ("ReleaseDocs",isLocalBuild)
 
 "All" 
 #if MONO
