@@ -1,11 +1,13 @@
 # ProjectScaffold
 
-## Getting started
+##What is ProjectScaffold?
+ProjectScaffold helps you get started with a new .NET/Mono project solution with everything needed for successful organising of code, tools and publishing. 
 
-Used to initialialize a prototypical .NET/mono solution including file system layout and tooling.
+We recommend you use ProjectScaffold for all new projects.
 
-This includes [Paket](paket-package-management.html) dependency management and a [FAKE](fake-build.html) build process that: 
+Tools include [Paket](paket-package-management.html) for dependency management and [FAKE](fake-build.html) for automating the build process 
 
+FAKE - 
 * allows a simple [one step release process](release-process.html)
 * works with most [build servers](build-servers.html) 
 * compiles the application and [runs all test projects](running-tests.html)
@@ -15,9 +17,9 @@ This includes [Paket](paket-package-management.html) dependency management and a
 * generates [documentation based on Markdown files](writing-docs.html#Markdown-files)
 * generates and/or pushes [NuGet](http://www.nuget.org) packages
 
-### Cloning the project
+##Getting Started
 
-This first thing to do is to clone or copy the ProjectScaffold repository to your own workspace.
+This first thing to do is to [clone](https://github.com/fsprojects/ProjectScaffold.git) or [copy](https://github.com/fsprojects/ProjectScaffold/archive/master.zip) the ProjectScaffold repository to your developer workspace.
 
 ### Initializing
 
