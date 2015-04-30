@@ -1,13 +1,13 @@
 ##What is ProjectScaffold?
-ProjectScaffold helps you get started with a new .NET/Mono project solution with everything needed for successful organising of code, tools and publishing. 
+ProjectScaffold helps you get started with a new F# .NET/Mono project solution with everything needed for successful organising of code, tools and publishing. 
 
 We recommend you use ProjectScaffold for all new projects.
 
 Tools include [Paket](paket-package-management.html) for dependency management and [FAKE](fake-build.html) for automating the build process 
 
 Packet - 
-* works with Nuget packages
-* can reference files [directly with a URL](http://fsprojects.github.io/Paket/http-dependencies.html) from GitHub or anywhere on the web
+* helps manage Nuget packages
+* can reference files [directly with a URL](http://fsprojects.github.io/Paket/http-dependencies.html) from GitHub or from any where on the web
 * gives precise and predictable control over referenced packages
 
 FAKE - 
@@ -22,7 +22,7 @@ FAKE -
 
 ##Getting Started
 
-This first thing to do is to [clone](https://github.com/fsprojects/ProjectScaffold.git) or [copy](https://github.com/fsprojects/ProjectScaffold/archive/master.zip) the ProjectScaffold repository to your developer workspace. This will eventually be your solution folder. Feel free to rename ProjectScaffold folder to your liking.
+The first thing to do is to [clone](https://github.com/fsprojects/ProjectScaffold.git) or [copy](https://github.com/fsprojects/ProjectScaffold/archive/master.zip) the ProjectScaffold repository to your developer workspace. This will eventually be your solution folder. Feel free to rename ProjectScaffold folder to your liking.
 
 ### Initializing
 
@@ -31,7 +31,7 @@ In order to generate your project first run:
     $ build.cmd // on windows
     $ build.sh  // on mono
 
-This would prompt you to enter a name for your project solution, which is required, and some more details which are optional:
+This would prompt you to enter a name for your project solution, which is required, and then some more details which are optional:
 
 * Project summary
 * Project description
