@@ -1,12 +1,12 @@
 ##What is ProjectScaffold?
-ProjectScaffold helps you get started with a new F# .NET/Mono project solution with everything needed for successful organising of code, tools and publishing. 
+ProjectScaffold helps you get started with a new .NET/Mono project solution with everything needed for successful organising of code, tools and publishing. 
 
 We recommend you use ProjectScaffold for all new projects.
 
 Tools include [Paket](paket-package-management.html) for dependency management and [FAKE](fake-build.html) for automating the build process 
 
-Packet - 
-* helps manage Nuget packages
+Paket - 
+* helps manage NuGet packages
 * can reference files [directly with a URL](http://fsprojects.github.io/Paket/http-dependencies.html) from GitHub or from any where on the web
 * gives precise and predictable control over referenced packages
 
