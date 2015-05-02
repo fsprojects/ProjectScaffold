@@ -2,8 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8"/>
-    <title>ProjectScaffold
-</title>
+    <title>index</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="description" content="A prototypical .NET solution (file system layout and tooling), recommended by the F# Foundation."/>
     <meta name="author" content="F# Foundation"/>
@@ -32,32 +31,36 @@
       <div class="row">
         <div class="span9" id="main">
           
-<h1><a name="ProjectScaffold" class="anchor" href="#ProjectScaffold">ProjectScaffold</a></h1>
+<h2><a name="What-is-ProjectScaffold" class="anchor" href="#What-is-ProjectScaffold">What is ProjectScaffold?</a></h2>
 
-<h2><a name="Getting-started" class="anchor" href="#Getting-started">Getting started</a></h2>
+<p>ProjectScaffold helps you get started with a new .NET/Mono project solution with everything needed for successful organising of code, tools and publishing.</p>
 
-<p>Used to initialialize a prototypical .NET/mono solution including file system layout and tooling.</p>
+<p>We recommend you use ProjectScaffold for all new projects.</p>
 
-<p>This includes <a href="paket-package-management.html">Paket</a> dependency management and a <a href="fake-build.html">FAKE</a> build process that:</p>
+<p>Tools include <a href="paket-package-management.html">Paket</a> for dependency management and <a href="fake-build.html">FAKE</a> for automating the build process</p>
 
-<ul>
-<li>allows a simple <a href="release-process.html">one step release process</a>.</li>
-<li>works with most <a href="build-servers.html">build servers</a></li>
-<li>compiles the application and <a href="running-tests.html">runs all test projects</a></li>
-<li>synchronizes all <code>AssemblyInfo</code> files prior to compilation</li>
-<li>generates <a href="https://github.com/ctaggart/SourceLink">SourceLinks</a></li>
-<li>generates <a href="writing-docs.html#API-docs">API docs based on XML documentation tags</a></li>
-<li>generates <a href="writing-docs.html#Markdown-files">documentation based on Markdown files</a></li>
-<li>generates and/or pushes <a href="http://www.nuget.org">NuGet</a> packages</li>
-</ul>
+<p>Paket - 
+<em> helps manage NuGet packages
+</em> can reference files <a href="http://fsprojects.github.io/Paket/http-dependencies.html">directly with a URL</a> from GitHub or from any where on the web
+* gives precise and predictable control over referenced packages</p>
 
-<h3><a name="Cloning-the-project" class="anchor" href="#Cloning-the-project">Cloning the project</a></h3>
+<p>FAKE - 
+<em> allows a simple <a href="release-process.html">one step release process</a>
+</em> works with most <a href="build-servers.html">build servers</a> 
+<em> compiles the application and <a href="running-tests.html">runs all test projects</a>
+</em> synchronizes all <code>AssemblyInfo</code> files prior to compilation
+<em> generates <a href="https://github.com/ctaggart/SourceLink">SourceLinks</a>
+</em> generates <a href="writing-docs.html#API-docs">API docs based on XML documentation tags</a>
+<em> generates <a href="writing-docs.html#Markdown-files">documentation based on Markdown files</a>
+</em> generates and/or pushes <a href="http://www.nuget.org">NuGet</a> packages</p>
 
-<p>This first thing to do is to clone or copy the ProjectScaffold repository to your own workspace.</p>
+<h2><a name="Getting-Started" class="anchor" href="#Getting-Started">Getting Started</a></h2>
+
+<p>The first thing to do is to <a href="https://github.com/fsprojects/ProjectScaffold.git">clone</a> or <a href="https://github.com/fsprojects/ProjectScaffold/archive/master.zip">copy</a> the ProjectScaffold repository to your developer workspace. This will eventually be your solution folder. Feel free to rename ProjectScaffold folder to your liking.</p>
 
 <h3><a name="Initializing" class="anchor" href="#Initializing">Initializing</a></h3>
 
-<p>In order to start the scaffolding process run:</p>
+<p>In order to generate your project first run:</p>
 
 <table class="pre"><tr><td class="lines"><pre class="fssnip">
 <span class="l">1: </span>
@@ -71,7 +74,7 @@
 </tr>
 </table>
 
-<p>During the init process you will be prompted for the name of your project and some other details including the following:</p>
+<p>This would prompt you to enter a name for your project solution, which is required, and then some more details which are optional:</p>
 
 <ul>
 <li>Project summary</li>
@@ -84,9 +87,9 @@
 
 <p><img src="img/init-script.png" alt="alt text" title="Init script asking for project details" /></p>
 
-<p>The project structure will then be generated from templates.</p>
+<p>During this initialization process project structure is generated and necessary packages and tools would be downloaded.</p>
 
-<p>After the initialization you can open, edit, build and test using <code>ProjectName.sln</code>.</p>
+<p>After the initialization has finished you can open, edit, build and test using <code>ProjectName.sln</code>.</p>
 
 <h3><a name="Further-topics" class="anchor" href="#Further-topics">Further topics</a></h3>
 
