@@ -12,7 +12,7 @@ OS=${OS:-"unknown"}
 if test "$OS" != "Windows_NT"
 then
   LOADER=mono
-  FSIARGS="-d:MONO"
+  FSIARGS="--fsiargs -d:MONO"
 fi
 
 "$LOADER" .paket/paket.bootstrapper.exe
@@ -21,4 +21,4 @@ fi
 
 "$LOADER" .paket/paket.exe restore
 
-"$LOADER" packages/FAKE/tools/FAKE.exe "$@" "$FSIARGS" build.fsx
+"$LOADER" packages/FAKE/tools/FAKE.exe "$@" $FSIARGS build.fsx
