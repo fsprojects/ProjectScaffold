@@ -8,6 +8,8 @@
 
 # Xamarin Studio / monodevelop user-specific
 *.userprefs
+*.dll.mdb
+*.exe.mdb
 
 # Build results
 
@@ -186,3 +188,4 @@ paket-files
 .paket/paket.exe
 docs/content/license.md
 docs/content/release-notes.md
+.fake

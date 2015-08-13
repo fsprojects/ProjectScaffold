@@ -15,12 +15,19 @@ This project can be used to scaffold a prototypical .NET solution including file
 
 In order to start the scaffolding process run 
 
-    $ build.cmd // on windows    
-    $ build.sh  // on mono
+    > build.cmd // on windows    
+    $ ./build.sh  // on unix
     
 Read the [Getting started tutorial](http://fsprojects.github.io/ProjectScaffold/index.html#Getting-started) to learn more.
 
 Documentation: http://fsprojects.github.io/ProjectScaffold
+
+
+## Build Status
+
+Mono | .NET
+---- | ----
+[![Mono CI Build Status](https://img.shields.io/travis/fsprojects/ProjectScaffold/master.svg)](https://travis-ci.org/fsprojects/ProjectScaffold) | [![.NET Build Status](https://img.shields.io/appveyor/ci/fsgit/ProjectScaffold/master.svg)](https://ci.appveyor.com/project/fsgit/projectscaffold)
 
 ## Maintainer(s)
 
@@ -28,4 +35,4 @@ Documentation: http://fsprojects.github.io/ProjectScaffold
 - [@pblasucci](https://github.com/pblasucci)
 - [@sergey-tihon](https://github.com/sergey-tihon)
 
-The default maintainer account for projects under "fsprojects" is [@fsgit](https://github.com/fsgit) - F# Community Project Incubation Space (repo management)
+The default maintainer account for projects under "fsprojects" is [@fsprojectsgit](https://github.com/fsprojectsgit) - F# Community Project Incubation Space (repo management)
