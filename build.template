@@ -228,7 +228,7 @@ Target "GenerateHelpDebug" (fun _ ->
 
 Target "KeepRunning" (fun _ ->    
     use watcher = !! "docs/content/**/*.*" |> WatchChanges (fun changes ->
-         generateHelp false
+         generateHelp' true true
     )
 
     traceImportant "Waiting for help edits. Press any key to stop."
@@ -360,7 +360,7 @@ Target "All" DoNothing
 "CleanDocs"
   ==> "GenerateHelpDebug"
 
-"GenerateHelp"
+"GenerateHelpDebug"
   ==> "KeepRunning"
     
 "ReleaseDocs"
