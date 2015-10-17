@@ -102,7 +102,7 @@ let givenOrigin = if wantGit
 //Basic settings
 let solutionTemplateName = "FSharp.ProjectScaffold"
 let projectTemplateName = "FSharp.ProjectTemplate"
-let oldProjectGuid = "7E90D6CE-A10B-4858-A5BC-41DF7250CBCA"
+let oldProjectGuid = "19ab1706-c1b7-43b6-8e04-cc6d37735d62"
 let projectGuid = Guid.NewGuid().ToString()
 let oldTestProjectGuid = "E789C72A-5CFD-436B-8EF1-61AA2852A89F"
 let testProjectGuid = Guid.NewGuid().ToString()

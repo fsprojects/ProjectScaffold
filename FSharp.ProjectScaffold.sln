@@ -37,6 +37,8 @@ Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "FSharp.ProjectTemplate.Test
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "clients", "clients", "{5861A35A-C72B-4CDD-8408-832E294AF2EC}"
 EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "FSharp.ProjectTemplate.ConsoleApplication", "clients\FSharp.ProjectTemplate.ConsoleApplication\FSharp.ProjectTemplate.ConsoleApplication.fsproj", "{15A000B7-9E76-4802-82B6-CA05F32AD20B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{E789C72A-5CFD-436B-8EF1-61AA2852A89F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E789C72A-5CFD-436B-8EF1-61AA2852A89F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E789C72A-5CFD-436B-8EF1-61AA2852A89F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{15A000B7-9E76-4802-82B6-CA05F32AD20B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{15A000B7-9E76-4802-82B6-CA05F32AD20B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{15A000B7-9E76-4802-82B6-CA05F32AD20B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{15A000B7-9E76-4802-82B6-CA05F32AD20B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -59,5 +65,6 @@ Global
 		{83F16175-43B1-4C90-A1EE-8E351C33435D} = {A6A6AF7D-D6E3-442D-9B1E-58CC91879BE1}
 		{8E6D5255-776D-4B61-85F9-73C37AA1FB9A} = {A6A6AF7D-D6E3-442D-9B1E-58CC91879BE1}
 		{E789C72A-5CFD-436B-8EF1-61AA2852A89F} = {ED8079DD-2B06-4030-9F0F-DC548F98E1C4}
+		{15A000B7-9E76-4802-82B6-CA05F32AD20B} = {5861A35A-C72B-4CDD-8408-832E294AF2EC}
 	EndGlobalSection
 EndGlobal
