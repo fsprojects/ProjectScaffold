@@ -1,0 +1,17 @@
+﻿<mui:ModernWindow
+		xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mui="http://firstfloorsoftware.com/ModernUI"
+		Title="MVVM and XAML Type provider" MinHeight="120" Width="300" Height="Auto" SizeToContent="WidthAndHeight"
+    ContentSource="/Page1.xaml"
+    >
+        <mui:ModernWindow.MenuLinkGroups>
+            <mui:LinkGroup DisplayName="group 1" >
+                <mui:LinkGroup.Links>
+                <mui:Link DisplayName="link 1" Source="/Page1.xaml"/>
+                    <mui:Link DisplayName="link 2" />
+                    <mui:Link DisplayName="link 3" />
+                </mui:LinkGroup.Links>
+            </mui:LinkGroup>
+        </mui:ModernWindow.MenuLinkGroups>
+</mui:ModernWindow>

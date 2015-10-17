@@ -1,6 +1,10 @@
 source https://nuget.org/api/v2
 
+nuget Expression.Blend.Sdk
 nuget FSharp.Formatting
+nuget FSharp.ViewModule.Core
+nuget FsXaml.Wpf
+nuget ModernUI.WPF
 nuget NUnit 
 nuget NUnit.Runners
 nuget FAKE
