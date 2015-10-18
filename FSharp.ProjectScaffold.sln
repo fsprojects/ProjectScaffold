@@ -41,9 +41,9 @@ Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "FSharp.ProjectTemplate.Cons
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FSharp.ProjectTemplate.UniversalWindowsApp", "clients\FSharp.ProjectTemplate.UniversalWindowsApp\FSharp.ProjectTemplate.UniversalWindowsApp.csproj", "{A69032C3-787C-4D30-909C-71C965FF630C}"
 EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "FSharp.ProjectScaffold.MUIApp", "clients\FSharp.ProjectScaffold.MUIApp\FSharp.ProjectScaffold.MUIApp.fsproj", "{4A69755D-C222-4D37-BBF0-D14F275BCC6D}"
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "FSharp.ProjectTemplate.MUIApp", "clients\FSharp.ProjectTemplate.MUIApp\FSharp.ProjectTemplate.MUIApp.fsproj", "{4A69755D-C222-4D37-BBF0-D14F275BCC6D}"
 EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "FSharp.ProjectScaffold.PowerShell", "clients\FSharp.ProjectScaffold.PowerShell\FSharp.ProjectScaffold.PowerShell.fsproj", "{CB11D2D9-6BA8-438A-9108-087F5C6079C6}"
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "FSharp.ProjectTemplate.PowerShell", "clients\FSharp.ProjectTemplate.PowerShell\FSharp.ProjectTemplate.PowerShell.fsproj", "{CB11D2D9-6BA8-438A-9108-087F5C6079C6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

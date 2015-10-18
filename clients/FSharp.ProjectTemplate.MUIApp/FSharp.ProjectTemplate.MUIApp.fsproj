@@ -7,12 +7,12 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>4a69755d-c222-4d37-bbf0-d14f275bcc6d</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>FSharp.ProjectScaffold.MUIApp</RootNamespace>
-    <AssemblyName>FSharp.ProjectScaffold.MUIApp</AssemblyName>
+    <RootNamespace>FSharp.ProjectTemplate.MUIApp</RootNamespace>
+    <AssemblyName>FSharp.ProjectTemplate.MUIApp</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <TargetFSharpCoreVersion>4.4.0.0</TargetFSharpCoreVersion>
-    <Name>FSharp.ProjectScaffold.MUIApp</Name>
+    <Name>FSharp.ProjectTemplate.MUIApp</Name>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -23,7 +23,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <WarningLevel>3</WarningLevel>
     <PlatformTarget>AnyCPU</PlatformTarget>
-    <DocumentationFile>bin\Debug\FSharp.ProjectScaffold.MUIApp.XML</DocumentationFile>
+    <DocumentationFile>bin\Debug\FSharp.ProjectTemplate.MUIApp.XML</DocumentationFile>
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -34,7 +34,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <WarningLevel>3</WarningLevel>
     <PlatformTarget>AnyCPU</PlatformTarget>
-    <DocumentationFile>bin\Release\FSharp.ProjectScaffold.MUIApp.XML</DocumentationFile>
+    <DocumentationFile>bin\Release\FSharp.ProjectTemplate.MUIApp.XML</DocumentationFile>
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>

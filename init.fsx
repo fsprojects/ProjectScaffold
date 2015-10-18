@@ -130,7 +130,11 @@ dirsWithProjects
     // project directories
     pd
     |> subDirectories
-    |> Array.iter (fun d -> d.MoveTo(pd.FullName @@ (d.Name.Replace(projectTemplateName, projectName))))
+    |> Array.iter (
+         fun d -> 
+            printfn "moving %s to %s" d.FullName (pd.FullName @@ (d.Name.Replace(projectTemplateName, projectName)))
+            d.MoveTo(pd.FullName @@ (d.Name.Replace(projectTemplateName, projectName)))
+       )
     )
 
 //Now that everything is renamed, we need to update the content of some files
