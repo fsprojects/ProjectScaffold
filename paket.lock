@@ -4,6 +4,7 @@ NUGET
     Expression.Blend.Sdk (1.0.2)
     FAKE (3.28.7)
     FSharp.Compiler.Service (0.0.89)
+    FSharp.Core (4.0.0.1)
     FSharp.Formatting (2.9.0)
       FSharp.Compiler.Service (>= 0.0.87)
       FSharpVSPowerTools.Core (1.8.0)
@@ -24,6 +25,8 @@ NUGET
     Octokit (0.9.0)
       Microsoft.Net.Http
     SourceLink.Fake (1.0.0)
+    Suave (0.32.1)
+      FSharp.Core (>= 3.1.2.5)
     System.Management.Automation (6.1.7601.17515)
 GITHUB
   remote: fsharp/FAKE

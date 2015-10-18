@@ -9,6 +9,7 @@ nuget NUnit
 nuget NUnit.Runners
 nuget FAKE
 nuget SourceLink.Fake
+nuget Suave
 nuget System.Management.Automation
 
 github fsharp/FAKE modules/Octokit/Octokit.fsx
