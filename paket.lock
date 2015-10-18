@@ -24,6 +24,7 @@ NUGET
     Octokit (0.9.0)
       Microsoft.Net.Http
     SourceLink.Fake (1.0.0)
+    System.Management.Automation (6.1.7601.17515)
 GITHUB
   remote: fsharp/FAKE
   specs:
