@@ -93,7 +93,7 @@ Target "AssemblyInfo" (fun _ ->
           (getAssemblyInfoAttributes projectName)
         )
 
-    !! "src/**/*.??proj"
+    ( !! "src/**/*.??proj" ) ++ "clients/**/*.??proj" ++ "servers/**/*.??proj"
     |> Seq.map getProjectDetails
     |> Seq.iter (fun (projFileName, projectName, folderName, attributes) ->
         match projFileName with
@@ -110,6 +110,13 @@ Target "CopyBinaries" (fun _ ->
     !! "src/**/*.??proj"
     |>  Seq.map (fun f -> ((System.IO.Path.GetDirectoryName f) @@ "bin/Release", "bin" @@ (System.IO.Path.GetFileNameWithoutExtension f)))
     |>  Seq.iter (fun (fromDir, toDir) -> CopyDir toDir fromDir (fun _ -> true))
+    ( !! "clients/**/*.??proj" ) ++ "servers/**/*.??proj"
+    |>  Seq.map (fun f -> ((System.IO.Path.GetDirectoryName f) @@ "bin/Release", "dist" @@ (System.IO.Path.GetFileNameWithoutExtension f)))
+    |>  Seq.iter (fun (fromDir, toDir) -> 
+            try 
+                CopyDir toDir fromDir (fun _ -> true)
+            with
+            | ex -> printfn "Unable to copy %A to %A" fromDir toDir)
 )
 
 // --------------------------------------------------------------------------------------
@@ -152,7 +159,7 @@ Target "RunTests" (fun _ ->
 
 Target "SourceLink" (fun _ ->
     let baseUrl = sprintf "%s/%s/{0}/%%var2%%" gitRaw project
-    !! "src/**/*.??proj"
+    ( !! "src/**/*.??proj" ) ++ "clients/**/*.??proj" ++ "servers/**/*.??proj"
     |> Seq.iter (fun projFile ->
         let proj = VsProj.LoadRelease projFile 
         SourceLink.Index proj.CompilesNotLinked proj.OutputFilePdb __SOURCE_DIRECTORY__ baseUrl
