@@ -1,4 +1,4 @@
-﻿namespace FSharp.ProjectScaffold.PowerShell.AssemblyInfo
+﻿namespace FSharp.ProjectTemplate.PowerShell.AssemblyInfo
 
 open System.Reflection
 open System.Runtime.CompilerServices
@@ -7,11 +7,11 @@ open System.Runtime.InteropServices
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[<assembly: AssemblyTitle("FSharp.ProjectScaffold.PowerShell")>]
+[<assembly: AssemblyTitle("FSharp.ProjectTemplate.PowerShell")>]
 [<assembly: AssemblyDescription("")>]
 [<assembly: AssemblyConfiguration("")>]
 [<assembly: AssemblyCompany("")>]
-[<assembly: AssemblyProduct("FSharp.ProjectScaffold.PowerShell")>]
+[<assembly: AssemblyProduct("FSharp.ProjectTemplate.PowerShell")>]
 [<assembly: AssemblyCopyright("Copyright ©  2015")>]
 [<assembly: AssemblyTrademark("")>]
 [<assembly: AssemblyCulture("")>]

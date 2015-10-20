@@ -1,4 +1,4 @@
-﻿namespace FSharp.ProjectScaffold.MUIApp.Views
+﻿namespace FSharp.ProjectTemplate.MUIApp.Views
 
 open FsXaml
 

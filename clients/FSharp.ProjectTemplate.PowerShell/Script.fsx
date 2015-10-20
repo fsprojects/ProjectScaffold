@@ -2,7 +2,7 @@
 // for more guidance on F# programming.
 
 #load "Library1.fs"
-open FSharp.ProjectScaffold.PowerShell
+open FSharp.ProjectTemplate.PowerShell
 
 // Define your library scripting code here
 

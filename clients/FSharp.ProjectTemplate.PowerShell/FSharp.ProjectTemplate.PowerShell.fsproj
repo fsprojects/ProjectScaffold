@@ -7,12 +7,12 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>cb11d2d9-6ba8-438a-9108-087f5c6079c6</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>FSharp.ProjectScaffold.PowerShell</RootNamespace>
-    <AssemblyName>FSharp.ProjectScaffold.PowerShell</AssemblyName>
+    <RootNamespace>FSharp.ProjectTemplate.PowerShell</RootNamespace>
+    <AssemblyName>FSharp.ProjectTemplate.PowerShell</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <TargetFSharpCoreVersion>4.4.0.0</TargetFSharpCoreVersion>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-    <Name>FSharp.ProjectScaffold.PowerShell</Name>
+    <Name>FSharp.ProjectTemplate.PowerShell</Name>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -22,7 +22,7 @@
     <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <WarningLevel>3</WarningLevel>
-    <DocumentationFile>bin\Debug\FSharp.ProjectScaffold.PowerShell.XML</DocumentationFile>
+    <DocumentationFile>bin\Debug\FSharp.ProjectTemplate.PowerShell.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -31,7 +31,7 @@
     <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <WarningLevel>3</WarningLevel>
-    <DocumentationFile>bin\Release\FSharp.ProjectScaffold.PowerShell.XML</DocumentationFile>
+    <DocumentationFile>bin\Release\FSharp.ProjectTemplate.PowerShell.XML</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="mscorlib" />

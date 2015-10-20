@@ -1,4 +1,4 @@
-﻿namespace FSharp.ProjectScaffold.MUIApp.ViewModels
+﻿namespace FSharp.ProjectTemplate.MUIApp.ViewModels
 
 open System
 open System.Windows

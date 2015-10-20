@@ -1,12 +1,15 @@
 ﻿<UserControl
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:local="clr-namespace:FSharp.ProjectScaffold.MUIApp.ViewModels;assembly=FSharp.ProjectTemplate.MUIApp" 
-        xmlns:views="clr-namespace:FSharp.ProjectScaffold.MUIApp.Views;assembly=FSharp.ProjectTemplate.MUIApp" 
-        MinHeight="120" Width="300" Height="Auto"
         xmlns:fsxaml="http://github.com/fsprojects/FsXaml"
+        xmlns:local="clr-namespace:FSharp.ProjectTemplate.MUIApp.ViewModels;assembly=FSharp.ProjectTemplate.MUIApp" 
+        xmlns:views="clr-namespace:FSharp.ProjectTemplate.MUIApp.Views;assembly=FSharp.ProjectTemplate.MUIApp" 
+        MinHeight="120" Width="300" Height="Auto"
         fsxaml:ViewController.Custom="{x:Type views:MainViewController}"
     >
+    <UserControl.Resources>
+        <fsxaml:BooleanToCollapsedConverter x:Key="TrueToCollapsed" />
+    </UserControl.Resources>
     <UserControl.DataContext>
         <local:MainViewModel></local:MainViewModel>
     </UserControl.DataContext>

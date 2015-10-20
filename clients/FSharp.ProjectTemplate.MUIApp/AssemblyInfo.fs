@@ -1,4 +1,4 @@
-﻿namespace FSharp.ProjectScaffold.MUIApp.AssemblyInfo
+﻿namespace FSharp.ProjectTemplate.MUIApp.AssemblyInfo
 
 open System.Reflection
 open System.Runtime.CompilerServices
@@ -7,11 +7,11 @@ open System.Runtime.InteropServices
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[<assembly: AssemblyTitle("FSharp.ProjectScaffold.MUIApp")>]
+[<assembly: AssemblyTitle("FSharp.ProjectTemplate.MUIApp")>]
 [<assembly: AssemblyDescription("")>]
 [<assembly: AssemblyConfiguration("")>]
 [<assembly: AssemblyCompany("")>]
-[<assembly: AssemblyProduct("FSharp.ProjectScaffold.MUIApp")>]
+[<assembly: AssemblyProduct("FSharp.ProjectTemplate.MUIApp")>]
 [<assembly: AssemblyCopyright("Copyright ©  2015")>]
 [<assembly: AssemblyTrademark("")>]
 [<assembly: AssemblyCulture("")>]

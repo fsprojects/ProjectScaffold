@@ -1,4 +1,4 @@
-﻿namespace FSharp.ProjectScaffold.PowerShell
+﻿namespace FSharp.ProjectTemplate.PowerShell
  open System  
  open System.Management.Automation  
  open System.ComponentModel  
