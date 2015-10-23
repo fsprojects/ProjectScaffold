@@ -4,6 +4,8 @@ nuget Expression.Blend.Sdk
 nuget FSharp.Formatting
 nuget FSharp.ViewModule.Core
 nuget FsXaml.Wpf
+nuget Microsoft.Orleans.Templates.Grains
+nuget Microsoft.Orleans.Templates.Interfaces
 nuget ModernUI.WPF
 nuget NUnit 
 nuget NUnit.Runners
