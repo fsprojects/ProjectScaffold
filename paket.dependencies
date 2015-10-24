@@ -1,5 +1,6 @@
 source https://nuget.org/api/v2
 
+nuget Destructurama.FSharp
 nuget Expression.Blend.Sdk
 nuget FSharp.Formatting
 nuget FSharp.ViewModule.Core

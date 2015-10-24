@@ -56,20 +56,10 @@
   <Target Name="AfterBuild">
   </Target>
   -->
-  <Choose>
-    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And ($(TargetFrameworkVersion) == 'v4.5' Or $(TargetFrameworkVersion) == 'v4.5.1' Or $(TargetFrameworkVersion) == 'v4.5.2' Or $(TargetFrameworkVersion) == 'v4.5.3' Or $(TargetFrameworkVersion) == 'v4.6')">
-      <ItemGroup>
-        <Reference Include="Orleans">
-          <HintPath>..\..\packages\Microsoft.Orleans.Core\lib\net45\Orleans.dll</HintPath>
-          <Private>True</Private>
-          <Paket>True</Paket>
-        </Reference>
-      </ItemGroup>
-    </When>
-  </Choose>
-  <Import Project="..\..\packages\Microsoft.Orleans.Templates.Grains\build\Microsoft.Orleans.Templates.Grains.props" Condition="Exists('..\..\packages\Microsoft.Orleans.Templates.Grains\build\Microsoft.Orleans.Templates.Grains.props')" Label="Paket" />
-  <Import Project="..\..\packages\Microsoft.Orleans.Templates.Grains\build\Microsoft.Orleans.Templates.Grains.targets" Condition="Exists('..\..\packages\Microsoft.Orleans.Templates.Grains\build\Microsoft.Orleans.Templates.Grains.targets')" Label="Paket" />
   <ItemGroup>
+    <Content Include="Properties\orleans.codegen.cs">
+      <Paket>True</Paket>
+    </Content>
     <None Include="Properties\orleans.codegen.cs">
       <Paket>True</Paket>
     </None>
@@ -102,4 +92,17 @@
       <Private>True</Private>
     </ProjectReference>
   </ItemGroup>
+  <Choose>
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And ($(TargetFrameworkVersion) == 'v4.5' Or $(TargetFrameworkVersion) == 'v4.5.1' Or $(TargetFrameworkVersion) == 'v4.5.2' Or $(TargetFrameworkVersion) == 'v4.5.3' Or $(TargetFrameworkVersion) == 'v4.6')">
+      <ItemGroup>
+        <Reference Include="Orleans">
+          <HintPath>..\..\packages\Microsoft.Orleans.Core\lib\net45\Orleans.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+  </Choose>
+  <Import Project="..\..\packages\Microsoft.Orleans.Templates.Grains\build\Microsoft.Orleans.Templates.Grains.props" Condition="Exists('..\..\packages\Microsoft.Orleans.Templates.Grains\build\Microsoft.Orleans.Templates.Grains.props')" Label="Paket" />
+  <Import Project="..\..\packages\Microsoft.Orleans.Templates.Grains\build\Microsoft.Orleans.Templates.Grains.targets" Condition="Exists('..\..\packages\Microsoft.Orleans.Templates.Grains\build\Microsoft.Orleans.Templates.Grains.targets')" Label="Paket" />
 </Project>

@@ -1,6 +1,8 @@
 NUGET
   remote: https://nuget.org/api/v2
   specs:
+    Destructurama.FSharp (1.0.14)
+      Serilog (>= 1.4.204)
     Expression.Blend.Sdk (1.0.2)
     FAKE (3.28.7)
     FSharp.Compiler.Service (0.0.89)
@@ -29,6 +31,7 @@ NUGET
     NUnit.Runners (2.6.4)
     Octokit (0.9.0)
       Microsoft.Net.Http
+    Serilog (1.5.12)
     SourceLink.Fake (1.0.0)
     Suave (0.32.1)
       FSharp.Core (>= 3.1.2.5)

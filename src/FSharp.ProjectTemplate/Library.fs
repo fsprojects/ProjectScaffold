@@ -1,6 +1,7 @@
 ﻿namespace FSharp.ProjectTemplate
 
 open FSharp.ProjectTemplate.Domain
+open Serilog
 
 /// Documentation for my library
 ///
@@ -11,6 +12,12 @@ open FSharp.ProjectTemplate.Domain
 ///
 module Library = 
   
+  Log.Logger <- LoggerConfiguration()
+      .Destructure.FSharpTypes()
+      //. Real logger missing      
+      .CreateLogger()
+  Log.Information( "Library FSharp.ProjectTemplate loaded" )
+
   /// Returns Hello firstName lastName
   ///
   /// ## Parameters
