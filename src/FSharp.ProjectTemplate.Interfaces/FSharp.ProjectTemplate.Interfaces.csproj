@@ -46,6 +46,12 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FSharp.ProjectTemplate.Domain\FSharp.ProjectTemplate.Domain.fsproj">
+      <Project>{0510d798-4d69-4310-9861-34d7cd22a5f4}</Project>
+      <Name>FSharp.ProjectTemplate.Domain</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

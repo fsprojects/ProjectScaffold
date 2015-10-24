@@ -68,6 +68,11 @@
     <Reference Include="System.Numerics" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\src\FSharp.ProjectTemplate.Domain\FSharp.ProjectTemplate.Domain.fsproj">
+      <Name>FSharp.ProjectTemplate.Domain</Name>
+      <Project>{0510d798-4d69-4310-9861-34d7cd22a5f4}</Project>
+      <Private>True</Private>
+    </ProjectReference>
     <ProjectReference Include="..\..\src\FSharp.ProjectTemplate\FSharp.ProjectTemplate.fsproj">
       <Name>FSharp.ProjectTemplate</Name>
       <Project>{7e90d6ce-a10b-4858-a5bc-41df7250cbca}</Project>

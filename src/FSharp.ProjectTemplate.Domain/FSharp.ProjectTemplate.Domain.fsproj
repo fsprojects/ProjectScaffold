@@ -5,69 +5,47 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>19ab1706-c1b7-43b6-8e04-cc6d37735d62</ProjectGuid>
+    <ProjectGuid>0510d798-4d69-4310-9861-34d7cd22a5f4</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>FSharp.ProjectTemplate</RootNamespace>
-    <AssemblyName>FSharp.ProjectTemplate</AssemblyName>
+    <RootNamespace>FSharp.ProjectTemplate.Domain</RootNamespace>
+    <AssemblyName>FSharp.ProjectTemplate.Domain</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Profile259</TargetFrameworkProfile>
     <TargetProfile>netcore</TargetProfile>
     <TargetFSharpCoreVersion>3.259.4.0</TargetFSharpCoreVersion>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-    <Name>FSharp.ProjectTemplate</Name>
+    <Name>FSharp.ProjectTemplate.Domain</Name>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <Tailcalls>false</Tailcalls>
-    <OutputPath>.\bin\Debug</OutputPath>
+    <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <WarningLevel>3</WarningLevel>
-    <OtherFlags>--warnon:1182</OtherFlags>
+    <DocumentationFile>bin\Debug\FSharp.ProjectTemplate.Domain.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <Tailcalls>true</Tailcalls>
-    <OutputPath>.\bin\Release</OutputPath>
+    <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <WarningLevel>3</WarningLevel>
-    <DocumentationFile>.\bin\Release\FSharp.ProjectTemplate.xml</DocumentationFile>
-    <OtherFlags>--warnon:1182</OtherFlags>
+    <DocumentationFile>bin\Release\FSharp.ProjectTemplate.Domain.XML</DocumentationFile>
   </PropertyGroup>
-  <Choose>
-    <When Condition="Exists('$(MSBuildExtensionsPath32)\..\Reference Assemblies\Microsoft\FSharp\.NETCore\$(TargetFSharpCoreVersion)\FSharp.Core.dll')">
-      <ItemGroup>
-        <Reference Include="FSharp.Core">
-          <Name>FSharp.Core</Name>
-          <AssemblyName>FSharp.Core.dll</AssemblyName>
-          <HintPath>$(MSBuildExtensionsPath32)\..\Reference Assemblies\Microsoft\FSharp\.NETCore\$(TargetFSharpCoreVersion)\FSharp.Core.dll</HintPath>
-        </Reference>
-      </ItemGroup>
-    </When>
-    <Otherwise>
-      <ItemGroup>
-        <Reference Include="FSharp.Core">
-          <Name>FSharp.Core</Name>
-          <AssemblyName>FSharp.Core.dll</AssemblyName>
-          <HintPath>..\..\packages\FSharp.Core\lib\portable-net45+netcore45+wpa81+wp8\FSharp.Core.dll</HintPath>
-        </Reference>
-      </ItemGroup>
-    </Otherwise>
-  </Choose>
   <ItemGroup>
-    <Compile Include="Library.fs" />
-    <None Include="Script.fsx" />
-    <None Include="paket.references" />
-    <None Include="paket.template" />
+    <Reference Include="FSharp.Core">
+      <Name>FSharp.Core</Name>
+      <AssemblyName>FSharp.Core.dll</AssemblyName>
+      <HintPath>$(MSBuildExtensionsPath32)\..\Reference Assemblies\Microsoft\FSharp\.NETCore\$(TargetFSharpCoreVersion)\FSharp.Core.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\FSharp.ProjectTemplate.Domain\FSharp.ProjectTemplate.Domain.fsproj">
-      <Name>FSharp.ProjectTemplate.Domain</Name>
-      <Project>{0510d798-4d69-4310-9861-34d7cd22a5f4}</Project>
-      <Private>True</Private>
-    </ProjectReference>
+    <Compile Include="AssemblyInfo.fs" />
+    <Compile Include="DomainTypes.fs" />
+    <None Include="Script.fsx" />
   </ItemGroup>
   <PropertyGroup>
     <MinimumVisualStudioVersion Condition="'$(MinimumVisualStudioVersion)' == ''">12</MinimumVisualStudioVersion>
@@ -80,5 +58,4 @@
   <Target Name="AfterBuild">
   </Target>
   -->
-  <Import Project="..\..\.paket\paket.targets" />
 </Project>

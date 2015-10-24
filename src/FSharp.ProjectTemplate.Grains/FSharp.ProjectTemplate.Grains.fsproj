@@ -75,7 +75,7 @@
     </None>
     <Compile Include="AssemblyInfo.fs" />
     <Compile Include="GeneratedFiles\orleans.codegen.fs" />
-    <Compile Include="Library1.fs" />
+    <Compile Include="Grains.fs" />
     <None Include="Script.fsx" />
   </ItemGroup>
   <ItemGroup>
@@ -86,6 +86,11 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Numerics" />
+    <ProjectReference Include="..\FSharp.ProjectTemplate.Domain\FSharp.ProjectTemplate.Domain.fsproj">
+      <Name>FSharp.ProjectTemplate.Domain</Name>
+      <Project>{0510d798-4d69-4310-9861-34d7cd22a5f4}</Project>
+      <Private>True</Private>
+    </ProjectReference>
     <ProjectReference Include="..\FSharp.ProjectTemplate.Interfaces\FSharp.ProjectTemplate.Interfaces.csproj">
       <Name>FSharp.ProjectTemplate.Interfaces</Name>
       <Project>{1279a47b-0f0a-4e09-bc6d-01d7aa81f55b}</Project>

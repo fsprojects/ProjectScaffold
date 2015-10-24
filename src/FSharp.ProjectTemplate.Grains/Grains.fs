@@ -1,5 +1,6 @@
 ﻿namespace FSharp.ProjectTemplate.Grains
 
+open FSharp.ProjectTemplate.Domain
 open FSharp.ProjectTemplate
 open FSharp.ProjectTemplate.Interfaces
 open System
@@ -11,5 +12,5 @@ type Grain1() =
 
     interface IHello with
 
-        override this.SayHello(greeting:string) =
-            Task.FromResult<string>("This comes from F#!")
+        override this.SayHello(person:Person) =
+            Task.FromResult<string>( Library.hello person )

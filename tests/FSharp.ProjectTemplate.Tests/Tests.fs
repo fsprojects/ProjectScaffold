@@ -2,9 +2,10 @@
 
 open FSharp.ProjectTemplate
 open NUnit.Framework
+open FSharp.ProjectTemplate.Domain
 
 [<Test>]
-let ``hello returns 42`` () =
-  let result = Library.hello 42
-  printfn "%i" result
-  Assert.AreEqual(42,result)
+let ``hello returns "Hello "`` () =
+  let result = Library.hello {FirstName="John";LastName="Rambo"}
+  printfn "%s" result
+  Assert.AreEqual("Hello John Rambo",result)
