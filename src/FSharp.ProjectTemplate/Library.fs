@@ -12,10 +12,6 @@ open Serilog
 ///
 module Library = 
   
-  Log.Logger <- LoggerConfiguration()
-      .Destructure.FSharpTypes()
-      //. Real logger missing      
-      .CreateLogger()
   Log.Information( "Library FSharp.ProjectTemplate loaded" )
 
   /// Returns Hello firstName lastName
