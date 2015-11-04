@@ -57,17 +57,11 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="Library.fs" />
     <None Include="Script.fsx" />
     <None Include="paket.references" />
     <None Include="paket.template" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\FSharp.ProjectTemplate.Domain\FSharp.ProjectTemplate.Domain.fsproj">
-      <Name>FSharp.ProjectTemplate.Domain</Name>
-      <Project>{0510d798-4d69-4310-9861-34d7cd22a5f4}</Project>
-      <Private>True</Private>
-    </ProjectReference>
+    <Compile Include="DomainTypes.fs" />
+    <Compile Include="Library.fs" />
   </ItemGroup>
   <PropertyGroup>
     <MinimumVisualStudioVersion Condition="'$(MinimumVisualStudioVersion)' == ''">12</MinimumVisualStudioVersion>
