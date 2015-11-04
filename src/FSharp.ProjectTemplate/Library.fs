@@ -2,9 +2,6 @@
 
 open FSharp.ProjectTemplate.Domain
 open Serilog
-open Orleankka
-open Orleankka.FSharp
-open Orleankka.Playground
 
 /// Documentation for my library
 ///
