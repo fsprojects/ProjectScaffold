@@ -22,6 +22,10 @@ NUGET
       Microsoft.Bcl (>= 1.1.10)
       Microsoft.Bcl.Build (>= 1.0.14)
     Microsoft.Orleans.Core (1.0.10)
+    Microsoft.Orleans.OrleansProviders (1.0.10)
+      Microsoft.Orleans.Core (>= 1.0.10)
+    Microsoft.Orleans.OrleansRuntime (1.0.10)
+      Microsoft.Orleans.Core (>= 1.0.10)
     Microsoft.Orleans.Templates.Grains (1.0.10)
       Microsoft.Orleans.Core (>= 1.0.10)
     Microsoft.Orleans.Templates.Interfaces (1.0.10)
@@ -31,6 +35,11 @@ NUGET
     NUnit.Runners (2.6.4)
     Octokit (0.9.0)
       Microsoft.Net.Http
+    Orleankka (0.10.9)
+      Microsoft.Orleans.OrleansProviders (>= 1.0.10)
+      Microsoft.Orleans.OrleansRuntime (>= 1.0.10)
+    Orleankka.Fsharp (0.10.7)
+      Orleankka (>= 0.10.7.0)
     Serilog (1.5.12)
     SourceLink.Fake (1.0.0)
     Suave (0.32.1)
@@ -39,5 +48,5 @@ NUGET
 GITHUB
   remote: fsharp/FAKE
   specs:
-    modules/Octokit/Octokit.fsx (0cedad490fa06bd072823b2215f3f05cf917a7ba)
+    modules/Octokit/Octokit.fsx (545fb5d2cc7901bcbfd8f7f1a53da8f7f169deda)
       Octokit

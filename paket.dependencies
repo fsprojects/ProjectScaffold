@@ -11,6 +11,7 @@ nuget ModernUI.WPF
 nuget NUnit 
 nuget NUnit.Runners
 nuget FAKE
+nuget Orleankka.Fsharp
 nuget SourceLink.Fake
 nuget Suave
 nuget System.Management.Automation
