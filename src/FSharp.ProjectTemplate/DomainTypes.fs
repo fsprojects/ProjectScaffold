@@ -1,7 +1,7 @@
 ﻿namespace FSharp.ProjectTemplate.Domain
 
 [<CLIMutable>]
-type Person = {    
+type Person = {
     FirstName:string
     LastName:string
 }
