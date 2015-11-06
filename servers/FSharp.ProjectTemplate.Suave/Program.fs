@@ -17,6 +17,9 @@ open Newtonsoft.Json
 open FSharp.ProjectTemplate.Actors
 
 open Serilog
+open Orleans.Serialization
+
+open JsonSerializer
 
 [<EntryPoint>]
 let main argv = 
@@ -24,7 +27,14 @@ let main argv =
         .Destructure.FSharpTypes()
         .WriteTo.Console()
         .CreateLogger()
-  Log.Information( "Console application started" )
+  Log.Information( "Web server started" )
+
+  SerializationManager.Register(
+        typeof<FSharp.ProjectTemplate.Domain.Person>, 
+        SerializationManager.DeepCopier(JObjectSerialization.DeepCopier), 
+        SerializationManager.Serializer(JObjectSerialization.Serializer), 
+        SerializationManager.Deserializer(JObjectSerialization.Deserializer)
+  )
 
   let assemblies:Assembly [] = [| Assembly.GetExecutingAssembly();(typeof<Greeter>).Assembly |]
 
