@@ -16,10 +16,15 @@ open Newtonsoft.Json
 
 open FSharp.ProjectTemplate.Actors
 
+open Serilog
+
 [<EntryPoint>]
 let main argv = 
-  
-  printfn "Running demo. Booting cluster might take some time ...\n"
+  Log.Logger <- LoggerConfiguration()
+        .Destructure.FSharpTypes()
+        .WriteTo.Console()
+        .CreateLogger()
+  Log.Information( "Console application started" )
 
   let assemblies:Assembly [] = [| Assembly.GetExecutingAssembly();(typeof<Greeter>).Assembly |]
 
@@ -31,6 +36,8 @@ let main argv =
   
   let testActor = system.ActorOf<Greeter>("http_test")
 
+  Log.Debug( "Actor path {@ActorPath}", testActor.Path )
+  printfn "%A" testActor.Path
 
   // configure actor routing
   let router = [(MessageType.DU(typeof<HelloMessage>), testActor.Path)]
@@ -53,7 +60,7 @@ let main argv =
     match router.Dispatch(actorPath, msgBody) with
     | Some t -> let! result = Async.AwaitTask t
                 return! OK (result.ToString()) ctx
-    | None   -> return! BAD_REQUEST "actor has not found, or message has invalid format" ctx  
+    | None   -> return! BAD_REQUEST "actor was not found, or message has invalid format" ctx  
   }  
 
   // configure Suave routing
