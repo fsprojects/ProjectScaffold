@@ -33,7 +33,8 @@ let main argv =
         typeof<FSharp.ProjectTemplate.Domain.Person>, 
         SerializationManager.DeepCopier(JObjectSerialization.DeepCopier), 
         SerializationManager.Serializer(JObjectSerialization.Serializer), 
-        SerializationManager.Deserializer(JObjectSerialization.Deserializer)
+        SerializationManager.Deserializer(JObjectSerialization.Deserializer),
+        true
   )
 
   let assemblies:Assembly [] = [| Assembly.GetExecutingAssembly();(typeof<Greeter>).Assembly |]

@@ -49,9 +49,9 @@
     <Compile Include="JsonSerializer.fs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\src\FSharp.ProjectTemplate\FSharp.ProjectTemplate.fsproj">
-      <Name>FSharp.ProjectTemplate</Name>
-      <Project>{19ab1706-c1b7-43b6-8e04-cc6d37735d62}</Project>
+    <ProjectReference Include="..\..\src\FSharp.ProjectTemplate.Fx\FSharp.ProjectTemplate.Fx.fsproj">
+      <Name>FSharp.ProjectTemplate.Fx</Name>
+      <Project>{20eaba0d-bac0-4e2c-abcd-e0cd459669cf}</Project>
       <Private>True</Private>
     </ProjectReference>
   </ItemGroup>
@@ -187,6 +187,11 @@
         </Reference>
         <Reference Include="OrleansManager">
           <HintPath>..\..\packages\Orleankka\lib\net45\OrleansManager.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+        <Reference Include="Polenter.SharpSerializer">
+          <HintPath>..\..\packages\Orleankka\lib\net45\Polenter.SharpSerializer.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>
