@@ -12,18 +12,15 @@ open Serilog
 ///
 module Library = 
   
-  Log.Information( "Library FSharp.ProjectTemplate loaded" )
+    Log.Information( "Library FSharp.ProjectTemplate loaded" )
 
-  /// Returns Hello firstName lastName
-  ///
-  /// ## Parameters
-  ///  - `person` - someone you would like to say hello to
-  let hello (person : Person) = 
-    sprintf "Hello %s %s" person.FirstName person.LastName
+    /// Returns Hello firstName lastName, I saw you for the last time on 1.1.1970
+    ///
+    /// ## Parameters
+    ///  - `person` - someone you would like to say hello to
+    let hello (person : Person) = 
+        sprintf "Hello %s %s" person.FirstName person.LastName
 
-  /// Returns when the person was last seen
-  ///
-  /// ## Parameters
-  ///  - `person` - someone you would like to know was last seen
-  let lastseen (person : Person) ( getByExample : Person -> Person ) = 
-    failwith "Not implemented yet"
+    let api = {
+        Hello = hello 
+    }

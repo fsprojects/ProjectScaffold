@@ -6,16 +6,11 @@ open Orleankka.Playground
 open FSharp.ProjectTemplate
 open FSharp.ProjectTemplate.Domain
 
-type HelloMessage = 
-   | Greet of Person
-   | Hi
-
 type Greeter() = 
-   inherit Actor<HelloMessage>()
+    inherit Actor<Domain.HelloMessage>()
 
-   override this.Receive message reply = task {
-      match message with
-      | Greet who -> reply (Library.hello who)
-      | Hi -> reply "Hello from F#!"
-   }
-
+    override this.Receive message reply = task {
+        match message with
+        | Greet who -> reply (Library.hello who)
+        | Hi -> reply "Hello from F#!"
+    }

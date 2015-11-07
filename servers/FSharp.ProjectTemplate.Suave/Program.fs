@@ -21,6 +21,8 @@ open Orleans.Serialization
 
 open JsonSerializer
 
+open FSharp.ProjectTemplate.Domain
+
 [<EntryPoint>]
 let main argv = 
   Log.Logger <- LoggerConfiguration()
