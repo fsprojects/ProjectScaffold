@@ -26,8 +26,9 @@ module Library =
     /// ## Parameters
     ///  - `person` - someone you would like to say hello to
     let hello (loadLastHello:LoadLastHello, saveLastHello:SaveLastHello) (person : Person) = 
-        sprintf "Hello %s %s, I saw you for the last time on %O" person.FirstName person.LastName (loadLastHello(person))
+        let result = sprintf "Hello %s %s, I saw you for the last time on %O" person.FirstName person.LastName (loadLastHello(person))
         saveLastHello (person)
+        result
 
     let api (loadLastHello:LoadLastHello, saveLastHello:SaveLastHello) = {
         Hello = hello (loadLastHello, saveLastHello)
