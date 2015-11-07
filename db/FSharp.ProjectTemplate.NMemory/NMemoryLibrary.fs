@@ -7,8 +7,13 @@ open FSharp.ProjectTemplate.Domain
 type MyDatabase() = 
     inherit Database()
 
-    let mutable myProp : ITable<Person> = null
+    let mutable persons : ITable<Person> = null
+
+    do
+        persons <- base.Tables.Create<Person, string>(
 
     member this.Persons 
-        with get() = myProp 
-        and private set(value) =  myProp <- value          
+        with get() = persons 
+        and private set(value) =  persons <- value         
+    
+     
