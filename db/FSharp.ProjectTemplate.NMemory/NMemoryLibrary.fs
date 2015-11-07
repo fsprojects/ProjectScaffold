@@ -1,4 +1,14 @@
 ﻿namespace FSharp.ProjectTemplate.NMemory
 
-type Class1() = 
-    member this.X = "F#"
+open NMemory
+open NMemory.Tables
+open FSharp.ProjectTemplate.Domain
+
+type MyDatabase() = 
+    inherit Database()
+
+    let mutable myProp : ITable<Person> = null
+
+    member this.Persons 
+        with get() = myProp 
+        and private set(value) =  myProp <- value          
