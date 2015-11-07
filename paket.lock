@@ -33,6 +33,7 @@ NUGET
       Microsoft.Orleans.Core (>= 1.0.10)
     ModernUI.WPF (1.0.6)
     Newtonsoft.Json (7.0.1)
+    NMemory (1.1.2)
     NUnit (2.6.4)
     NUnit.Runners (2.6.4)
     Octokit (0.9.0)

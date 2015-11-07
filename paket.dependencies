@@ -10,6 +10,7 @@ nuget Microsoft.Orleans.Templates.Grains
 nuget Microsoft.Orleans.Templates.Interfaces
 nuget ModernUI.WPF
 nuget Newtonsoft.Json
+nuget NMemory
 nuget NUnit 
 nuget NUnit.Runners
 nuget FAKE
