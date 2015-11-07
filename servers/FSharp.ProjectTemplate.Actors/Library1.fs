@@ -12,7 +12,7 @@ type Greeter() =
     inherit Actor<Domain.HelloMessage>()
 
     abstract member SaveLastHello : Person -> unit
-    abstract member LoadLastHello : Person -> DateTime
+    abstract member LoadLastHello : Person -> DateTime option
 
     override this.Receive message reply = task {
         match message with

@@ -7,6 +7,7 @@ module NMemory =
     open FSharp.ProjectTemplate.Domain
     open Serilog
     open FSharp.ProjectTemplate.NMemory
+    open System
 
     Log.Logger <- LoggerConfiguration()
         .Destructure.FSharpTypes()
@@ -16,8 +17,8 @@ module NMemory =
 
     [<Test>]
     let ``simple NMemory database crud is working`` () =
-      let db = new MyDatabase()
-      db.Persons.Insert( {Id=int64 1;FirstName="John";LastName="Rambo"} )
+      let db = Impl.MyDatabase()
+      db.Persons.Insert( {Id=int64 1;FirstName="John";LastName="Rambo";LastSeen=DateTime.Now} )
       Assert.AreEqual( 1, db.Persons.Count )
 
       

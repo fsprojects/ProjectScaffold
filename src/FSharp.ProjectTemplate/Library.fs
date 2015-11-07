@@ -19,7 +19,7 @@ module Library =
     type SaveLastHello =
         Person -> unit
     type LoadLastHello =
-        Person -> DateTime
+        Person -> DateTime option
 
     /// Returns Hello firstName lastName, I saw you for the last time on 1.1.1970
     ///
@@ -31,7 +31,7 @@ module Library =
         result
 
     let SaveFake (p : Person) = 0 |> ignore
-    let LoadFake (p : Person) = DateTime.Now
+    let LoadFake (p : Person) = Some(DateTime.Now)
 
     let api (loadLastHello:LoadLastHello, saveLastHello:SaveLastHello) = {
         Hello = hello (loadLastHello, saveLastHello)
