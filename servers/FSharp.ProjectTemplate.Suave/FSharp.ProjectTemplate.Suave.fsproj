@@ -54,6 +54,11 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\db\FSharp.ProjectTemplate.SqlClient\FSharp.ProjectTemplate.SqlClient.fsproj">
+      <Name>FSharp.ProjectTemplate.SqlClient</Name>
+      <Project>{9d897b5e-5697-4e79-8f7d-df174cb0e4d9}</Project>
+      <Private>True</Private>
+    </ProjectReference>
     <ProjectReference Include="..\..\src\FSharp.ProjectTemplate.Fx\FSharp.ProjectTemplate.Fx.fsproj">
       <Name>FSharp.ProjectTemplate.Fx</Name>
       <Project>{20eaba0d-bac0-4e2c-abcd-e0cd459669cf}</Project>
@@ -208,11 +213,6 @@
         </Reference>
         <Reference Include="OrleansManager">
           <HintPath>..\..\packages\Orleankka\lib\net45\OrleansManager.dll</HintPath>
-          <Private>True</Private>
-          <Paket>True</Paket>
-        </Reference>
-        <Reference Include="Polenter.SharpSerializer">
-          <HintPath>..\..\packages\Orleankka\lib\net45\Polenter.SharpSerializer.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>

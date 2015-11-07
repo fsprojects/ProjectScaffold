@@ -190,11 +190,6 @@
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>
-        <Reference Include="Polenter.SharpSerializer">
-          <HintPath>..\..\packages\Orleankka\lib\net45\Polenter.SharpSerializer.dll</HintPath>
-          <Private>True</Private>
-          <Paket>True</Paket>
-        </Reference>
       </ItemGroup>
     </When>
   </Choose>

@@ -24,12 +24,17 @@ open Orleans.Serialization
 open JsonSerializer
 
 open FSharp.ProjectTemplate.Domain
+open FSharp.ProjectTemplate.SqlClient
 
 type GreeterSQL() = 
     inherit Greeter()
 
-    override x.SaveLastHello (p : Person) = 0 |> ignore
-    override x.LoadLastHello (p : Person) = DateTime.Now
+    override x.SaveLastHello (p : Person) = 
+        0 |> ignore
+    override x.LoadLastHello (p : Person) = 
+        match Impl.LoadPersonLastSeen (p) |> Async.RunSynchronously with
+        | Some s -> s
+        | None -> DateTime.MinValue
 
 [<EntryPoint>]
 let main argv = 

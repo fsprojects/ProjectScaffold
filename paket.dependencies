@@ -2,6 +2,7 @@ source https://nuget.org/api/v2
 
 nuget Destructurama.FSharp
 nuget Expression.Blend.Sdk
+nuget FSharp.Data.SqlClient
 nuget FSharp.Formatting
 nuget FSharp.ViewModule.Core
 nuget FsXaml.Wpf

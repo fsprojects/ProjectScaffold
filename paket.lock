@@ -7,6 +7,7 @@ NUGET
     FAKE (3.28.7)
     FSharp.Compiler.Service (0.0.89)
     FSharp.Core (4.0.0.1)
+    FSharp.Data.SqlClient (1.7.7)
     FSharp.Formatting (2.9.0)
       FSharp.Compiler.Service (>= 0.0.87)
       FSharpVSPowerTools.Core (1.8.0)
