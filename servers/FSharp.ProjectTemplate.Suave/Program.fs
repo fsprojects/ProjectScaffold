@@ -30,7 +30,7 @@ type GreeterSQL() =
     inherit Greeter()
 
     override x.SaveLastHello (p : Person) = 
-        0 |> ignore
+        Impl.SavePersonLastSeen (p)
     override x.LoadLastHello (p : Person) = 
         match Impl.LoadPersonLastSeen (p) |> Async.RunSynchronously with
         | Some s -> s
