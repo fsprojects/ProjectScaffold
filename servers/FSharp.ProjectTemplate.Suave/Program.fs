@@ -1,4 +1,6 @@
-﻿open Suave                 
+﻿open System
+
+open Suave                 
 open Suave.Web
 open Suave.Http
 open Suave.Http.Successful
@@ -22,6 +24,12 @@ open Orleans.Serialization
 open JsonSerializer
 
 open FSharp.ProjectTemplate.Domain
+
+type GreeterSQL() = 
+    inherit Greeter()
+
+    override x.SaveLastHello (p : Person) = 0 |> ignore
+    override x.LoadLastHello (p : Person) = DateTime.Now
 
 [<EntryPoint>]
 let main argv = 
