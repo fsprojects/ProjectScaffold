@@ -30,6 +30,9 @@ module Library =
         saveLastHello (person)
         result
 
+    let SaveFake (p : Person) = 0 |> ignore
+    let LoadFake (p : Person) = DateTime.Now
+
     let api (loadLastHello:LoadLastHello, saveLastHello:SaveLastHello) = {
         Hello = hello (loadLastHello, saveLastHello)
     }

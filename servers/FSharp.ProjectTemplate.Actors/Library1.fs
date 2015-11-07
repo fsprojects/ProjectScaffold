@@ -11,6 +11,6 @@ type Greeter() =
 
     override this.Receive message reply = task {
         match message with
-        | Greet who -> reply (Library.hello who)
+        | Greet who -> reply (Library.api(Library.LoadFake, Library.SaveFake).Hello who)
         | Hi -> reply "Hello from F#!"
     }
