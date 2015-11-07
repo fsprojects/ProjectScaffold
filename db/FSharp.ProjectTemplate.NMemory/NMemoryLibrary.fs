@@ -8,13 +8,20 @@ open System.Linq.Expressions
 type Expr = 
   static member Quote<'A, 'B>(e:Expression<System.Func<'A, 'B>>) = e
 
+[<CLIMutable>]
+type PersonDTO = {
+    Id : int64
+    FirstName:string
+    LastName:string
+}
+
 type MyDatabase() = 
     inherit Database()
 
-    let mutable persons : ITable<Person> = null
+    let mutable persons : ITable<PersonDTO> = null
 
     do
-        persons <- base.Tables.Create<Person, string>( Expr.Quote<Person, string>( fun p -> p.FirstName+p.LastName ), IdentitySpecification<Person>(Expr.Quote<Person, int64>( fun p -> int64 (p.GetHashCode()) )) )
+        persons <- base.Tables.Create<PersonDTO, int64>( Expr.Quote<PersonDTO, int64>( fun p -> p.Id ), IdentitySpecification<PersonDTO>(Expr.Quote<PersonDTO, int64>( fun p -> p.Id )) )
 
     member this.Persons 
         with get() = persons 
