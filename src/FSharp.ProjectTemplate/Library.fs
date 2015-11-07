@@ -18,4 +18,12 @@ module Library =
   ///
   /// ## Parameters
   ///  - `person` - someone you would like to say hello to
-  let hello (person : Person) = sprintf "Hello %s %s" person.FirstName person.LastName
+  let hello (person : Person) = 
+    sprintf "Hello %s %s" person.FirstName person.LastName
+
+  /// Returns when the person was last seen
+  ///
+  /// ## Parameters
+  ///  - `person` - someone you would like to know was last seen
+  let lastseen (person : Person) ( getByExample : Person -> Person ) = 
+    failwith "Not implemented yet"
