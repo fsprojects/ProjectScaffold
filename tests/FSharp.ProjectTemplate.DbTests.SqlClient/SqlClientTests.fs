@@ -24,6 +24,9 @@ module SqlClient =
 
     [<Test>]
     let ``simple SqlClient database crud is working`` () =
-      Assert.AreEqual( 1, 1 )
+      let p = {FirstName="John";LastName="Rambo"}
+      Impl.SavePersonLastSeen( p )
+      let lastSeen = Impl.LoadPersonLastSeen( p ) |> Async.RunSynchronously
+      Assert.AreEqual( DateTime.Now, lastSeen.Value )
 
       
