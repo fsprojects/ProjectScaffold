@@ -33,19 +33,6 @@
     <WarningLevel>3</WarningLevel>
     <DocumentationFile>bin\Release\FSharp.ProjectTemplate.DbTests.SqlClient.XML</DocumentationFile>
   </PropertyGroup>
-  <ItemGroup>
-    <Reference Include="mscorlib" />
-    <Reference Include="FSharp.Core, Version=$(TargetFSharpCoreVersion), Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Numerics" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="SqlClientTests.fs" />
-    <None Include="Script.fsx" />
-  </ItemGroup>
   <PropertyGroup>
     <MinimumVisualStudioVersion Condition="'$(MinimumVisualStudioVersion)' == ''">11</MinimumVisualStudioVersion>
   </PropertyGroup>
@@ -97,25 +84,6 @@
       </ItemGroup>
     </When>
   </Choose>
-  <ItemGroup>
-    <Reference Include="nunit.framework">
-      <HintPath>..\..\packages\NUnit\lib\nunit.framework.dll</HintPath>
-      <Private>True</Private>
-      <Paket>True</Paket>
-    </Reference>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\db\FSharp.ProjectTemplate.SqlClient\FSharp.ProjectTemplate.SqlClient.fsproj">
-      <Name>FSharp.ProjectTemplate.SqlClient</Name>
-      <Project>{9d897b5e-5697-4e79-8f7d-df174cb0e4d9}</Project>
-      <Private>True</Private>
-    </ProjectReference>
-    <ProjectReference Include="..\..\src\FSharp.ProjectTemplate.Fx\FSharp.ProjectTemplate.Fx.fsproj">
-      <Name>FSharp.ProjectTemplate.Fx</Name>
-      <Project>{20eaba0d-bac0-4e2c-abcd-e0cd459669cf}</Project>
-      <Private>True</Private>
-    </ProjectReference>
-  </ItemGroup>
   <Choose>
     <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And ($(TargetFrameworkVersion) == 'v4.0')">
       <ItemGroup>
@@ -155,4 +123,34 @@
       </ItemGroup>
     </When>
   </Choose>
+  <ItemGroup>
+    <Compile Include="SqlClientTests.fs" />
+    <None Include="Script.fsx" />
+    <Content Include="App.config" />
+    <None Include="CreateSchema.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="mscorlib" />
+    <Reference Include="FSharp.Core, Version=$(TargetFSharpCoreVersion), Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="nunit.framework">
+      <HintPath>..\..\packages\NUnit\lib\nunit.framework.dll</HintPath>
+      <Private>True</Private>
+      <Paket>True</Paket>
+    </Reference>
+    <ProjectReference Include="..\..\db\FSharp.ProjectTemplate.SqlClient\FSharp.ProjectTemplate.SqlClient.fsproj">
+      <Name>FSharp.ProjectTemplate.SqlClient</Name>
+      <Project>{9d897b5e-5697-4e79-8f7d-df174cb0e4d9}</Project>
+      <Private>True</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\FSharp.ProjectTemplate.Fx\FSharp.ProjectTemplate.Fx.fsproj">
+      <Name>FSharp.ProjectTemplate.Fx</Name>
+      <Project>{20eaba0d-bac0-4e2c-abcd-e0cd459669cf}</Project>
+      <Private>True</Private>
+    </ProjectReference>
+  </ItemGroup>
 </Project>

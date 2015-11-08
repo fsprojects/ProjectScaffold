@@ -8,12 +8,19 @@ module SqlClient =
     open Serilog
     open FSharp.ProjectTemplate.SqlClient
     open System
+    open FSharp.Data
 
     Log.Logger <- LoggerConfiguration()
         .Destructure.FSharpTypes()
         .WriteTo.Console()
         .CreateLogger()
     Log.Information( "Tests started" )
+
+    type private EnsureDatabaseExistsCommand = SqlCommandProvider<"IF db_id('ProjectTemplate.Tests') IS NULL CREATE DATABASE [ProjectTemplate.Tests]", FSharp.ProjectTemplate.SqlClient.Impl.ConnectionString>
+
+    [<Test>]
+    let ``Ensure database exists`` () = 
+      (new EnsureDatabaseExistsCommand()).Execute() |> ignore
 
     [<Test>]
     let ``simple SqlClient database crud is working`` () =
