@@ -21,12 +21,12 @@ module SqlClient =
     [<Test>]
     let ``Ensure database exists`` () = 
       (new EnsureDatabaseExistsCommand()).Execute() |> ignore
+      Impl.createSchema ()
 
     [<Test>]
     let ``simple SqlClient database crud is working`` () =
       let p = {FirstName="John";LastName="Rambo"}
       Impl.SavePersonLastSeen( p )
       let lastSeen = Impl.LoadPersonLastSeen( p ) |> Async.RunSynchronously
-      Assert.AreEqual( DateTime.Now, lastSeen.Value )
-
+      Assert.LessOrEqual( DateTime.Now - lastSeen.Value, TimeSpan.FromSeconds(float 1) )
       

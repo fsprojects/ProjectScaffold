@@ -63,6 +63,7 @@
     <None Include="Script.fsx" />
     <Content Include="App.config" />
     <None Include="GetPersonLastSeen.sql" />
+    <None Include="CreateSchema.sql" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="mscorlib" />

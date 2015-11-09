@@ -10,6 +10,7 @@ module Impl =
 
     type private GetPersonLastSeenQuery = SqlCommandProvider<"GetPersonLastSeen.sql", ConnectionString>
     type private SavePersonLastSeenQuery = SqlCommandProvider<"SavePersonLastSeen.sql", ConnectionString>
+    type private CreateSchemaCommand = SqlCommandProvider<"CreateSchema.sql", ConnectionString>
 
     let LoadPersonLastSeen ( p : Person ) =
         async {
@@ -19,4 +20,7 @@ module Impl =
 
     let SavePersonLastSeen ( p : Person ) =
         (new SavePersonLastSeenQuery()).AsyncExecute( p.FirstName, p.LastName ) |> Async.RunSynchronously |> ignore
+
+    let internal createSchema () =
+        (new CreateSchemaCommand()).AsyncExecute() |> Async.RunSynchronously |> ignore
 
