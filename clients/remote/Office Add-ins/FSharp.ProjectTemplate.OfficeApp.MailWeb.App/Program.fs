@@ -1,7 +1,8 @@
 ﻿[<EntryPoint>]
 let main argv = 
-    use appComposeHomeJSFile = System.IO.File.CreateText(@"..\..\..\FSharp.ProjectTemplate.OfficeApp.MailWeb\AppCompose\Home\Home.js")
-    let homeJS = """
+    use appComposeHomeJSFile = System.IO.File.CreateText(@"..\FSharp.ProjectTemplate.OfficeApp.MailWeb\AppCompose\Home\Home.js")
+
+    fprintfn appComposeHomeJSFile """
 /// <reference path="../App.js" />
 
 (function () {
@@ -42,7 +43,10 @@ let main argv =
         }
     }
 
+    $(document).ready(function () {
+        %s
+    });
+
 })();
-    """
-    fprintfn appComposeHomeJSFile "%s" <| FunScript.Compiler.compileWithoutReturn <@ AppCompose.main() @>
+    """ <| FunScript.Compiler.compileWithoutReturn <@ AppCompose.main() @>
     0

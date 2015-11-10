@@ -1,4 +1,5 @@
-﻿/// <reference path="../App.js" />
+
+/// <reference path="../App.js" />
 
 (function () {
     'use strict';
@@ -38,4 +39,44 @@
         }
     }
 
+    $(document).ready(function () {
+        var AppCompose__op_Dynamic$JQuery_JQuery_, AppCompose__main$, AppCompose__log_info$String_String, AppCompose__log_enable$Unit_Unit_, AppCompose__jq$, AppCompose__hello$;
+AppCompose__hello$ = (function(unitVar0)
+{
+    return ((window.window).alert("Hello world!"));
+});
+AppCompose__jq$ = (function(selector)
+{
+    return ((window.$)(selector));
+});
+AppCompose__log_enable$Unit_Unit_ = (function(b)
+{
+    log.enableAll();
+});
+AppCompose__log_info$String_String = (function(a)
+{
+    log.info(a);
+});
+AppCompose__main$ = (function(unitVar0)
+{
+    var _1;
+    AppCompose__log_enable$Unit_Unit_(_1);
+    AppCompose__log_info$String_String("application started");
+    return (AppCompose__op_Dynamic$JQuery_JQuery_((function(selector)
+    {
+      return AppCompose__jq$(selector);
+    }), "helloWorld").click((function(_arg1)
+    {
+      AppCompose__log_info$String_String("button clicked");
+      return AppCompose__hello$();
+    })));
+});
+AppCompose__op_Dynamic$JQuery_JQuery_ = (function(jq,name)
+{
+    return jq(("#" + name));
+});
+AppCompose__main$()
+    });
+
 })();
+    

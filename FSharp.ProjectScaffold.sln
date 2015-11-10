@@ -70,6 +70,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FSharp.ProjectTemplate.OfficeApp.Mail", "clients\remote\Office Add-ins\FSharp.ProjectTemplate.OfficeApp.Mail\FSharp.ProjectTemplate.OfficeApp.Mail.csproj", "{EA76B479-5901-4F8A-AD28-C1F7A7604B6B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FSharp.ProjectTemplate.OfficeApp.MailWeb", "clients\remote\Office Add-ins\FSharp.ProjectTemplate.OfficeApp.MailWeb\FSharp.ProjectTemplate.OfficeApp.MailWeb.csproj", "{2C922A45-BB89-44C9-9F73-0F7CC70998F1}"
+	ProjectSection(ProjectDependencies) = postProject
+		{24EE79F4-C147-45EF-846D-06AE32BE6A6C} = {24EE79F4-C147-45EF-846D-06AE32BE6A6C}
+	EndProjectSection
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "FSharp.ProjectTemplate.OfficeApp.MailWeb.App", "clients\remote\Office Add-ins\FSharp.ProjectTemplate.OfficeApp.MailWeb.App\FSharp.ProjectTemplate.OfficeApp.MailWeb.App.fsproj", "{24EE79F4-C147-45EF-846D-06AE32BE6A6C}"
 EndProject
