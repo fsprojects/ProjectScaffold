@@ -6,6 +6,9 @@ nuget FSharp.Data.SqlClient
 nuget FSharp.Formatting
 nuget FSharp.ViewModule.Core
 nuget FsXaml.Wpf
+nuget FunScript
+nuget FunScript.TypeScript.Binding.jquery
+nuget FunScript.TypeScript.Binding.lib
 nuget jQuery
 nuget Microsoft.CodeDom.Providers.DotNetCompilerPlatform
 nuget Microsoft.Net.Compilers
