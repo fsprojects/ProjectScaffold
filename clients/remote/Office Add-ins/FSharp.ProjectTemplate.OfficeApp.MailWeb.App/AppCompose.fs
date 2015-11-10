@@ -14,8 +14,12 @@ let log_info (a) = failwith "never" |> ignore
 [<JS; JSEmit("log.enableAll()")>]
 let log_enable (b) = failwith "never" |> ignore
 
-let hello () =
-  Globals.window.alert("Hello world!")
+[<JS; JSEmit("app.showNotification('F# App Notification',{0})")>]
+let hello (a) = failwith "never" |> ignore
+
+[<JS; JSEmit("Office.cast.item.toItemCompose(Office.context.mailbox.item).subject.setAsync({0})")>]
+let setSubject(a) =
+    failwith "never" |> ignore
 
 let main() = 
     log_enable ()
@@ -23,5 +27,5 @@ let main() =
     jq?helloWorld.click(
         fun _ -> 
             log_info ( "button clicked" )
-            hello() :> obj
+            hello( "Clicked!" ) :> obj
     )

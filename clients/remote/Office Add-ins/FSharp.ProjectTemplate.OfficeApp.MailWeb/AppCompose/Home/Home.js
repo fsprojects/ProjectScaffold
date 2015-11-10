@@ -40,10 +40,10 @@
     }
 
     $(document).ready(function () {
-        var AppCompose__op_Dynamic$JQuery_JQuery_, AppCompose__main$, AppCompose__log_info$String_String, AppCompose__log_enable$Unit_Unit_, AppCompose__jq$, AppCompose__hello$;
-AppCompose__hello$ = (function(unitVar0)
+        var AppCompose__op_Dynamic$JQuery_JQuery_, AppCompose__main$, AppCompose__log_info$String_String, AppCompose__log_enable$Unit_Unit_, AppCompose__jq$, AppCompose__hello$String_String;
+AppCompose__hello$String_String = (function(a)
 {
-    return ((window.window).alert("Hello world!"));
+    app.showNotification('F# App Notification',a);
 });
 AppCompose__jq$ = (function(selector)
 {
@@ -68,7 +68,7 @@ AppCompose__main$ = (function(unitVar0)
     }), "helloWorld").click((function(_arg1)
     {
       AppCompose__log_info$String_String("button clicked");
-      return AppCompose__hello$();
+      return AppCompose__hello$String_String("Clicked!");
     })));
 });
 AppCompose__op_Dynamic$JQuery_JQuery_ = (function(jq,name)
