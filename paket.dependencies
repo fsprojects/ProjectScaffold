@@ -6,6 +6,10 @@ nuget FSharp.Data.SqlClient
 nuget FSharp.Formatting
 nuget FSharp.ViewModule.Core
 nuget FsXaml.Wpf
+nuget jQuery
+nuget Microsoft.CodeDom.Providers.DotNetCompilerPlatform
+nuget Microsoft.Net.Compilers
+nuget Microsoft.Office.js
 nuget Microsoft.Orleans.Templates.Grains
 nuget Microsoft.Orleans.Templates.Interfaces
 nuget ModernUI.WPF

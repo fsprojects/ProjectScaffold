@@ -189,3 +189,6 @@ docs/content/release-notes.md
 docs/tools/FSharp.Formatting.svclog
 dist/
 orleans.codegen.*
+clients/remote/Office Add-ins/FSharp.ProjectTemplate.OfficeApp.MailWeb/Scripts/jquery*
+clients/remote/Office Add-ins/FSharp.ProjectTemplate.OfficeApp.MailWeb/Scripts/Office/
+

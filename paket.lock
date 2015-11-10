@@ -16,12 +16,17 @@ NUGET
       FSharp.Compiler.Service (>= 0.0.87)
     FsXaml.Wpf (0.9.9)
       Expression.Blend.Sdk (>= 1.0.2) - framework: >= net45
+    jQuery (2.1.4)
     Microsoft.Bcl (1.1.10)
       Microsoft.Bcl.Build (>= 1.0.14)
     Microsoft.Bcl.Build (1.0.21) - import_targets: false
+    Microsoft.CodeDom.Providers.DotNetCompilerPlatform (1.0.1)
+      Microsoft.Net.Compilers (>= 1.0.0)
+    Microsoft.Net.Compilers (1.0.0)
     Microsoft.Net.Http (2.2.29)
       Microsoft.Bcl (>= 1.1.10)
       Microsoft.Bcl.Build (>= 1.0.14)
+    Microsoft.Office.js (1.1.0.9)
     Microsoft.Orleans.Core (1.0.10)
     Microsoft.Orleans.OrleansProviders (1.0.10)
       Microsoft.Orleans.Core (>= 1.0.10)
