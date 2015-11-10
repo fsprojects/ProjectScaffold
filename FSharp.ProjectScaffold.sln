@@ -65,6 +65,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "remote", "remote", "{32DEB0
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "FSharp.ProjectTemplate.DbTests.SqlClient", "tests\FSharp.ProjectTemplate.DbTests.SqlClient\FSharp.ProjectTemplate.DbTests.SqlClient.fsproj", "{B230EACC-FF48-4414-BC06-81DFF77B13CB}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Office Add-ins", "Office Add-ins", "{8C96511F-A79E-42D6-BD78-7BF74F03D475}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -308,5 +310,6 @@ Global
 		{BF3DAC4A-5187-4168-85DE-7306178950F8} = {ED8079DD-2B06-4030-9F0F-DC548F98E1C4}
 		{32DEB049-A3B1-4312-BF0C-ABEF97381F04} = {5861A35A-C72B-4CDD-8408-832E294AF2EC}
 		{B230EACC-FF48-4414-BC06-81DFF77B13CB} = {ED8079DD-2B06-4030-9F0F-DC548F98E1C4}
+		{8C96511F-A79E-42D6-BD78-7BF74F03D475} = {32DEB049-A3B1-4312-BF0C-ABEF97381F04}
 	EndGlobalSection
 EndGlobal
