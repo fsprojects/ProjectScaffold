@@ -1,13 +1,3 @@
-// Type definitions for Office.js
-// Project: http://dev.office.com
-// Definitions by: OfficeDev <https://github.com/OfficeDev>
-// Definitions: https://github.com/borisyankov/DefinitelyTyped
-
-/*
-office-js
-Copyright (c) Microsoft Corporation
-*/
-
 declare module OfficeExtension {
     /** An abstract proxy object that represents an object in an Office document. You create proxy objects from the context (or from other proxy objects), add commands to a queue to act on the object, and then synchronize the proxy object state with the document by calling "context.sync()". */
     class ClientObject {
@@ -15,8 +5,8 @@ declare module OfficeExtension {
         context: ClientRequestContext;
     }
     interface LoadOption {
-        select?: string | string[];
-        expand?: string | string[];
+        select?: string[];
+        expand?: string[];
         top?: number;
         skip?: number;
     }
@@ -26,7 +16,7 @@ declare module OfficeExtension {
         /** Collection of objects that are tracked for automatic adjustments based on surrounding changes in the document. */
         trackedObjects: TrackedObjects;
         /** Queues up a command to load the specified properties of the object. You must call "context.sync()" before reading the properties. */
-        load(object: ClientObject, option?: string | string[] | LoadOption): void;
+        load(object: ClientObject, option?: LoadOption): void;
         /** Adds a trace message to the queue. If the promise returned by "context.sync()" is rejected due to an error, this adds a ".traceMessages" array to the OfficeExtension.Error object, containing all trace messages that were executed. These messages can help you monitor the program execution sequence and detect the cause of the error. */
         trace(message: string): void;
         /** Synchronizes the state between JavaScript proxy objects and the Office document, by executing instructions queued on the request context and retrieving properties of loaded Office objects for use in your code.?This method returns a promise, which is resolved when the synchronization is complete. */
@@ -1981,7 +1971,7 @@ declare module Excel {
         /**
          * Queues up a command to load the specified properties of the object. You must call "context.sync()" before reading the properties.
          */
-        load(option?: string | string[] | OfficeExtension.LoadOption): Excel.Application;
+        load(option?: OfficeExtension.LoadOption): Excel.Application;
     }
     /**
      *
@@ -2027,7 +2017,7 @@ declare module Excel {
         /**
          * Queues up a command to load the specified properties of the object. You must call "context.sync()" before reading the properties.
          */
-        load(option?: string | string[] | OfficeExtension.LoadOption): Excel.Workbook;
+        load(option?: OfficeExtension.LoadOption): Excel.Workbook;
     }
     /**
      *
@@ -2106,7 +2096,7 @@ declare module Excel {
         /**
          * Queues up a command to load the specified properties of the object. You must call "context.sync()" before reading the properties.
          */
-        load(option?: string | string[] | OfficeExtension.LoadOption): Excel.Worksheet;
+        load(option?: OfficeExtension.LoadOption): Excel.Worksheet;
     }
     /**
      *
@@ -2139,7 +2129,7 @@ declare module Excel {
         /**
          * Queues up a command to load the specified properties of the object. You must call "context.sync()" before reading the properties.
          */
-        load(option?: string | string[] | OfficeExtension.LoadOption): Excel.WorksheetCollection;
+        load(option?: OfficeExtension.LoadOption): Excel.WorksheetCollection;
     }
     /**
      *
@@ -2257,7 +2247,7 @@ declare module Excel {
          *
          * @param anotherRange The range object or address or range name.
          */
-        getBoundingRect(anotherRange: Excel.Range | string): Excel.Range;
+        getBoundingRect(anotherRange: Excel.Range): Excel.Range;
         /**
          *
          * Gets the range object containing the single cell based on row and column numbers. The cell can be outside the bounds of its parent range, so long as it's stays within the worksheet grid. The returned cell is located relative to the top left cell of the range.
@@ -2291,7 +2281,7 @@ declare module Excel {
          *
          * @param anotherRange The range object or range address that will be used to determine the intersection of ranges.
          */
-        getIntersection(anotherRange: Excel.Range | string): Excel.Range;
+        getIntersection(anotherRange: Excel.Range): Excel.Range;
         /**
          *
          * Gets the last cell within the range. For example, the last cell of "B2:D5" is "D5".
@@ -2347,7 +2337,7 @@ declare module Excel {
         /**
          * Queues up a command to load the specified properties of the object. You must call "context.sync()" before reading the properties.
          */
-        load(option?: string | string[] | OfficeExtension.LoadOption): Excel.Range;
+        load(option?: OfficeExtension.LoadOption): Excel.Range;
     }
     /**
      *
@@ -2367,7 +2357,7 @@ declare module Excel {
         /**
          * Queues up a command to load the specified properties of the object. You must call "context.sync()" before reading the properties.
          */
-        load(option?: string | string[] | OfficeExtension.LoadOption): Excel.NamedItemCollection;
+        load(option?: OfficeExtension.LoadOption): Excel.NamedItemCollection;
     }
     /**
      *
@@ -2408,7 +2398,7 @@ declare module Excel {
         /**
          * Queues up a command to load the specified properties of the object. You must call "context.sync()" before reading the properties.
          */
-        load(option?: string | string[] | OfficeExtension.LoadOption): Excel.NamedItem;
+        load(option?: OfficeExtension.LoadOption): Excel.NamedItem;
     }
     /**
      *
@@ -2448,7 +2438,7 @@ declare module Excel {
         /**
          * Queues up a command to load the specified properties of the object. You must call "context.sync()" before reading the properties.
          */
-        load(option?: string | string[] | OfficeExtension.LoadOption): Excel.Binding;
+        load(option?: OfficeExtension.LoadOption): Excel.Binding;
     }
     /**
      *
@@ -2481,7 +2471,7 @@ declare module Excel {
         /**
          * Queues up a command to load the specified properties of the object. You must call "context.sync()" before reading the properties.
          */
-        load(option?: string | string[] | OfficeExtension.LoadOption): Excel.BindingCollection;
+        load(option?: OfficeExtension.LoadOption): Excel.BindingCollection;
     }
     /**
      *
@@ -2511,7 +2501,7 @@ declare module Excel {
          *
          * @param key Name or ID of the table to be retrieved.
          */
-        getItem(key: number | string): Excel.Table;
+        getItem(key: string): Excel.Table;
         /**
          *
          * Gets a table based on its position in the collection.
@@ -2522,7 +2512,7 @@ declare module Excel {
         /**
          * Queues up a command to load the specified properties of the object. You must call "context.sync()" before reading the properties.
          */
-        load(option?: string | string[] | OfficeExtension.LoadOption): Excel.TableCollection;
+        load(option?: OfficeExtension.LoadOption): Excel.TableCollection;
     }
     /**
      *
@@ -2604,7 +2594,7 @@ declare module Excel {
         /**
          * Queues up a command to load the specified properties of the object. You must call "context.sync()" before reading the properties.
          */
-        load(option?: string | string[] | OfficeExtension.LoadOption): Excel.Table;
+        load(option?: OfficeExtension.LoadOption): Excel.Table;
     }
     /**
      *
@@ -2627,14 +2617,14 @@ declare module Excel {
          * @param index Specifies the relative position of the new column. The previous column at this position is shifted to the right. The index value should be equal to or less than the last column's index value, so it cannot be used to append a column at the end of the table. Zero-indexed.
          * @param values A 2-dimensional array of unformatted values of the table column.
          */
-        add(index: number, values?: Array<Array<boolean | string | number>> | boolean | string | number): Excel.TableColumn;
+        add(index: number, values?: Array<Array<string>>): Excel.TableColumn;
         /**
          *
          * Gets a column object by Name or ID.
          *
          * @param key Column Name or ID.
          */
-        getItem(key: number | string): Excel.TableColumn;
+        getItem(key: string): Excel.TableColumn;
         /**
          *
          * Gets a column based on its position in the collection.
@@ -2645,7 +2635,7 @@ declare module Excel {
         /**
          * Queues up a command to load the specified properties of the object. You must call "context.sync()" before reading the properties.
          */
-        load(option?: string | string[] | OfficeExtension.LoadOption): Excel.TableColumnCollection;
+        load(option?: OfficeExtension.LoadOption): Excel.TableColumnCollection;
     }
     /**
      *
@@ -2709,7 +2699,7 @@ declare module Excel {
         /**
          * Queues up a command to load the specified properties of the object. You must call "context.sync()" before reading the properties.
          */
-        load(option?: string | string[] | OfficeExtension.LoadOption): Excel.TableColumn;
+        load(option?: OfficeExtension.LoadOption): Excel.TableColumn;
     }
     /**
      *
@@ -2732,7 +2722,7 @@ declare module Excel {
          * @param index Specifies the relative position of the new row. If null, the addition happens at the end. Any rows below the inserted row are shifted downwards. Zero-indexed.
          * @param values A 2-dimensional array of unformatted values of the table row.
          */
-        add(index?: number, values?: Array<Array<boolean | string | number>> | boolean | string | number): Excel.TableRow;
+        add(index?: number, values?: Array<Array<string>>): Excel.TableRow;
         /**
          *
          * Gets a row based on its position in the collection.
@@ -2743,7 +2733,7 @@ declare module Excel {
         /**
          * Queues up a command to load the specified properties of the object. You must call "context.sync()" before reading the properties.
          */
-        load(option?: string | string[] | OfficeExtension.LoadOption): Excel.TableRowCollection;
+        load(option?: OfficeExtension.LoadOption): Excel.TableRowCollection;
     }
     /**
      *
@@ -2777,7 +2767,7 @@ declare module Excel {
         /**
          * Queues up a command to load the specified properties of the object. You must call "context.sync()" before reading the properties.
          */
-        load(option?: string | string[] | OfficeExtension.LoadOption): Excel.TableRow;
+        load(option?: OfficeExtension.LoadOption): Excel.TableRow;
     }
     /**
      *
@@ -2823,7 +2813,7 @@ declare module Excel {
         /**
          * Queues up a command to load the specified properties of the object. You must call "context.sync()" before reading the properties.
          */
-        load(option?: string | string[] | OfficeExtension.LoadOption): Excel.RangeFormat;
+        load(option?: OfficeExtension.LoadOption): Excel.RangeFormat;
     }
     /**
      *
@@ -2845,7 +2835,7 @@ declare module Excel {
         /**
          * Queues up a command to load the specified properties of the object. You must call "context.sync()" before reading the properties.
          */
-        load(option?: string | string[] | OfficeExtension.LoadOption): Excel.RangeFill;
+        load(option?: OfficeExtension.LoadOption): Excel.RangeFill;
     }
     /**
      *
@@ -2879,7 +2869,7 @@ declare module Excel {
         /**
          * Queues up a command to load the specified properties of the object. You must call "context.sync()" before reading the properties.
          */
-        load(option?: string | string[] | OfficeExtension.LoadOption): Excel.RangeBorder;
+        load(option?: OfficeExtension.LoadOption): Excel.RangeBorder;
     }
     /**
      *
@@ -2912,7 +2902,7 @@ declare module Excel {
         /**
          * Queues up a command to load the specified properties of the object. You must call "context.sync()" before reading the properties.
          */
-        load(option?: string | string[] | OfficeExtension.LoadOption): Excel.RangeBorderCollection;
+        load(option?: OfficeExtension.LoadOption): Excel.RangeBorderCollection;
     }
     /**
      *
@@ -2958,7 +2948,7 @@ declare module Excel {
         /**
          * Queues up a command to load the specified properties of the object. You must call "context.sync()" before reading the properties.
          */
-        load(option?: string | string[] | OfficeExtension.LoadOption): Excel.RangeFont;
+        load(option?: OfficeExtension.LoadOption): Excel.RangeFont;
     }
     /**
      *
@@ -3000,7 +2990,7 @@ declare module Excel {
         /**
          * Queues up a command to load the specified properties of the object. You must call "context.sync()" before reading the properties.
          */
-        load(option?: string | string[] | OfficeExtension.LoadOption): Excel.ChartCollection;
+        load(option?: OfficeExtension.LoadOption): Excel.ChartCollection;
     }
     /**
      *
@@ -3095,11 +3085,11 @@ declare module Excel {
          * @param startCell The start cell. This is where the chart will be moved to. The start cell is the top-left or top-right cell, depending on the user's right-to-left display settings.
          * @param endCell (Optional) The end cell. If specified, the chart's width and height will be set to fully cover up this cell/range.
          */
-        setPosition(startCell: Excel.Range | string, endCell?: Excel.Range | string): void;
+        setPosition(startCell: Excel.Range, endCell?: Excel.Range): void;
         /**
          * Queues up a command to load the specified properties of the object. You must call "context.sync()" before reading the properties.
          */
-        load(option?: string | string[] | OfficeExtension.LoadOption): Excel.Chart;
+        load(option?: OfficeExtension.LoadOption): Excel.Chart;
     }
     /**
      *
@@ -3121,7 +3111,7 @@ declare module Excel {
         /**
          * Queues up a command to load the specified properties of the object. You must call "context.sync()" before reading the properties.
          */
-        load(option?: string | string[] | OfficeExtension.LoadOption): Excel.ChartAreaFormat;
+        load(option?: OfficeExtension.LoadOption): Excel.ChartAreaFormat;
     }
     /**
      *
@@ -3147,7 +3137,7 @@ declare module Excel {
         /**
          * Queues up a command to load the specified properties of the object. You must call "context.sync()" before reading the properties.
          */
-        load(option?: string | string[] | OfficeExtension.LoadOption): Excel.ChartSeriesCollection;
+        load(option?: OfficeExtension.LoadOption): Excel.ChartSeriesCollection;
     }
     /**
      *
@@ -3175,7 +3165,7 @@ declare module Excel {
         /**
          * Queues up a command to load the specified properties of the object. You must call "context.sync()" before reading the properties.
          */
-        load(option?: string | string[] | OfficeExtension.LoadOption): Excel.ChartSeries;
+        load(option?: OfficeExtension.LoadOption): Excel.ChartSeries;
     }
     /**
      *
@@ -3197,7 +3187,7 @@ declare module Excel {
         /**
          * Queues up a command to load the specified properties of the object. You must call "context.sync()" before reading the properties.
          */
-        load(option?: string | string[] | OfficeExtension.LoadOption): Excel.ChartSeriesFormat;
+        load(option?: OfficeExtension.LoadOption): Excel.ChartSeriesFormat;
     }
     /**
      *
@@ -3223,7 +3213,7 @@ declare module Excel {
         /**
          * Queues up a command to load the specified properties of the object. You must call "context.sync()" before reading the properties.
          */
-        load(option?: string | string[] | OfficeExtension.LoadOption): Excel.ChartPointsCollection;
+        load(option?: OfficeExtension.LoadOption): Excel.ChartPointsCollection;
     }
     /**
      *
@@ -3245,7 +3235,7 @@ declare module Excel {
         /**
          * Queues up a command to load the specified properties of the object. You must call "context.sync()" before reading the properties.
          */
-        load(option?: string | string[] | OfficeExtension.LoadOption): Excel.ChartPoint;
+        load(option?: OfficeExtension.LoadOption): Excel.ChartPoint;
     }
     /**
      *
@@ -3261,7 +3251,7 @@ declare module Excel {
         /**
          * Queues up a command to load the specified properties of the object. You must call "context.sync()" before reading the properties.
          */
-        load(option?: string | string[] | OfficeExtension.LoadOption): Excel.ChartPointFormat;
+        load(option?: OfficeExtension.LoadOption): Excel.ChartPointFormat;
     }
     /**
      *
@@ -3289,7 +3279,7 @@ declare module Excel {
         /**
          * Queues up a command to load the specified properties of the object. You must call "context.sync()" before reading the properties.
          */
-        load(option?: string | string[] | OfficeExtension.LoadOption): Excel.ChartAxes;
+        load(option?: OfficeExtension.LoadOption): Excel.ChartAxes;
     }
     /**
      *
@@ -3347,7 +3337,7 @@ declare module Excel {
         /**
          * Queues up a command to load the specified properties of the object. You must call "context.sync()" before reading the properties.
          */
-        load(option?: string | string[] | OfficeExtension.LoadOption): Excel.ChartAxis;
+        load(option?: OfficeExtension.LoadOption): Excel.ChartAxis;
     }
     /**
      *
@@ -3369,7 +3359,7 @@ declare module Excel {
         /**
          * Queues up a command to load the specified properties of the object. You must call "context.sync()" before reading the properties.
          */
-        load(option?: string | string[] | OfficeExtension.LoadOption): Excel.ChartAxisFormat;
+        load(option?: OfficeExtension.LoadOption): Excel.ChartAxisFormat;
     }
     /**
      *
@@ -3397,7 +3387,7 @@ declare module Excel {
         /**
          * Queues up a command to load the specified properties of the object. You must call "context.sync()" before reading the properties.
          */
-        load(option?: string | string[] | OfficeExtension.LoadOption): Excel.ChartAxisTitle;
+        load(option?: OfficeExtension.LoadOption): Excel.ChartAxisTitle;
     }
     /**
      *
@@ -3413,7 +3403,7 @@ declare module Excel {
         /**
          * Queues up a command to load the specified properties of the object. You must call "context.sync()" before reading the properties.
          */
-        load(option?: string | string[] | OfficeExtension.LoadOption): Excel.ChartAxisTitleFormat;
+        load(option?: OfficeExtension.LoadOption): Excel.ChartAxisTitleFormat;
     }
     /**
      *
@@ -3477,7 +3467,7 @@ declare module Excel {
         /**
          * Queues up a command to load the specified properties of the object. You must call "context.sync()" before reading the properties.
          */
-        load(option?: string | string[] | OfficeExtension.LoadOption): Excel.ChartDataLabels;
+        load(option?: OfficeExtension.LoadOption): Excel.ChartDataLabels;
     }
     /**
      *
@@ -3499,7 +3489,7 @@ declare module Excel {
         /**
          * Queues up a command to load the specified properties of the object. You must call "context.sync()" before reading the properties.
          */
-        load(option?: string | string[] | OfficeExtension.LoadOption): Excel.ChartDataLabelFormat;
+        load(option?: OfficeExtension.LoadOption): Excel.ChartDataLabelFormat;
     }
     /**
      *
@@ -3521,7 +3511,7 @@ declare module Excel {
         /**
          * Queues up a command to load the specified properties of the object. You must call "context.sync()" before reading the properties.
          */
-        load(option?: string | string[] | OfficeExtension.LoadOption): Excel.ChartGridlines;
+        load(option?: OfficeExtension.LoadOption): Excel.ChartGridlines;
     }
     /**
      *
@@ -3537,7 +3527,7 @@ declare module Excel {
         /**
          * Queues up a command to load the specified properties of the object. You must call "context.sync()" before reading the properties.
          */
-        load(option?: string | string[] | OfficeExtension.LoadOption): Excel.ChartGridlinesFormat;
+        load(option?: OfficeExtension.LoadOption): Excel.ChartGridlinesFormat;
     }
     /**
      *
@@ -3571,7 +3561,7 @@ declare module Excel {
         /**
          * Queues up a command to load the specified properties of the object. You must call "context.sync()" before reading the properties.
          */
-        load(option?: string | string[] | OfficeExtension.LoadOption): Excel.ChartLegend;
+        load(option?: OfficeExtension.LoadOption): Excel.ChartLegend;
     }
     /**
      *
@@ -3593,7 +3583,7 @@ declare module Excel {
         /**
          * Queues up a command to load the specified properties of the object. You must call "context.sync()" before reading the properties.
          */
-        load(option?: string | string[] | OfficeExtension.LoadOption): Excel.ChartLegendFormat;
+        load(option?: OfficeExtension.LoadOption): Excel.ChartLegendFormat;
     }
     /**
      *
@@ -3627,7 +3617,7 @@ declare module Excel {
         /**
          * Queues up a command to load the specified properties of the object. You must call "context.sync()" before reading the properties.
          */
-        load(option?: string | string[] | OfficeExtension.LoadOption): Excel.ChartTitle;
+        load(option?: OfficeExtension.LoadOption): Excel.ChartTitle;
     }
     /**
      *
@@ -3649,7 +3639,7 @@ declare module Excel {
         /**
          * Queues up a command to load the specified properties of the object. You must call "context.sync()" before reading the properties.
          */
-        load(option?: string | string[] | OfficeExtension.LoadOption): Excel.ChartTitleFormat;
+        load(option?: OfficeExtension.LoadOption): Excel.ChartTitleFormat;
     }
     /**
      *
@@ -3672,7 +3662,7 @@ declare module Excel {
         /**
          * Queues up a command to load the specified properties of the object. You must call "context.sync()" before reading the properties.
          */
-        load(option?: string | string[] | OfficeExtension.LoadOption): Excel.ChartFill;
+        load(option?: OfficeExtension.LoadOption): Excel.ChartFill;
     }
     /**
      *
@@ -3694,7 +3684,7 @@ declare module Excel {
         /**
          * Queues up a command to load the specified properties of the object. You must call "context.sync()" before reading the properties.
          */
-        load(option?: string | string[] | OfficeExtension.LoadOption): Excel.ChartLineFormat;
+        load(option?: OfficeExtension.LoadOption): Excel.ChartLineFormat;
     }
     /**
      *
@@ -3740,7 +3730,7 @@ declare module Excel {
         /**
          * Queues up a command to load the specified properties of the object. You must call "context.sync()" before reading the properties.
          */
-        load(option?: string | string[] | OfficeExtension.LoadOption): Excel.ChartFont;
+        load(option?: OfficeExtension.LoadOption): Excel.ChartFont;
     }
     module BindingType {
         var range: string;
@@ -4106,16 +4096,7 @@ declare module Word {
          * @param searchText Required. The search text.
          * @param searchOptions Optional. Options for the search.
          */
-        search(searchText: string, searchOptions?: Word.SearchOptions | {
-            ignorePunct?: boolean;
-            ignoreSpace?: boolean;
-            matchCase?: boolean;
-            matchPrefix?: boolean;
-            matchSoundsLike?: boolean;
-            matchSuffix?: boolean;
-            matchWholeWord?: boolean;
-            matchWildCards?: boolean;
-        }): Word.SearchResultCollection;
+        search(searchText: string, searchOptions?: Word.SearchOptions): Word.SearchResultCollection;
         /**
          *
          * Selects the body and navigates the Word UI to it.
@@ -4125,7 +4106,7 @@ declare module Word {
         /**
          * Queues up a command to load the specified properties of the object. You must call "context.sync()" before reading the properties.
          */
-        load(option?: string | string[] | OfficeExtension.LoadOption): Word.Body;
+        load(option?: OfficeExtension.LoadOption): Word.Body;
     }
     /**
      *
@@ -4315,16 +4296,7 @@ declare module Word {
          * @param searchText Required. The search text.
          * @param searchOptions Optional. Options for the search.
          */
-        search(searchText: string, searchOptions?: Word.SearchOptions | {
-            ignorePunct?: boolean;
-            ignoreSpace?: boolean;
-            matchCase?: boolean;
-            matchPrefix?: boolean;
-            matchSoundsLike?: boolean;
-            matchSuffix?: boolean;
-            matchWholeWord?: boolean;
-            matchWildCards?: boolean;
-        }): Word.SearchResultCollection;
+        search(searchText: string, searchOptions?: Word.SearchOptions): Word.SearchResultCollection;
         /**
          *
          * Selects the content control. This causes Word to scroll to the selection.
@@ -4334,7 +4306,7 @@ declare module Word {
         /**
          * Queues up a command to load the specified properties of the object. You must call "context.sync()" before reading the properties.
          */
-        load(option?: string | string[] | OfficeExtension.LoadOption): Word.ContentControl;
+        load(option?: OfficeExtension.LoadOption): Word.ContentControl;
     }
     /**
      *
@@ -4376,7 +4348,7 @@ declare module Word {
         /**
          * Queues up a command to load the specified properties of the object. You must call "context.sync()" before reading the properties.
          */
-        load(option?: string | string[] | OfficeExtension.LoadOption): Word.ContentControlCollection;
+        load(option?: OfficeExtension.LoadOption): Word.ContentControlCollection;
     }
     /**
      *
@@ -4422,7 +4394,7 @@ declare module Word {
         /**
          * Queues up a command to load the specified properties of the object. You must call "context.sync()" before reading the properties.
          */
-        load(option?: string | string[] | OfficeExtension.LoadOption): Word.Document;
+        load(option?: OfficeExtension.LoadOption): Word.Document;
     }
     /**
      *
@@ -4499,7 +4471,7 @@ declare module Word {
         /**
          * Queues up a command to load the specified properties of the object. You must call "context.sync()" before reading the properties.
          */
-        load(option?: string | string[] | OfficeExtension.LoadOption): Word.Font;
+        load(option?: OfficeExtension.LoadOption): Word.Font;
     }
     /**
      *
@@ -4565,7 +4537,7 @@ declare module Word {
         /**
          * Queues up a command to load the specified properties of the object. You must call "context.sync()" before reading the properties.
          */
-        load(option?: string | string[] | OfficeExtension.LoadOption): Word.InlinePicture;
+        load(option?: OfficeExtension.LoadOption): Word.InlinePicture;
     }
     /**
      *
@@ -4579,7 +4551,7 @@ declare module Word {
         /**
          * Queues up a command to load the specified properties of the object. You must call "context.sync()" before reading the properties.
          */
-        load(option?: string | string[] | OfficeExtension.LoadOption): Word.InlinePictureCollection;
+        load(option?: OfficeExtension.LoadOption): Word.InlinePictureCollection;
     }
     /**
      *
@@ -4777,16 +4749,7 @@ declare module Word {
          * @param searchText Required. The search text.
          * @param searchOptions Optional. Options for the search.
          */
-        search(searchText: string, searchOptions?: Word.SearchOptions | {
-            ignorePunct?: boolean;
-            ignoreSpace?: boolean;
-            matchCase?: boolean;
-            matchPrefix?: boolean;
-            matchSoundsLike?: boolean;
-            matchSuffix?: boolean;
-            matchWholeWord?: boolean;
-            matchWildCards?: boolean;
-        }): Word.SearchResultCollection;
+        search(searchText: string, searchOptions?: Word.SearchOptions): Word.SearchResultCollection;
         /**
          *
          * Selects and navigates the Word UI to the paragraph.
@@ -4796,7 +4759,7 @@ declare module Word {
         /**
          * Queues up a command to load the specified properties of the object. You must call "context.sync()" before reading the properties.
          */
-        load(option?: string | string[] | OfficeExtension.LoadOption): Word.Paragraph;
+        load(option?: OfficeExtension.LoadOption): Word.Paragraph;
     }
     /**
      *
@@ -4810,7 +4773,7 @@ declare module Word {
         /**
          * Queues up a command to load the specified properties of the object. You must call "context.sync()" before reading the properties.
          */
-        load(option?: string | string[] | OfficeExtension.LoadOption): Word.ParagraphCollection;
+        load(option?: OfficeExtension.LoadOption): Word.ParagraphCollection;
     }
     /**
      *
@@ -4940,16 +4903,7 @@ declare module Word {
          * @param searchText Required. The search text.
          * @param searchOptions Optional. Options for the search.
          */
-        search(searchText: string, searchOptions?: Word.SearchOptions | {
-            ignorePunct?: boolean;
-            ignoreSpace?: boolean;
-            matchCase?: boolean;
-            matchPrefix?: boolean;
-            matchSoundsLike?: boolean;
-            matchSuffix?: boolean;
-            matchWholeWord?: boolean;
-            matchWildCards?: boolean;
-        }): Word.SearchResultCollection;
+        search(searchText: string, searchOptions?: Word.SearchOptions): Word.SearchResultCollection;
         /**
          *
          * Selects and navigates the Word UI to the range.
@@ -4959,7 +4913,7 @@ declare module Word {
         /**
          * Queues up a command to load the specified properties of the object. You must call "context.sync()" before reading the properties.
          */
-        load(option?: string | string[] | OfficeExtension.LoadOption): Word.Range;
+        load(option?: OfficeExtension.LoadOption): Word.Range;
     }
     /**
      *
@@ -5017,7 +4971,7 @@ declare module Word {
         /**
          * Queues up a command to load the specified properties of the object. You must call "context.sync()" before reading the properties.
          */
-        load(option?: string | string[] | OfficeExtension.LoadOption): Word.SearchOptions;
+        load(option?: OfficeExtension.LoadOption): Word.SearchOptions;
         /**
          * Create a new instance of Word.SearchOptions object
          */
@@ -5035,7 +4989,7 @@ declare module Word {
         /**
          * Queues up a command to load the specified properties of the object. You must call "context.sync()" before reading the properties.
          */
-        load(option?: string | string[] | OfficeExtension.LoadOption): Word.SearchResultCollection;
+        load(option?: OfficeExtension.LoadOption): Word.SearchResultCollection;
     }
     /**
      *
@@ -5067,7 +5021,7 @@ declare module Word {
         /**
          * Queues up a command to load the specified properties of the object. You must call "context.sync()" before reading the properties.
          */
-        load(option?: string | string[] | OfficeExtension.LoadOption): Word.Section;
+        load(option?: OfficeExtension.LoadOption): Word.Section;
     }
     /**
      *
@@ -5081,7 +5035,7 @@ declare module Word {
         /**
          * Queues up a command to load the specified properties of the object. You must call "context.sync()" before reading the properties.
          */
-        load(option?: string | string[] | OfficeExtension.LoadOption): Word.SectionCollection;
+        load(option?: OfficeExtension.LoadOption): Word.SectionCollection;
     }
     /**
      *
