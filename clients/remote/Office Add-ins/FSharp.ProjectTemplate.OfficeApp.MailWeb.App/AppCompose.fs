@@ -17,9 +17,9 @@ let log_enable (b) = failwith "never" |> ignore
 [<JS; JSEmit("app.showNotification('F# App Notification',{0})")>]
 let hello (a) = failwith "never" |> ignore
 
-[<JS; JSEmit("Office.cast.item.toItemCompose(Office.context.mailbox.item).subject.setAsync({0})")>]
 let setSubject(a) =
-    failwith "never" |> ignore
+    let subjObj : Office.Subject = downcast Office.cast.item.Globals.toItemCompose(Office.Globals.context.mailbox.item).subject
+    subjObj.setAsync(a)
 
 let main() = 
     log_enable ()
