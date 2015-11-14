@@ -67,58 +67,9 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="web.config.install.xdt">
-      <Paket>True</Paket>
-    </Content>
-    <Content Include="web.config.uninstall.xdt">
-      <Paket>True</Paket>
-    </Content>
-    <None Include="Web.Debug.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </None>
-    <None Include="Web.Release.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Scripts\jquery-1.9.1.intellisense.js" />
-    <Content Include="AppCompose\App.css" />
-    <Content Include="AppCompose\App.js" />
-    <Content Include="AppCompose\Home\Home.css" />
-    <Content Include="AppCompose\Home\Home.html" />
-    <Content Include="AppCompose\Home\Home.js" />
-    <Content Include="AppRead\App.css" />
-    <Content Include="AppRead\App.js" />
-    <Content Include="AppRead\Home\Home.css" />
-    <Content Include="AppRead\Home\Home.html" />
-    <Content Include="AppRead\Home\Home.js" />
-    <Content Include="Content\Office.css" />
-    <Content Include="Images\Close.png" />
-    <Content Include="Scripts\jquery-2.1.4-vsdoc.js">
-      <Paket>True</Paket>
-    </Content>
-    <Content Include="Scripts\jquery-2.1.4.js">
-      <Paket>True</Paket>
-    </Content>
-    <Content Include="Scripts\jquery-2.1.4.min.js">
-      <Paket>True</Paket>
-    </Content>
-    <Content Include="Scripts\jquery-2.1.4.min.map">
-      <Paket>True</Paket>
-    </Content>
-    <Content Include="Scripts\jquery-1.9.1.js" />
-    <Content Include="Scripts\jquery-1.9.1.min.js" />
-    <Content Include="Scripts\jquery-1.9.1.min.map" />
-    <None Include="Scripts\_references.js" />
-    <None Include="Scripts\Office\1\outlook-win32.debug-vsdoc.js" />
-    <None Include="Scripts\Office\1\office-vsdoc.js" />
-    <Content Include="Content\OfficeThemes.css" />
-    <Content Include="Scripts\Office\1\office-vsdoc.js">
-      <Paket>True</Paket>
-    </Content>
-    <Content Include="Scripts\Office\1\outlook-win32.debug-vsdoc.js">
-      <Paket>True</Paket>
-    </Content>
+    <None Include="Scripts\jquery-2.1.4-vsdoc.js" />
+    <Content Include="Scripts\jquery-2.1.4.js" />
+    <Content Include="Scripts\jquery-2.1.4.min.js" />
     <Content Include="Scripts\Office\1\access-web-16.00.debug.js" />
     <Content Include="Scripts\Office\1\access-web-16.00.js" />
     <Content Include="Scripts\Office\1\ar-sa\office_strings.debug.js" />
@@ -129,10 +80,6 @@
     <Content Include="Scripts\Office\1\bg-bg\office_strings.js" />
     <Content Include="Scripts\Office\1\bg-bg\outlook_strings.debug.js" />
     <Content Include="Scripts\Office\1\bg-bg\outlook_strings.js" />
-    <Content Include="Scripts\Office\1\ca-es\office_strings.debug.js" />
-    <Content Include="Scripts\Office\1\ca-es\office_strings.js" />
-    <Content Include="Scripts\Office\1\ca-es\outlook_strings.debug.js" />
-    <Content Include="Scripts\Office\1\ca-es\outlook_strings.js" />
     <Content Include="Scripts\Office\1\cs-cz\office_strings.debug.js" />
     <Content Include="Scripts\Office\1\cs-cz\office_strings.js" />
     <Content Include="Scripts\Office\1\cs-cz\outlook_strings.debug.js" />
@@ -161,10 +108,6 @@
     <Content Include="Scripts\Office\1\et-ee\office_strings.js" />
     <Content Include="Scripts\Office\1\et-ee\outlook_strings.debug.js" />
     <Content Include="Scripts\Office\1\et-ee\outlook_strings.js" />
-    <Content Include="Scripts\Office\1\eu-es\office_strings.debug.js" />
-    <Content Include="Scripts\Office\1\eu-es\office_strings.js" />
-    <Content Include="Scripts\Office\1\eu-es\outlook_strings.debug.js" />
-    <Content Include="Scripts\Office\1\eu-es\outlook_strings.js" />
     <Content Include="Scripts\Office\1\excel-15.01.debug.js" />
     <Content Include="Scripts\Office\1\excel-15.01.js" />
     <Content Include="Scripts\Office\1\excel-15.debug.js" />
@@ -189,10 +132,6 @@
     <Content Include="Scripts\Office\1\fr-fr\office_strings.js" />
     <Content Include="Scripts\Office\1\fr-fr\outlook_strings.debug.js" />
     <Content Include="Scripts\Office\1\fr-fr\outlook_strings.js" />
-    <Content Include="Scripts\Office\1\gl-es\office_strings.debug.js" />
-    <Content Include="Scripts\Office\1\gl-es\office_strings.js" />
-    <Content Include="Scripts\Office\1\gl-es\outlook_strings.debug.js" />
-    <Content Include="Scripts\Office\1\gl-es\outlook_strings.js" />
     <Content Include="Scripts\Office\1\he-il\office_strings.debug.js" />
     <Content Include="Scripts\Office\1\he-il\office_strings.js" />
     <Content Include="Scripts\Office\1\he-il\outlook_strings.debug.js" />
@@ -251,6 +190,7 @@
     <Content Include="Scripts\Office\1\nl-nl\outlook_strings.js" />
     <Content Include="Scripts\Office\1\o15apptofilemappingtable.debug.js" />
     <Content Include="Scripts\Office\1\o15apptofilemappingtable.js" />
+    <None Include="Scripts\Office\1\office-vsdoc.js" />
     <Content Include="Scripts\Office\1\office.debug.js" />
     <Content Include="Scripts\Office\1\office.js" />
     <Content Include="Scripts\Office\1\outlook-15.01.debug.js" />
@@ -263,6 +203,7 @@
     <Content Include="Scripts\Office\1\outlook-web-16.00.js" />
     <Content Include="Scripts\Office\1\outlook-win32-16.00.debug.js" />
     <Content Include="Scripts\Office\1\outlook-win32-16.00.js" />
+    <None Include="Scripts\Office\1\outlook-win32.debug-vsdoc.js" />
     <Content Include="Scripts\Office\1\outlookwebapp-15.01.debug.js" />
     <Content Include="Scripts\Office\1\outlookwebapp-15.01.js" />
     <Content Include="Scripts\Office\1\outlookwebapp-15.debug.js" />
@@ -313,22 +254,10 @@
     <Content Include="Scripts\Office\1\sl-si\office_strings.js" />
     <Content Include="Scripts\Office\1\sl-si\outlook_strings.debug.js" />
     <Content Include="Scripts\Office\1\sl-si\outlook_strings.js" />
-    <Content Include="Scripts\Office\1\sr-cyrl-cs\office_strings.debug.js" />
-    <Content Include="Scripts\Office\1\sr-cyrl-cs\office_strings.js" />
-    <Content Include="Scripts\Office\1\sr-cyrl-cs\outlook_strings.debug.js" />
-    <Content Include="Scripts\Office\1\sr-cyrl-cs\outlook_strings.js" />
-    <Content Include="Scripts\Office\1\sr-cyrl-rs\office_strings.debug.js" />
-    <Content Include="Scripts\Office\1\sr-cyrl-rs\office_strings.js" />
-    <Content Include="Scripts\Office\1\sr-cyrl-rs\outlook_strings.debug.js" />
-    <Content Include="Scripts\Office\1\sr-cyrl-rs\outlook_strings.js" />
     <Content Include="Scripts\Office\1\sr-latn-cs\office_strings.debug.js" />
     <Content Include="Scripts\Office\1\sr-latn-cs\office_strings.js" />
     <Content Include="Scripts\Office\1\sr-latn-cs\outlook_strings.debug.js" />
     <Content Include="Scripts\Office\1\sr-latn-cs\outlook_strings.js" />
-    <Content Include="Scripts\Office\1\sr-latn-rs\office_strings.debug.js" />
-    <Content Include="Scripts\Office\1\sr-latn-rs\office_strings.js" />
-    <Content Include="Scripts\Office\1\sr-latn-rs\outlook_strings.debug.js" />
-    <Content Include="Scripts\Office\1\sr-latn-rs\outlook_strings.js" />
     <Content Include="Scripts\Office\1\sv-se\office_strings.debug.js" />
     <Content Include="Scripts\Office\1\sv-se\office_strings.js" />
     <Content Include="Scripts\Office\1\sv-se\outlook_strings.debug.js" />
@@ -372,6 +301,35 @@
     <Content Include="Scripts\Office\metadata\endpoints.xml" />
     <Content Include="Scripts\Office\metadata\features.xml" />
     <Content Include="Scripts\Office\MicrosoftAjax.js" />
+    <Content Include="web.config.install.xdt">
+      <Paket>True</Paket>
+    </Content>
+    <Content Include="web.config.uninstall.xdt">
+      <Paket>True</Paket>
+    </Content>
+    <Content Include="Scripts\jquery-2.1.4.min.map" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="AppCompose\App.css" />
+    <Content Include="AppCompose\App.js" />
+    <Content Include="AppCompose\Home\Home.css" />
+    <Content Include="AppCompose\Home\Home.html" />
+    <Content Include="AppCompose\Home\Home.js" />
+    <Content Include="AppRead\App.css" />
+    <Content Include="AppRead\App.js" />
+    <Content Include="AppRead\Home\Home.css" />
+    <Content Include="AppRead\Home\Home.html" />
+    <Content Include="AppRead\Home\Home.js" />
+    <Content Include="Content\Office.css" />
+    <Content Include="Images\Close.png" />
+    <None Include="Scripts\_references.js" />
+    <Content Include="Content\OfficeThemes.css" />
     <Content Include="Scripts\_officeintellisense.js" />
     <Content Include="Web.config" />
   </ItemGroup>
