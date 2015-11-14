@@ -28,4 +28,9 @@ let main() =
         fun _ -> 
             log_info ( "button clicked" )
             hello( "Clicked!" ) :> obj
-    )
+    ) |> ignore
+    jq?``set-subject``.click(
+        fun _ -> 
+            log_info ( "button clicked" )
+            setSubject( "Hello world!" ) :> obj
+    ) |> ignore

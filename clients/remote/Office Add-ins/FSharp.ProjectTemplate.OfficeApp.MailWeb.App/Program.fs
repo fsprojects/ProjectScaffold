@@ -13,7 +13,7 @@ let main argv =
         $(document).ready(function () {
             app.initialize();
 
-            $('#set-subject').click(setSubject);
+            //$('#set-subject').click(setSubject);
             $('#get-subject').click(getSubject);
             $('#add-to-recipients').click(addToRecipients);
         });
