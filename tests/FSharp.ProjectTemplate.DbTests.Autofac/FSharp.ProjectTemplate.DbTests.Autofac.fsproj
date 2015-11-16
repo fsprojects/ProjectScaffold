@@ -5,14 +5,14 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>bf3dac4a-5187-4168-85de-7306178950f8</ProjectGuid>
+    <ProjectGuid>7a1655ba-df1c-4d3c-ac48-f3d603672b33</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>FSharp.ProjectTemplate.DbTests.NMemory</RootNamespace>
-    <AssemblyName>FSharp.ProjectTemplate.DbTests.NMemory</AssemblyName>
+    <RootNamespace>FSharp.ProjectTemplate.DbTests.Autofac</RootNamespace>
+    <AssemblyName>FSharp.ProjectTemplate.DbTests.Autofac</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <TargetFSharpCoreVersion>4.4.0.0</TargetFSharpCoreVersion>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-    <Name>FSharp.ProjectTemplate.DbTests.NMemory</Name>
+    <Name>FSharp.ProjectTemplate.DbTests.Autofac</Name>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -22,7 +22,7 @@
     <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <WarningLevel>3</WarningLevel>
-    <DocumentationFile>bin\Debug\FSharp.ProjectTemplate.DbTests.NMemory.XML</DocumentationFile>
+    <DocumentationFile>bin\Debug\FSharp.ProjectTemplate.DbTests.Autofac.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -31,7 +31,7 @@
     <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <WarningLevel>3</WarningLevel>
-    <DocumentationFile>bin\Release\FSharp.ProjectTemplate.DbTests.NMemory.XML</DocumentationFile>
+    <DocumentationFile>bin\Release\FSharp.ProjectTemplate.DbTests.Autofac.XML</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="mscorlib" />
@@ -44,18 +44,17 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Script.fsx" />
-    <Compile Include="NMemoryTests.fs" />
-    <None Include="paket.references" />
+    <Compile Include="AutofacTests.fs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\db\FSharp.ProjectTemplate.NMemory\FSharp.ProjectTemplate.NMemory.fsproj">
-      <Name>FSharp.ProjectTemplate.NMemory</Name>
-      <Project>{a5e69be1-2032-44a9-b4a5-53b0dc641ba6}</Project>
-      <Private>True</Private>
-    </ProjectReference>
     <ProjectReference Include="..\..\src\FSharp.ProjectTemplate.Fx\FSharp.ProjectTemplate.Fx.fsproj">
       <Name>FSharp.ProjectTemplate.Fx</Name>
       <Project>{20eaba0d-bac0-4e2c-abcd-e0cd459669cf}</Project>
+      <Private>True</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\..\support\Support.Autofac\Support.Autofac.fsproj">
+      <Name>Support.Autofac</Name>
+      <Project>{d4162d47-88b0-4dd4-8ec2-1986648dfcbe}</Project>
       <Private>True</Private>
     </ProjectReference>
   </ItemGroup>
@@ -88,32 +87,6 @@
         <Reference Include="Destructurama.FSharp">
           <HintPath>..\..\packages\Destructurama.FSharp\lib\portable-net45+win+wpa81+wp80+MonoAndroid10+MonoTouch10\Destructurama.FSharp.dll</HintPath>
           <Private>True</Private>
-          <Paket>True</Paket>
-        </Reference>
-      </ItemGroup>
-    </When>
-  </Choose>
-  <Choose>
-    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And ($(TargetFrameworkVersion) == 'v4.0')">
-      <ItemGroup>
-        <Reference Include="NMemory">
-          <HintPath>..\..\packages\NMemory\lib\net40\NMemory.dll</HintPath>
-          <Private>True</Private>
-          <Paket>True</Paket>
-        </Reference>
-        <Reference Include="System.Transactions">
-          <Paket>True</Paket>
-        </Reference>
-      </ItemGroup>
-    </When>
-    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And ($(TargetFrameworkVersion) == 'v4.5' Or $(TargetFrameworkVersion) == 'v4.5.1' Or $(TargetFrameworkVersion) == 'v4.5.2' Or $(TargetFrameworkVersion) == 'v4.5.3' Or $(TargetFrameworkVersion) == 'v4.6')">
-      <ItemGroup>
-        <Reference Include="NMemory">
-          <HintPath>..\..\packages\NMemory\lib\net45\NMemory.dll</HintPath>
-          <Private>True</Private>
-          <Paket>True</Paket>
-        </Reference>
-        <Reference Include="System.Transactions">
           <Paket>True</Paket>
         </Reference>
       </ItemGroup>

@@ -80,6 +80,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "support", "support", "{B306
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Support.Autofac", "support\Support.Autofac\Support.Autofac.fsproj", "{D4162D47-88B0-4DD4-8EC2-1986648DFCBE}"
 EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "FSharp.ProjectTemplate.DbTests.Autofac", "tests\FSharp.ProjectTemplate.DbTests.Autofac\FSharp.ProjectTemplate.DbTests.Autofac.fsproj", "{7A1655BA-DF1C-4D3C-AC48-F3D603672B33}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -376,6 +378,22 @@ Global
 		{D4162D47-88B0-4DD4-8EC2-1986648DFCBE}.Release|x64.Build.0 = Release|Any CPU
 		{D4162D47-88B0-4DD4-8EC2-1986648DFCBE}.Release|x86.ActiveCfg = Release|Any CPU
 		{D4162D47-88B0-4DD4-8EC2-1986648DFCBE}.Release|x86.Build.0 = Release|Any CPU
+		{7A1655BA-DF1C-4D3C-AC48-F3D603672B33}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7A1655BA-DF1C-4D3C-AC48-F3D603672B33}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7A1655BA-DF1C-4D3C-AC48-F3D603672B33}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{7A1655BA-DF1C-4D3C-AC48-F3D603672B33}.Debug|ARM.Build.0 = Debug|Any CPU
+		{7A1655BA-DF1C-4D3C-AC48-F3D603672B33}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{7A1655BA-DF1C-4D3C-AC48-F3D603672B33}.Debug|x64.Build.0 = Debug|Any CPU
+		{7A1655BA-DF1C-4D3C-AC48-F3D603672B33}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{7A1655BA-DF1C-4D3C-AC48-F3D603672B33}.Debug|x86.Build.0 = Debug|Any CPU
+		{7A1655BA-DF1C-4D3C-AC48-F3D603672B33}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7A1655BA-DF1C-4D3C-AC48-F3D603672B33}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7A1655BA-DF1C-4D3C-AC48-F3D603672B33}.Release|ARM.ActiveCfg = Release|Any CPU
+		{7A1655BA-DF1C-4D3C-AC48-F3D603672B33}.Release|ARM.Build.0 = Release|Any CPU
+		{7A1655BA-DF1C-4D3C-AC48-F3D603672B33}.Release|x64.ActiveCfg = Release|Any CPU
+		{7A1655BA-DF1C-4D3C-AC48-F3D603672B33}.Release|x64.Build.0 = Release|Any CPU
+		{7A1655BA-DF1C-4D3C-AC48-F3D603672B33}.Release|x86.ActiveCfg = Release|Any CPU
+		{7A1655BA-DF1C-4D3C-AC48-F3D603672B33}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -400,5 +418,6 @@ Global
 		{2C922A45-BB89-44C9-9F73-0F7CC70998F1} = {8C96511F-A79E-42D6-BD78-7BF74F03D475}
 		{24EE79F4-C147-45EF-846D-06AE32BE6A6C} = {8C96511F-A79E-42D6-BD78-7BF74F03D475}
 		{D4162D47-88B0-4DD4-8EC2-1986648DFCBE} = {B3066490-A9A6-4A16-8F8F-21368A22B454}
+		{7A1655BA-DF1C-4D3C-AC48-F3D603672B33} = {ED8079DD-2B06-4030-9F0F-DC548F98E1C4}
 	EndGlobalSection
 EndGlobal
