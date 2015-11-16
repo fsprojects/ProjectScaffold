@@ -36,3 +36,10 @@ module Library =
     let api (loadLastHello:LoadLastHello, saveLastHello:SaveLastHello) = {
         Hello = hello (loadLastHello, saveLastHello)
     }
+
+/// Interface to be implemented by persistent layer and combined together in the client or server if needed
+///
+///
+type public IHelloPersistency =
+   abstract member Load: Person -> DateTime option
+   abstract member Save :  Person -> unit

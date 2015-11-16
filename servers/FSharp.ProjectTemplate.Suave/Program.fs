@@ -4,7 +4,7 @@ module Program =
 
     open System
 
-    open Suave                 
+    open Suave
     open Suave.Web
     open Suave.Http
     open Suave.Http.Successful
@@ -17,7 +17,7 @@ module Program =
     open Orleankka.Http
     open Orleankka.Playground
 
-    open System.Reflection            
+    open System.Reflection
     open Newtonsoft.Json
 
     open FSharp.ProjectTemplate.Actors
@@ -28,7 +28,6 @@ module Program =
     open JsonSerializer
 
     open FSharp.ProjectTemplate.Domain
-    open FSharp.ProjectTemplate.SqlClient
 
     type GreeterSQL() = 
         inherit Greeter()
@@ -66,7 +65,7 @@ module Program =
 
 
       let hasContentType (ctx:HttpContext) = async {
-        match ctx.request.header "content-type" with         
+        match ctx.request.header "content-type" with
         | Choice1Of2 v when v = ContentType.Orleankka -> 
                return Some ctx
         | _ -> return None

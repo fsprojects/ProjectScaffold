@@ -17,7 +17,7 @@ module NMemory =
 
     [<Test>]
     let ``simple NMemory database crud is working`` () =
-      let db = Impl.MyDatabase()
+      let db = Impl.Database()
       db.Persons.Insert( {Id=int64 1;FirstName="John";LastName="Rambo";LastSeen=DateTime.Now} )
       Assert.AreEqual( 1, db.Persons.Count )
 
