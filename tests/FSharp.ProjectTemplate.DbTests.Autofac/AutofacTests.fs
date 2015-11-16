@@ -15,6 +15,12 @@ module Tests =
         .CreateLogger()
     Log.Information( "Tests started" )
 
+
+    [<Test>]
+    let HokusPokus () =
+        let a = FSharp.ProjectTemplate.NMemory.Impl.Database()
+        Assert.IsNotNull(a)
+
     [<Test>]
     let ``simple database crud is working`` () =
       let db = DI.Load<IHelloPersistency> ()

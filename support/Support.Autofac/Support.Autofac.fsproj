@@ -43,7 +43,7 @@
     <Reference Include="System.Numerics" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Library1.fs" />
+    <Compile Include="Load.fs" />
     <None Include="Script.fsx" />
   </ItemGroup>
   <ItemGroup>
