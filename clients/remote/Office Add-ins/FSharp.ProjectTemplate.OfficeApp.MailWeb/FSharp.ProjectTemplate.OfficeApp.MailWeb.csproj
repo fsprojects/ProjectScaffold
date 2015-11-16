@@ -68,8 +68,17 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Scripts\jquery-2.1.4-vsdoc.js" />
+    <Content Include="Scripts\jquery-2.1.4-vsdoc.js">
+      <Paket>True</Paket>
+    </Content>
     <Content Include="Scripts\jquery-2.1.4.js" />
     <Content Include="Scripts\jquery-2.1.4.min.js" />
+    <Content Include="Scripts\Office\1\office-vsdoc.js">
+      <Paket>True</Paket>
+    </Content>
+    <Content Include="Scripts\Office\1\outlook-win32.debug-vsdoc.js">
+      <Paket>True</Paket>
+    </Content>
     <Content Include="Scripts\Office\1\access-web-16.00.debug.js" />
     <Content Include="Scripts\Office\1\access-web-16.00.js" />
     <Content Include="Scripts\Office\1\ar-sa\office_strings.debug.js" />

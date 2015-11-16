@@ -76,6 +76,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FSharp.ProjectTemplate.Offi
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "FSharp.ProjectTemplate.OfficeApp.MailWeb.App", "clients\remote\Office Add-ins\FSharp.ProjectTemplate.OfficeApp.MailWeb.App\FSharp.ProjectTemplate.OfficeApp.MailWeb.App.fsproj", "{24EE79F4-C147-45EF-846D-06AE32BE6A6C}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "support", "support", "{B3066490-A9A6-4A16-8F8F-21368A22B454}"
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Support.Autofac", "support\Support.Autofac\Support.Autofac.fsproj", "{D4162D47-88B0-4DD4-8EC2-1986648DFCBE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -356,6 +360,22 @@ Global
 		{24EE79F4-C147-45EF-846D-06AE32BE6A6C}.Release|x64.Build.0 = Release|Any CPU
 		{24EE79F4-C147-45EF-846D-06AE32BE6A6C}.Release|x86.ActiveCfg = Release|Any CPU
 		{24EE79F4-C147-45EF-846D-06AE32BE6A6C}.Release|x86.Build.0 = Release|Any CPU
+		{D4162D47-88B0-4DD4-8EC2-1986648DFCBE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D4162D47-88B0-4DD4-8EC2-1986648DFCBE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D4162D47-88B0-4DD4-8EC2-1986648DFCBE}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{D4162D47-88B0-4DD4-8EC2-1986648DFCBE}.Debug|ARM.Build.0 = Debug|Any CPU
+		{D4162D47-88B0-4DD4-8EC2-1986648DFCBE}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{D4162D47-88B0-4DD4-8EC2-1986648DFCBE}.Debug|x64.Build.0 = Debug|Any CPU
+		{D4162D47-88B0-4DD4-8EC2-1986648DFCBE}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{D4162D47-88B0-4DD4-8EC2-1986648DFCBE}.Debug|x86.Build.0 = Debug|Any CPU
+		{D4162D47-88B0-4DD4-8EC2-1986648DFCBE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D4162D47-88B0-4DD4-8EC2-1986648DFCBE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D4162D47-88B0-4DD4-8EC2-1986648DFCBE}.Release|ARM.ActiveCfg = Release|Any CPU
+		{D4162D47-88B0-4DD4-8EC2-1986648DFCBE}.Release|ARM.Build.0 = Release|Any CPU
+		{D4162D47-88B0-4DD4-8EC2-1986648DFCBE}.Release|x64.ActiveCfg = Release|Any CPU
+		{D4162D47-88B0-4DD4-8EC2-1986648DFCBE}.Release|x64.Build.0 = Release|Any CPU
+		{D4162D47-88B0-4DD4-8EC2-1986648DFCBE}.Release|x86.ActiveCfg = Release|Any CPU
+		{D4162D47-88B0-4DD4-8EC2-1986648DFCBE}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -379,5 +399,6 @@ Global
 		{EA76B479-5901-4F8A-AD28-C1F7A7604B6B} = {8C96511F-A79E-42D6-BD78-7BF74F03D475}
 		{2C922A45-BB89-44C9-9F73-0F7CC70998F1} = {8C96511F-A79E-42D6-BD78-7BF74F03D475}
 		{24EE79F4-C147-45EF-846D-06AE32BE6A6C} = {8C96511F-A79E-42D6-BD78-7BF74F03D475}
+		{D4162D47-88B0-4DD4-8EC2-1986648DFCBE} = {B3066490-A9A6-4A16-8F8F-21368A22B454}
 	EndGlobalSection
 EndGlobal
