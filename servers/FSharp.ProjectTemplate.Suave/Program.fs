@@ -29,13 +29,17 @@ module Program =
 
     open FSharp.ProjectTemplate.Domain
 
+    open Support
+
+    let db = DI.Load<FSharp.ProjectTemplate.IHelloPersistency> ()
+
     type GreeterSQL() = 
         inherit Greeter()
 
         override x.SaveLastHello (p : Person) = 
-            Impl.SavePersonLastSeen (p)
+            db.Save(p)
         override x.LoadLastHello (p : Person) = 
-            Impl.LoadPersonLastSeen (p) |> Async.RunSynchronously
+            db.Load(p)
 
     [<EntryPoint>]
     let main argv = 

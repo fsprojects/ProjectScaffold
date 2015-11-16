@@ -59,6 +59,11 @@
       <Project>{20eaba0d-bac0-4e2c-abcd-e0cd459669cf}</Project>
       <Private>True</Private>
     </ProjectReference>
+    <ProjectReference Include="..\..\support\Support.Autofac\Support.Autofac.fsproj">
+      <Name>Support.Autofac</Name>
+      <Project>{d4162d47-88b0-4dd4-8ec2-1986648dfcbe}</Project>
+      <Private>True</Private>
+    </ProjectReference>
     <ProjectReference Include="..\FSharp.ProjectTemplate.Actors\FSharp.ProjectTemplate.Actors.fsproj">
       <Name>FSharp.ProjectTemplate.Actors</Name>
       <Project>{d55032aa-aed3-4dc6-b905-f7a51b979c04}</Project>
