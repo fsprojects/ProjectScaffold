@@ -37,49 +37,6 @@
     <DocumentationFile>bin\Release\FSharp.ProjectTemplate.Suave.XML</DocumentationFile>
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
-  <ItemGroup>
-    <Reference Include="mscorlib" />
-    <Reference Include="FSharp.Core, Version=$(TargetFSharpCoreVersion), Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Numerics" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="AssemblyInfo.fs" />
-    <Compile Include="RestFul.fs" />
-    <Compile Include="Infrastructure.fs" />
-    <Compile Include="Program.fs" />
-    <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\db\FSharp.ProjectTemplate.NMemory\FSharp.ProjectTemplate.NMemory.fsproj">
-      <Name>FSharp.ProjectTemplate.NMemory</Name>
-      <Project>{a5e69be1-2032-44a9-b4a5-53b0dc641ba6}</Project>
-      <Private>True</Private>
-    </ProjectReference>
-    <ProjectReference Include="..\..\db\FSharp.ProjectTemplate.SqlClient\FSharp.ProjectTemplate.SqlClient.fsproj">
-      <Name>FSharp.ProjectTemplate.SqlClient</Name>
-      <Project>{9d897b5e-5697-4e79-8f7d-df174cb0e4d9}</Project>
-      <Private>True</Private>
-    </ProjectReference>
-    <ProjectReference Include="..\..\src\FSharp.ProjectTemplate.Fx\FSharp.ProjectTemplate.Fx.fsproj">
-      <Name>FSharp.ProjectTemplate.Fx</Name>
-      <Project>{20eaba0d-bac0-4e2c-abcd-e0cd459669cf}</Project>
-      <Private>True</Private>
-    </ProjectReference>
-    <ProjectReference Include="..\..\support\Support.Autofac\Support.Autofac.fsproj">
-      <Name>Support.Autofac</Name>
-      <Project>{d4162d47-88b0-4dd4-8ec2-1986648dfcbe}</Project>
-      <Private>True</Private>
-    </ProjectReference>
-    <ProjectReference Include="..\FSharp.ProjectTemplate.Actors\FSharp.ProjectTemplate.Actors.fsproj">
-      <Name>FSharp.ProjectTemplate.Actors</Name>
-      <Project>{d55032aa-aed3-4dc6-b905-f7a51b979c04}</Project>
-      <Private>True</Private>
-    </ProjectReference>
-  </ItemGroup>
   <PropertyGroup>
     <MinimumVisualStudioVersion Condition="'$(MinimumVisualStudioVersion)' == ''">11</MinimumVisualStudioVersion>
   </PropertyGroup>
@@ -245,4 +202,48 @@
       </ItemGroup>
     </When>
   </Choose>
+  <ItemGroup>
+    <Compile Include="AssemblyInfo.fs" />
+    <Compile Include="RestFul.fs" />
+    <Compile Include="Infrastructure.fs" />
+    <Compile Include="Program.fs" />
+    <None Include="App.config" />
+    <None Include="autofac.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="mscorlib" />
+    <Reference Include="FSharp.Core, Version=$(TargetFSharpCoreVersion), Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Numerics" />
+    <ProjectReference Include="..\..\db\FSharp.ProjectTemplate.NMemory\FSharp.ProjectTemplate.NMemory.fsproj">
+      <Name>FSharp.ProjectTemplate.NMemory</Name>
+      <Project>{a5e69be1-2032-44a9-b4a5-53b0dc641ba6}</Project>
+      <Private>True</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\..\db\FSharp.ProjectTemplate.SqlClient\FSharp.ProjectTemplate.SqlClient.fsproj">
+      <Name>FSharp.ProjectTemplate.SqlClient</Name>
+      <Project>{9d897b5e-5697-4e79-8f7d-df174cb0e4d9}</Project>
+      <Private>True</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\FSharp.ProjectTemplate.Fx\FSharp.ProjectTemplate.Fx.fsproj">
+      <Name>FSharp.ProjectTemplate.Fx</Name>
+      <Project>{20eaba0d-bac0-4e2c-abcd-e0cd459669cf}</Project>
+      <Private>True</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\..\support\Support.Autofac\Support.Autofac.fsproj">
+      <Name>Support.Autofac</Name>
+      <Project>{d4162d47-88b0-4dd4-8ec2-1986648dfcbe}</Project>
+      <Private>True</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\FSharp.ProjectTemplate.Actors\FSharp.ProjectTemplate.Actors.fsproj">
+      <Name>FSharp.ProjectTemplate.Actors</Name>
+      <Project>{d55032aa-aed3-4dc6-b905-f7a51b979c04}</Project>
+      <Private>True</Private>
+    </ProjectReference>
+  </ItemGroup>
 </Project>

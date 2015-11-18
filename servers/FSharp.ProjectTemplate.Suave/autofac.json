@@ -1,0 +1,13 @@
+﻿{
+  "defaultAssembly": "FSharp.ProjectTemplate.NMemory",
+    "components": [
+        {
+            "type": "FSharp.ProjectTemplate.NMemory.Impl+Database",
+            "services": [
+                {
+                    "type": "FSharp.ProjectTemplate.IHelloPersistency, FSharp.ProjectTemplate.Fx"
+                }
+            ]
+        }
+    ]
+}
