@@ -5,7 +5,7 @@
             "type": "FSharp.ProjectTemplate.NMemory.Impl+Database",
             "services": [
                 {
-                    "type": "FSharp.ProjectTemplate.IHelloPersistency"
+                    "type": "FSharp.ProjectTemplate.IHelloPersistency, FSharp.ProjectTemplate.Fx"
                 }
             ]
         }
