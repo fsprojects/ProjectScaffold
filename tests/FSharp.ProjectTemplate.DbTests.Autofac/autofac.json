@@ -2,7 +2,7 @@
   "defaultAssembly": "FSharp.ProjectTemplate.NMemory",
     "components": [
         {
-            "type": "FSharp.ProjectTemplate.NMemory.Impl.Database",
+            "type": "FSharp.ProjectTemplate.NMemory.Impl+Database",
             "services": [
                 {
                     "type": "FSharp.ProjectTemplate.IHelloPersistency"

@@ -1,20 +1,26 @@
 ﻿namespace FSharp.ProjectTemplate.DbTests
 
+open NUnit.Framework
+open Serilog
+
+[<SetUpFixture>]
+type SetupTest() =
+    [<SetUp>]
+    let ``start logging`` =
+        Log.Logger <- LoggerConfiguration()
+            .Destructure.FSharpTypes()
+            .MinimumLevel.Debug() //uncomment to see the full debug in the console
+            .WriteTo.ColoredConsole()
+            .CreateLogger()
+        Log.Information( "Tests started" )
+
 module SqlClient =
 
     open FSharp.ProjectTemplate
-    open NUnit.Framework
     open FSharp.ProjectTemplate.Domain
-    open Serilog
     open FSharp.ProjectTemplate.SqlClient
     open System
     open FSharp.Data
-
-    Log.Logger <- LoggerConfiguration()
-        .Destructure.FSharpTypes()
-        .WriteTo.Console()
-        .CreateLogger()
-    Log.Information( "Tests started" )
 
     type private EnsureDatabaseExistsCommand = SqlCommandProvider<"IF db_id('ProjectTemplate.Tests') IS NULL CREATE DATABASE [ProjectTemplate.Tests]", FSharp.ProjectTemplate.SqlClient.Impl.ConnectionString>
 

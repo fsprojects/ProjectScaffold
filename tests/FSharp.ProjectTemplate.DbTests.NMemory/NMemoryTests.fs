@@ -1,19 +1,25 @@
 ﻿namespace FSharp.ProjectTemplate.DbTests
 
+open NUnit.Framework
+open Serilog
+
+[<SetUpFixture>]
+type SetupTest() =
+    [<SetUp>]
+    let ``start logging`` =
+        Log.Logger <- LoggerConfiguration()
+            .Destructure.FSharpTypes()
+            .MinimumLevel.Debug() //uncomment to see the full debug in the console
+            .WriteTo.ColoredConsole()
+            .CreateLogger()
+        Log.Information( "Tests started" )
+
 module NMemory =
 
     open FSharp.ProjectTemplate
-    open NUnit.Framework
     open FSharp.ProjectTemplate.Domain
-    open Serilog
     open FSharp.ProjectTemplate.NMemory
     open System
-
-    Log.Logger <- LoggerConfiguration()
-        .Destructure.FSharpTypes()
-        .WriteTo.Console()
-        .CreateLogger()
-    Log.Information( "Tests started" )
 
     [<Test>]
     let ``simple NMemory database crud is working`` () =

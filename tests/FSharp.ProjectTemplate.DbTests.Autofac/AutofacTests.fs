@@ -1,20 +1,25 @@
 ﻿namespace FSharp.ProjectTemplate.DbTests.Autofac
 
+open NUnit.Framework
+open Serilog
+
+[<SetUpFixture>]
+type SetupTest() =
+    [<SetUp>]
+    let ``start logging`` =
+        Log.Logger <- LoggerConfiguration()
+            .Destructure.FSharpTypes()
+            .MinimumLevel.Debug() //uncomment to see the full debug in the console
+            .WriteTo.ColoredConsole()
+            .CreateLogger()
+        Log.Information( "Tests started" )
+
 module Tests =
 
     open FSharp.ProjectTemplate
-    open NUnit.Framework
     open FSharp.ProjectTemplate.Domain
-    open Serilog
     open System
     open Support
-
-    Log.Logger <- LoggerConfiguration()
-        .Destructure.FSharpTypes()
-        .WriteTo.Console()
-        .CreateLogger()
-    Log.Information( "Tests started" )
-
 
     [<Test>]
     let HokusPokus () =
@@ -23,8 +28,9 @@ module Tests =
 
     [<Test>]
     let ``simple database crud is working`` () =
-      //let db = DI.Load<IHelloPersistency> ()
-      let db = DI.Register<FSharp.ProjectTemplate.NMemory.Impl.Database, IHelloPersistency> ()
+      Log.Information( "Test entered" )
+      let db = DI.Load<IHelloPersistency> ()
+      //let db = DI.Register<FSharp.ProjectTemplate.NMemory.Impl.Database, IHelloPersistency> ()
       let p = {FirstName="John";LastName="Rambo"}
       db.Save( p )
       let lastSeen = db.Load( p )
