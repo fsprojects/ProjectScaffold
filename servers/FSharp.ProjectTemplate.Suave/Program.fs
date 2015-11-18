@@ -31,7 +31,8 @@ module Program =
 
     open Support
 
-    let db = DI.Load<FSharp.ProjectTemplate.IHelloPersistency> ()
+    //let db = //DI.Load<FSharp.ProjectTemplate.IHelloPersistency> ()
+    let db = DI.Register<FSharp.ProjectTemplate.NMemory.Impl.Database, FSharp.ProjectTemplate.IHelloPersistency> ()
 
     type GreeterSQL() = 
         inherit Greeter()

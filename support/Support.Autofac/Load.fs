@@ -12,8 +12,14 @@ module DI =
         config.AddJsonFile("autofac.json") |> ignore
 
         // Register the ConfigurationModule with Autofac.
-        let module1 = new ConfigurationModule(config.Build());
-        let builder = new ContainerBuilder();
+        let module1 = new ConfigurationModule(config.Build())
+        let builder = new ContainerBuilder()
         builder.RegisterModule(module1) |> ignore
         let container = builder.Build()
         container.Resolve<'T>()
+
+    let Register<'T, 'U> () = 
+        let builder = new ContainerBuilder()
+        builder.RegisterType<'T>().As<'U>() |> ignore
+        let container = builder.Build()
+        container.Resolve<'U>()

@@ -23,7 +23,8 @@ module Tests =
 
     [<Test>]
     let ``simple database crud is working`` () =
-      let db = DI.Load<IHelloPersistency> ()
+      //let db = DI.Load<IHelloPersistency> ()
+      let db = DI.Register<FSharp.ProjectTemplate.NMemory.Impl.Database, IHelloPersistency> ()
       let p = {FirstName="John";LastName="Rambo"}
       db.Save( p )
       let lastSeen = db.Load( p )
