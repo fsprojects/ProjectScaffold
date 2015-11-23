@@ -20,8 +20,8 @@ nuget Microsoft.Orleans.Templates.Interfaces
 nuget ModernUI.WPF
 nuget Newtonsoft.Json
 nuget NMemory
-nuget NUnit 
-nuget NUnit.Runners
+nuget NUnit ~> 2
+nuget NUnit.Runners ~> 2
 nuget FAKE
 nuget Orleankka.Fsharp
 nuget SourceLink.Fake
