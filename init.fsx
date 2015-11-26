@@ -135,8 +135,12 @@ dirsWithProjects
     |> Array.iter (
          fun d -> 
             if d.FullName <> (d.FullName.Replace(projectTemplateName, projectName)) then
-                printfn "moving %s to %s" d.FullName (d.FullName.Replace(projectTemplateName, projectName))
-                d.MoveTo(d.FullName.Replace(projectTemplateName, projectName))
+                printf "moving %s to %s" d.FullName (d.FullName.Replace(projectTemplateName, projectName))
+                try 
+                    d.MoveTo(d.FullName.Replace(projectTemplateName, projectName))
+                    printfn " done."
+                with
+                | ex -> printfn " failed [%A]" ex
        )
     )
 
