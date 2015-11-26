@@ -119,17 +119,19 @@ let projectName =
 let solutionFile = localFile (projectName + ".sln")
 move templateSolutionFile solutionFile
 
+let inline allSubDirectories (dir : DirectoryInfo) = dir.GetDirectories("*", SearchOption.AllDirectories)
+
 //Rename project files and directories
 dirsWithProjects
 |> List.iter (fun pd ->
     // project files
     pd
-    |> subDirectories
+    |> allSubDirectories
     |> Array.collect (fun d -> filesInDirMatching "*.?sproj" d)
     |> Array.iter (fun f -> f.MoveTo(f.Directory.FullName @@ (f.Name.Replace(projectTemplateName, projectName))))
     // project directories
     pd
-    |> subDirectories
+    |> allSubDirectories
     |> Array.iter (
          fun d -> 
             printfn "moving %s to %s" d.FullName (pd.FullName @@ (d.Name.Replace(projectTemplateName, projectName)))
