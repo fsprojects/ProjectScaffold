@@ -134,9 +134,9 @@ dirsWithProjects
     |> allSubDirectories
     |> Array.iter (
          fun d -> 
-            if d.FullName <> (pd.FullName @@ (d.Name.Replace(projectTemplateName, projectName))) then
-                printfn "moving %s to %s" d.FullName (pd.FullName @@ (d.Name.Replace(projectTemplateName, projectName)))
-                d.MoveTo(pd.FullName @@ (d.Name.Replace(projectTemplateName, projectName)))
+            if d.FullName <> (d.FullName.Replace(projectTemplateName, projectName)) then
+                printfn "moving %s to %s" d.FullName (d.FullName.Replace(projectTemplateName, projectName))
+                d.MoveTo(d.FullName.Replace(projectTemplateName, projectName))
        )
     )
 

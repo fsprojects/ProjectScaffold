@@ -1,5 +1,6 @@
 ﻿namespace FSharp.ProjectTemplate.EventStore
 
+(* 
 module internal Utilities = 
 
     let withConnection factory f =
@@ -14,3 +15,4 @@ module internal Utilities =
         conn |> Conn.connect |> Async.RunSynchronously
         try f conn
         finally conn |> Conn.close
+*)
