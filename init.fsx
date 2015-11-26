@@ -10,7 +10,7 @@ open System.Collections.Generic
 // It generates the build.fsx and generate.fsx files
 // --------------------------------
 
-let dirsWithProjects = ["src";"tests";"docs/content";"clients";"servers"]
+let dirsWithProjects = ["src";"tests";"docs/content";"clients";"servers";"db"]
                        |> List.map (fun d -> directoryInfo (__SOURCE_DIRECTORY__ @@ d))
 
 // special funtions
@@ -134,8 +134,9 @@ dirsWithProjects
     |> allSubDirectories
     |> Array.iter (
          fun d -> 
-            printfn "moving %s to %s" d.FullName (pd.FullName @@ (d.Name.Replace(projectTemplateName, projectName)))
-            d.MoveTo(pd.FullName @@ (d.Name.Replace(projectTemplateName, projectName)))
+            if d.FullName <> (pd.FullName @@ (d.Name.Replace(projectTemplateName, projectName))) then
+                printfn "moving %s to %s" d.FullName (pd.FullName @@ (d.Name.Replace(projectTemplateName, projectName)))
+                d.MoveTo(pd.FullName @@ (d.Name.Replace(projectTemplateName, projectName)))
        )
     )
 
