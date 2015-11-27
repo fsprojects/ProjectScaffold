@@ -56,6 +56,9 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <Target Name="AfterBuild">
+    <Exec Command="copy /y &quot;$(ProjectDir)App.config&quot; &quot;$(TargetDir)\$(TargetName).dll.config&quot;" />
+  </Target>
   <ItemGroup>
     <Compile Include="SqlClientTests.fs" />
     <None Include="Script.fsx" />
