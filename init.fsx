@@ -10,7 +10,7 @@ open System.Collections.Generic
 // It generates the build.fsx and generate.fsx files
 // --------------------------------
 
-let dirsWithProjects = ["src";"tests";"docs/content"]
+let dirsWithProjects = ["src";"tests";"docs/content";"clients";"servers";"db"]
                        |> List.map (fun d -> directoryInfo (__SOURCE_DIRECTORY__ @@ d))
 
 // special funtions
@@ -102,7 +102,7 @@ let givenOrigin = if wantGit
 //Basic settings
 let solutionTemplateName = "FSharp.ProjectScaffold"
 let projectTemplateName = "FSharp.ProjectTemplate"
-let oldProjectGuid = "7E90D6CE-A10B-4858-A5BC-41DF7250CBCA"
+let oldProjectGuid = "19ab1706-c1b7-43b6-8e04-cc6d37735d62"
 let projectGuid = Guid.NewGuid().ToString()
 let oldTestProjectGuid = "E789C72A-5CFD-436B-8EF1-61AA2852A89F"
 let testProjectGuid = Guid.NewGuid().ToString()
@@ -119,18 +119,29 @@ let projectName =
 let solutionFile = localFile (projectName + ".sln")
 move templateSolutionFile solutionFile
 
+let inline allSubDirectories (dir : DirectoryInfo) = dir.GetDirectories("*", SearchOption.AllDirectories)
+
 //Rename project files and directories
 dirsWithProjects
 |> List.iter (fun pd ->
     // project files
     pd
-    |> subDirectories
+    |> allSubDirectories
     |> Array.collect (fun d -> filesInDirMatching "*.?sproj" d)
     |> Array.iter (fun f -> f.MoveTo(f.Directory.FullName @@ (f.Name.Replace(projectTemplateName, projectName))))
     // project directories
     pd
-    |> subDirectories
-    |> Array.iter (fun d -> d.MoveTo(pd.FullName @@ (d.Name.Replace(projectTemplateName, projectName))))
+    |> allSubDirectories
+    |> Array.iter (
+         fun d -> 
+            if d.FullName <> (d.FullName.Replace(projectTemplateName, projectName)) then
+                printf "moving %s to %s" d.FullName (d.FullName.Replace(projectTemplateName, projectName))
+                try 
+                    d.MoveTo(d.FullName.Replace(projectTemplateName, projectName))
+                    printfn " done."
+                with
+                | ex -> printfn " failed [%A]" ex
+       )
     )
 
 //Now that everything is renamed, we need to update the content of some files

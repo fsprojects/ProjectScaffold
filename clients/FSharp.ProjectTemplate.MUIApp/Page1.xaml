@@ -1,0 +1,17 @@
+﻿<UserControl
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:FSharp.ProjectTemplate.MUIApp.Views;assembly=FSharp.ProjectTemplate.MUIApp" 
+        MinHeight="120" Width="300" Height="Auto">
+    <Grid Style="{StaticResource ContentRoot}">
+        <TextBlock Text="Enter Your Name:" FontSize="16" Grid.Row="0" />
+        <local:MainView Grid.Row="1" />
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+    </Grid>
+</UserControl>
+    
+    

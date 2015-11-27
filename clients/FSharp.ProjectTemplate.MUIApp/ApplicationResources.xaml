@@ -1,0 +1,43 @@
+﻿<ResourceDictionary
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:fsxaml="http://github.com/fsprojects/FsXaml">
+    <fsxaml:ValidationErrorsToStringConverter x:Key="validationConverter"/>
+    <Style TargetType="{x:Type TextBox}" x:Key="customTextBoxStyle">
+        <Style.Resources>
+            <Style x:Key="{x:Type ToolTip}" TargetType="{x:Type ToolTip}">
+                <Setter Property="Foreground" Value="White"/>
+                <Setter Property="Background" Value="Red"/>
+            </Style>
+        </Style.Resources>
+        <Style.Triggers>
+            <Trigger Property="Validation.HasError" Value="true">
+                <Setter Property="ToolTipService.ToolTip">
+                    <Setter.Value>
+                        <MultiBinding Converter="{StaticResource validationConverter}">
+                            <Binding RelativeSource="{x:Static RelativeSource.Self}" Path="(Validation.Errors)" />
+                            <Binding RelativeSource="{x:Static RelativeSource.Self}" Path="(Validation.Errors).Count" />
+                        </MultiBinding>
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+        </Style.Triggers>
+        <Setter Property="Validation.ErrorTemplate">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Grid>
+                        <AdornedElementPlaceholder Name="customAdorner" VerticalAlignment="Center" >
+                            <Border BorderBrush="red" BorderThickness="1" />
+                        </AdornedElementPlaceholder>
+                        <Border IsHitTestVisible="false" Background="Red" HorizontalAlignment="Right"  Margin="5,0" Width="14" Height="14" CornerRadius="7">
+                            <TextBlock Text="!" VerticalAlignment="center" HorizontalAlignment="Center" FontWeight="Bold" Foreground="white"/>
+                        </Border>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource customTextBoxStyle}">
+    </Style>
+</ResourceDictionary>
+

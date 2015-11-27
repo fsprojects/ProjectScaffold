@@ -1,9 +1,32 @@
 source https://nuget.org/api/v2
 
+nuget Autofac.Configuration 4.0.0-beta8-262
+nuget Destructurama.FSharp
+nuget EventStore.Client.FSharp
+nuget Expression.Blend.Sdk
+nuget FSharp.Data.SqlClient
 nuget FSharp.Formatting
+nuget FSharp.ViewModule.Core
+nuget FsXaml.Wpf
+nuget FunScript
+nuget FunScript.TypeScript.Binding.jquery
+nuget FunScript.TypeScript.Binding.lib
+nuget jQuery
+nuget Microsoft.CodeDom.Providers.DotNetCompilerPlatform
+nuget Microsoft.Framework.Configuration.Json
+nuget Microsoft.Net.Compilers
+nuget Microsoft.Office.js
+nuget Microsoft.Orleans.Templates.Grains
+nuget Microsoft.Orleans.Templates.Interfaces
+nuget ModernUI.WPF
+nuget Newtonsoft.Json
+nuget NMemory
 nuget NUnit ~> 2
 nuget NUnit.Runners ~> 2
 nuget FAKE
+nuget Orleankka.Fsharp
 nuget SourceLink.Fake
+nuget Suave
+nuget System.Management.Automation
 
 github fsharp/FAKE modules/Octokit/Octokit.fsx

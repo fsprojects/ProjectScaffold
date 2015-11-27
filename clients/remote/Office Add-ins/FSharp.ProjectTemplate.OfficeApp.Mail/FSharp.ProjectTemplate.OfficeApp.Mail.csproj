@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{EA76B479-5901-4F8A-AD28-C1F7A7604B6B}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>FSharp.ProjectTemplate.OfficeApp.Mail</RootNamespace>
+    <AssemblyName>FSharp.ProjectTemplate.OfficeApp.Mail</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetOfficeVersion>15.0</TargetOfficeVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{C1CDDADD-2546-481F-9697-4EA41081F2FC};{14822709-B5A1-4724-98CA-57A101D1B079};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <IncludeAssemblyInPackage>False</IncludeAssemblyInPackage>
+    <AppFeaturePartId>{8581f959-7d8b-4f9a-8bb3-21f886a945c8}</AppFeaturePartId>
+    <WspPartId>{808bde3f-739c-4645-b2f1-d061e344ba55}</WspPartId>
+    <WorkflowPartId>{08030337-22ce-4bc2-b3af-c2ceb461d2ac}</WorkflowPartId>
+    <CspkgPartId>{29a489ae-39c7-4eb6-ae64-bcba7caf0c8b}</CspkgPartId>
+    <SqlPackagePartId>{94a2e5dc-d4db-4a4b-a194-1c3efa7f58eb}</SqlPackagePartId>
+    <ProjectMode>MailApp</ProjectMode>
+    <MinimumVisualStudioVersion>12.0</MinimumVisualStudioVersion>
+    <MinimumOfficeToolsVersion>12.2</MinimumOfficeToolsVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Include="FSharp.ProjectTemplate.OfficeApp.MailManifest\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{1cdf3228-e21d-45d4-9ce7-5dd8c65e7e2f}</SharePointProjectItemId>
+    </None>
+    <Content Include="FSharp.ProjectTemplate.OfficeApp.MailManifest\FSharp.ProjectTemplate.OfficeApp.Mail.xml">
+      <OpcRelationship>manifest-oemanifest</OpcRelationship>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FSharp.ProjectTemplate.OfficeApp.MailWeb\FSharp.ProjectTemplate.OfficeApp.MailWeb.csproj">
+      <Project>{2C922A45-BB89-44C9-9F73-0F7CC70998F1}</Project>
+      <Name>FSharp.ProjectTemplate.OfficeApp.MailWeb</Name>
+      <Private>True</Private>
+      <RoleType>Web</RoleType>
+      <OutputItemType>SharePointWebProjectOutput</OutputItemType>
+      <RoleName>FSharp.ProjectTemplate.OfficeApp.MailWeb</RoleName>
+      <ReferenceOutputAssembly>False</ReferenceOutputAssembly>
+    </ProjectReference>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(VSToolsPath)\SharePointTools\Microsoft.VisualStudio.SharePoint.targets" Condition="Exists('$(VSToolsPath)\SharePointTools\Microsoft.VisualStudio.SharePoint.targets')" />
+  <Target Name="Rebuild" Condition="!Exists('$(VSToolsPath)\SharePointTools\Microsoft.VisualStudio.SharePoint.targets')"  />
+</Project>
