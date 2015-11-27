@@ -1,5 +1,7 @@
 init:
   - git config --global core.autocrlf input
+  - ps: iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
+
 os: Visual Studio 2015
 build_script:
   - cmd: build.cmd
@@ -8,3 +10,6 @@ version: 0.0.1.{build}
 artifacts:
   - path: bin
     name: bin
+
+on_finish:
+- ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
