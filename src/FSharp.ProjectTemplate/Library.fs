@@ -26,12 +26,16 @@ module Library =
     /// ## Parameters
     ///  - `person` - someone you would like to say hello to
     let hello (loadLastHello:LoadLastHello, saveLastHello:SaveLastHello) (person : Person) = 
-        let result = sprintf "Hello %s %s, I saw you for the last time on %O" person.FirstName person.LastName (loadLastHello(person))
+        let lastHello = loadLastHello(person)
+        let result = 
+            match lastHello with
+            | Some lastHelloTime -> sprintf "Hello %s %s, I saw you for the last time on %O" person.FirstName person.LastName lastHelloTime
+            | None -> sprintf "Hello %s %s" person.FirstName person.LastName
         saveLastHello (person)
         result
 
     let SaveFake (p : Person) = 0 |> ignore
-    let LoadFake (p : Person) = Some(DateTime.Now)
+    let LoadFake (p : Person) = None
 
     let api (loadLastHello:LoadLastHello, saveLastHello:SaveLastHello) = {
         Hello = hello (loadLastHello, saveLastHello)
