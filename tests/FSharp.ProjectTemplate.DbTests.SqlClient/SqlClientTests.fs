@@ -22,17 +22,10 @@ module SqlClient =
     open System
     open FSharp.Data
 
-    type private EnsureDatabaseExistsCommand = SqlCommandProvider<"IF db_id('ProjectTemplate.Tests') IS NULL CREATE DATABASE [ProjectTemplate.Tests]", FSharp.ProjectTemplate.SqlClient.Impl.ConnectionString>
-
-    [<Test>]
-    let ``Ensure database exists`` () = 
-      (new EnsureDatabaseExistsCommand()).Execute() |> ignore
-      Impl.createSchema ()
-
     [<Test>]
     let ``simple SqlClient database crud is working`` () =
       let p = {FirstName="John";LastName="Rambo"}
       Impl.SavePersonLastSeen( p )
       let lastSeen = Impl.LoadPersonLastSeen( p ) |> Async.RunSynchronously
-      Assert.LessOrEqual( DateTime.Now - lastSeen.Value, TimeSpan.FromSeconds(float 1) )
+      Assert.LessOrEqual( DateTime.Now - lastSeen.Value, TimeSpan.FromSeconds(float 10) )
       
