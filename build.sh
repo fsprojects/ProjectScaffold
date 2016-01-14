@@ -33,5 +33,5 @@ run .paket/paket.exe restore
 
 [ ! -e build.fsx ] && run .paket/paket.exe update
 [ ! -e build.fsx ] && run packages/FAKE/tools/FAKE.exe init.fsx
-run packages/FAKE/tools/FAKE.exe "$@" $FSIARGS build.fsx
+run packages/build/FAKE/tools/FAKE.exe "$@" $FSIARGS build.fsx
 
