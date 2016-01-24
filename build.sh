@@ -28,9 +28,19 @@ function run() {
 run $PAKET_BOOTSTRAPPER_EXE
 
 if [[ "$OS" != "Windows_NT" ]] &&
-       [ ! -e ~/.config/.mono/certs ]
+       [ $(certmgr -list -c Trust | grep X.509 | wc -l) -le 1 ]
 then
-  mozroots --import --sync --quiet
+  echo "Your Mono installation has no trusted SSL root certificates set up."
+  echo "This may result in the Paket bootstrapper failing to download Paket"
+  echo "because Github's SSL certificate can't be verified. One way to fix"
+  echo "this issue would be to download the list of SSL root certificates"
+  echo "from the Mozilla project by running the following command:"
+  echo ""
+  echo "    mozroots --import --sync"
+  echo ""
+  echo "This will import over 100 SSL root certificates into your Mono"
+  echo "certificate repository. Then try running this script again."
+  exit 1
 fi
 
 run $PAKET_EXE restore
