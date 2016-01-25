@@ -25,10 +25,24 @@ function run() {
   fi
 }
 
+function yesno() {
+  # NOTE: Defaults to NO
+  read -p "$1 [y/N] " ynresult
+  case "$ynresult" in
+    [yY]*) true ;;
+    *) false ;;
+  esac
+}
+
+set +e
 run $PAKET_BOOTSTRAPPER_EXE
+bootstrapper_exitcode=$?
+set -e
 
 if [[ "$OS" != "Windows_NT" ]] &&
-       [ $(certmgr -list -c Trust | grep X.509 | wc -l) -le 1 ]
+       [ $bootstrapper_exitcode -ne 0 ] &&
+       [ $(certmgr -list -c Trust | grep X.509 | wc -l) -le 1 ] &&
+       [ $(certmgr -list -c -m Trust | grep X.509 | wc -l) -le 1 ]
 then
   echo "Your Mono installation has no trusted SSL root certificates set up."
   echo "This may result in the Paket bootstrapper failing to download Paket"
@@ -39,8 +53,17 @@ then
   echo "    mozroots --import --sync"
   echo ""
   echo "This will import over 100 SSL root certificates into your Mono"
-  echo "certificate repository. Then try running this script again."
-  exit 1
+  echo "certificate repository."
+  echo ""
+  if yesno "Run 'mozroots --import --sync' now?"
+  then
+    mozroots --import --sync
+  else
+    echo "Attempting to continue without running mozroots. This might fail."
+  fi
+  # Re-run bootstrapper whether or not the user ran mozroots, because maybe
+  # they fixed the problem in a separate terminal window.
+  run $PAKET_BOOTSTRAPPER_EXE
 fi
 
 run $PAKET_EXE restore
