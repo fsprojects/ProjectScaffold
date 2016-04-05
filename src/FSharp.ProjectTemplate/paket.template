@@ -1,4 +1,6 @@
 type project
+title
+    ##ProjectName##
 owners
     ##Author##
 authors 
