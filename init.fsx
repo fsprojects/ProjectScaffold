@@ -156,6 +156,7 @@ let replaceContent file =
   |> replaceWithVarOrMsg "##Author##" "Author not set"
   |> replaceWithVarOrMsg "##Description##" "Description not set"
   |> replaceWithVarOrMsg "##Summary##" ""
+  |> replaceWithVarOrMsg "##ProjectName##" ""
   |> replaceWithVarOrMsg "##Tags##" ""
   |> replaceWithVarOrMsg "##GitHome##" "[github-user]"
   |> overwrite file
