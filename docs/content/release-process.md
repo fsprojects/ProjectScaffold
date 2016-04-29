@@ -22,7 +22,7 @@ Prior to the first release from a given working area, you need to do a manual st
       exit /b %errorlevel%
     )
     
-    packages\FAKE\tools\FAKE.exe build.fsx "target=Release" "NugetKey=NUGETKEY" "github-user=USER"  "github-pw=PW"
+    packages\build\FAKE\tools\FAKE.exe build.fsx "target=Release" "NugetKey=NUGETKEY" "github-user=USER"  "github-pw=PW"
     
 (Substitute your specific credentials for ``NUGETKEY``, ``USER`` and ``PW``).
 
