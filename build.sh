@@ -3,7 +3,7 @@
 set -eu
 set -o pipefail
 
-cd `dirname $0`
+cd "$(dirname "$0")"
 
 FSIARGS=""
 OS=${OS:-"unknown"}
