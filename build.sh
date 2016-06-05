@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
 set -eu
-set -o pipefail
 
 cd `dirname $0`
 
@@ -10,14 +9,18 @@ PAKET_EXE=.paket/paket.exe
 FAKE_EXE=packages/build/FAKE/tools/FAKE.exe
 
 FSIARGS=""
+FSIARGS2=""
 OS=${OS:-"unknown"}
-if [[ "$OS" != "Windows_NT" ]]
+if [ "$OS" != "Windows_NT" ]
 then
-  FSIARGS="--fsiargs -d:MONO"
+  # Can't use FSIARGS="--fsiargs -d:MONO" in zsh, so split it up
+  # (Can't use arrays since dash can't handle them)
+  FSIARGS="--fsiargs"
+  FSIARGS2="-d:MONO"
 fi
 
-function run() {
-  if [[ "$OS" != "Windows_NT" ]]
+run() {
+  if [ "$OS" != "Windows_NT" ]
   then
     mono "$@"
   else
@@ -25,7 +28,7 @@ function run() {
   fi
 }
 
-function yesno() {
+yesno() {
   # NOTE: Defaults to NO
   read -p "$1 [y/N] " ynresult
   case "$ynresult" in
@@ -39,7 +42,7 @@ run $PAKET_BOOTSTRAPPER_EXE
 bootstrapper_exitcode=$?
 set -e
 
-if [[ "$OS" != "Windows_NT" ]] &&
+if [ "$OS" != "Windows_NT" ] &&
        [ $bootstrapper_exitcode -ne 0 ] &&
        [ $(certmgr -list -c Trust | grep X.509 | wc -l) -le 1 ] &&
        [ $(certmgr -list -c -m Trust | grep X.509 | wc -l) -le 1 ]
@@ -70,5 +73,5 @@ run $PAKET_EXE restore
 
 [ ! -e build.fsx ] && run $PAKET_EXE update
 [ ! -e build.fsx ] && run $FAKE_EXE init.fsx
-run $FAKE_EXE "$@" $FSIARGS build.fsx
+run $FAKE_EXE "$@" $FSIARGS $FSIARGS2 build.fsx
 
