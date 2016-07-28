@@ -22,6 +22,9 @@ Read the [Getting started tutorial](http://fsprojects.github.io/ProjectScaffold/
 
 Documentation: http://fsprojects.github.io/ProjectScaffold
 
+## Requirements
+
+ProjectScaffold requires a local git installation. You can download git from [Git Downloads](https://git-scm.com/downloads).
 
 ## Build Status
 
