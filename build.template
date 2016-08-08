@@ -401,11 +401,11 @@ Target "All" DoNothing
 "GenerateHelpDebug"
   ==> "KeepRunning"
 
-"ReleaseDocs"
-  ==> "Release"
-
 "BuildPackage"
   ==> "PublishNuget"
   ==> "Release"
 
+"ReleaseDocs"
+  ==> "Release"
+  
 RunTargetOrDefault "All"
