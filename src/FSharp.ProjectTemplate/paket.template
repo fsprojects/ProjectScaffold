@@ -6,11 +6,11 @@ owners
 authors 
     ##Author##
 projectUrl
-    http://github.com/##GitHome##/##GitName##
+    ##GitUrl##/##GitHome##/##GitName##
 iconUrl
-    https://raw.githubusercontent.com/##GitHome##/##GitName##/master/docs/files/img/logo.png
+    ##GitRawUrl##/##GitHome##/##GitName##/master/docs/files/img/logo.png
 licenseUrl
-    http://github.com/##GitHome##/##GitName##/blob/master/LICENSE.txt
+    ##GitUrl##/##GitHome##/##GitName##/blob/master/LICENSE.txt
 requireLicenseAcceptance
     false
 copyright

@@ -83,12 +83,17 @@ print """
 #
 """
 
+let [<Literal>] defaultGirUrl = "https://github.com"
+let [<Literal>] defaultGirRawUrl = "https://raw.githubusercontent.com"
+
 let vars = Dictionary<string,string option>()
 vars.["##ProjectName##"] <- promptForNoSpaces "Project Name (used for solution/project files)"
 vars.["##Summary##"]     <- promptFor "Summary (a short description)"
 vars.["##Description##"] <- promptFor "Description (longer description used by NuGet)"
 vars.["##Author##"]      <- promptFor "Author"
 vars.["##Tags##"]        <- promptFor "Tags (separated by spaces)"
+vars.["##GitUrl##"]      <- promptFor (sprintf "Github url (leave blank to use \"%s\")" defaultGirUrl)
+vars.["##GitRawUrl##"]   <- promptFor (sprintf "Github raw url (leave blank to use \"%s\")" defaultGirRawUrl)
 vars.["##GitHome##"]     <- promptFor "Github User or Organization"
 vars.["##GitName##"]     <- promptFor "Github Project Name (leave blank to use Project Name)"
 
@@ -158,6 +163,8 @@ let replaceContent file =
   |> replaceWithVarOrMsg "##Summary##" ""
   |> replaceWithVarOrMsg "##ProjectName##" ""
   |> replaceWithVarOrMsg "##Tags##" ""
+  |> replaceWithVarOrMsg "##GitUrl##" defaultGirUrl
+  |> replaceWithVarOrMsg "##GitRawUrl##" defaultGirRawUrl
   |> replaceWithVarOrMsg "##GitHome##" "[github-user]"
   |> replaceWithVarOrMsg "##GitName##" projectName
   |> overwrite file
@@ -189,6 +196,8 @@ let generate templatePath generatedFilePath =
     |> replaceWithVarOrMsg "##Description##" "Project has no description; update build.fsx"
     |> replaceWithVarOrMsg "##Author##" "Update Author in build.fsx"
     |> replaceWithVarOrMsg "##Tags##" ""
+    |> replaceWithVarOrMsg "##GitUrl##" defaultGirUrl
+    |> replaceWithVarOrMsg "##GitRawUrl##" defaultGirRawUrl
     |> replaceWithVarOrMsg "##GitHome##" "Update GitHome in build.fsx"
     |> replaceWithVarOrMsg "##GitName##" projectName
 
