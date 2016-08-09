@@ -159,6 +159,7 @@ let replaceContent file =
   |> replaceWithVarOrMsg "##ProjectName##" ""
   |> replaceWithVarOrMsg "##Tags##" ""
   |> replaceWithVarOrMsg "##GitHome##" "[github-user]"
+  |> replaceWithVarOrMsg "##GitName##" "FSharp.ProjectScaffold"
   |> overwrite file
   |> sprintf "%s updated"
 
