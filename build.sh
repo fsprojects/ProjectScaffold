@@ -2,7 +2,7 @@
 
 set -eu
 
-cd `dirname $0`
+cd "$(dirname "$0")"
 
 PAKET_BOOTSTRAPPER_EXE=.paket/paket.bootstrapper.exe
 PAKET_EXE=.paket/paket.exe
