@@ -86,14 +86,18 @@ print """
 let [<Literal>] defaultGitUrl = "https://github.com"
 let [<Literal>] defaultGitRawUrl = "https://raw.githubusercontent.com"
 
+let normalizeUrl (url : string) = url.TrimEnd('/')
+let promptAndNormalizeFor (normalize : string -> string) = promptFor >> (function | Some e -> Some(normalize e) | e -> e)
+let promptAndNormalizeUrlFor = promptAndNormalizeFor normalizeUrl
+
 let vars = Dictionary<string,string option>()
 vars.["##ProjectName##"] <- promptForNoSpaces "Project Name (used for solution/project files)"
 vars.["##Summary##"]     <- promptFor "Summary (a short description)"
 vars.["##Description##"] <- promptFor "Description (longer description used by NuGet)"
 vars.["##Author##"]      <- promptFor "Author"
 vars.["##Tags##"]        <- promptFor "Tags (separated by spaces)"
-vars.["##GitUrl##"]      <- promptFor (sprintf "Github url (leave blank to use \"%s\")" defaultGitUrl)
-vars.["##GitRawUrl##"]   <- promptFor (sprintf "Github raw url (leave blank to use \"%s\")" defaultGitRawUrl)
+vars.["##GitUrl##"]      <- promptAndNormalizeUrlFor (sprintf "Github url (leave blank to use \"%s\")" defaultGitUrl)
+vars.["##GitRawUrl##"]   <- promptAndNormalizeUrlFor (sprintf "Github raw url (leave blank to use \"%s\")" defaultGitRawUrl)
 vars.["##GitHome##"]     <- promptFor "Github User or Organization"
 vars.["##GitName##"]     <- promptFor "Github Project Name (leave blank to use Project Name)"
 
