@@ -132,9 +132,9 @@ Target "CleanDocs" (fun _ ->
 Target "Build" (fun _ ->
     !! solutionFile
 #if MONO
-    |> MSBuildReleaseExt "" [ ("DefineConstants","MONO") ] "Rebuild"
+    |> MSBuildReleaseExt "" [ ("DefineConstants","MONO") ] "Build"
 #else
-    |> MSBuildRelease "" "Rebuild"
+    |> MSBuildRelease "" "Build"
 #endif
     |> ignore
 )
@@ -372,8 +372,7 @@ Target "BuildPackage" DoNothing
 
 Target "All" DoNothing
 
-"Clean"
-  ==> "AssemblyInfo"
+"AssemblyInfo"
   ==> "Build"
   ==> "CopyBinaries"
   ==> "RunTests"
@@ -388,13 +387,9 @@ Target "All" DoNothing
   ==> "All"
   =?> ("ReleaseDocs",isLocalBuild)
 
-"CleanDocs"
-  ==> "GenerateHelp"
+"GenerateHelp"
   ==> "GenerateReferenceDocs"
   ==> "GenerateDocs"
-
-"CleanDocs"
-  ==> "GenerateHelpDebug"
 
 "GenerateHelpDebug"
   ==> "KeepRunning"
