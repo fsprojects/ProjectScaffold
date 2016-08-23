@@ -119,11 +119,8 @@ Target "CopyBinaries" (fun _ ->
 // Clean build results
 
 Target "Clean" (fun _ ->
-    CleanDirs ["bin"; "temp"]
-)
-
-Target "CleanDocs" (fun _ ->
-    CleanDirs ["docs/output"]
+    !! solutionFile |> MSBuildRelease "" "Clean" |> ignore
+    CleanDirs ["bin"; "temp"; "docs/output"]
 )
 
 // --------------------------------------------------------------------------------------
@@ -400,5 +397,5 @@ Target "All" DoNothing
 
 "ReleaseDocs"
   ==> "Release"
-  
+
 RunTargetOrDefault "All"
