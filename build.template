@@ -379,16 +379,14 @@ Target "All" DoNothing
   ==> "RunTests"
   ==> "GenerateReferenceDocs"
   ==> "GenerateDocs"
-  ==> "All"
-  =?> ("ReleaseDocs",isLocalBuild)
-
-"All"
 #if MONO
 #else
   =?> ("SourceLink", Pdbstr.tryFind().IsSome )
 #endif
   ==> "NuGet"
   ==> "BuildPackage"
+  ==> "All"
+  =?> ("ReleaseDocs",isLocalBuild)
 
 "CleanDocs"
   ==> "GenerateHelp"
