@@ -164,9 +164,9 @@ let replaceContent file =
   |> replace solutionTemplateName projectName
   |> replaceWithVarOrMsg "##Author##" "Author not set"
   |> replaceWithVarOrMsg "##Description##" "Description not set"
-  |> replaceWithVarOrMsg "##Summary##" ""
-  |> replaceWithVarOrMsg "##ProjectName##" ""
-  |> replaceWithVarOrMsg "##Tags##" ""
+  |> replaceWithVarOrMsg "##Summary##" "Summary not set"
+  |> replaceWithVarOrMsg "##ProjectName##" "FSharpSolution"
+  |> replaceWithVarOrMsg "##Tags##" "fsharp"
   |> replaceWithVarOrMsg "##GitUrl##" defaultGitUrl
   |> replaceWithVarOrMsg "##GitRawUrl##" defaultGitRawUrl
   |> replaceWithVarOrMsg "##GitHome##" "[github-user]"
