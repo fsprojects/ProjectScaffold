@@ -391,6 +391,9 @@ Target "All" DoNothing
 "GenerateHelpDebug"
   ==> "KeepRunning"
 
+"Clean"
+  ==> "Release"
+
 "BuildPackage"
   ==> "PublishNuget"
   ==> "Release"
