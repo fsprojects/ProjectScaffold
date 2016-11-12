@@ -80,12 +80,32 @@ let (|Fsproj|Csproj|Vbproj|Shproj|) (projFileName:string) =
 // Generate assembly info files with the right version & up-to-date information
 Target "AssemblyInfo" (fun _ ->
     let getAssemblyInfoAttributes projectName =
-        [ Attribute.Title (projectName)
-          Attribute.Product project
-          Attribute.Description summary
-          Attribute.Version release.AssemblyVersion
-          Attribute.FileVersion release.AssemblyVersion ]
+        let attributes =
+            [ Attribute.Title (projectName)
+              Attribute.Product project
+              Attribute.Description summary
+              Attribute.Version release.AssemblyVersion
+              Attribute.FileVersion release.AssemblyVersion ]
 
+        // For com interop projects a guid is required, GUID should only ever change explicitly
+        // Getting GUID from a simple textfile named interop.guid in the project folder.
+        // file should be checked into source control
+        let getComInteropGuid projectName = 
+            let readComInteropGuidFile (file) = 
+                match Guid.TryParse(File.ReadAllText(file).Trim ()) with
+                | true, guid -> Some(guid)
+                | false, _   -> failwith "Content of %s not a valid GUID string" file
+
+            let guidFile = ((__SOURCE_DIRECTORY__ @@ "src") @@ projectName) @@ "interop.guid"
+
+            match fileExists guidFile with
+            | true  -> readComInteropGuidFile guidFile
+            | false -> None 
+
+        match getComInteropGuid projectName with
+        | Some(guid) -> attributes @ [Attribute.Guid (guid.ToString ())]
+        | None       -> attributes
+        
     let getProjectDetails projectPath =
         let projectName = System.IO.Path.GetFileNameWithoutExtension(projectPath)
         ( projectPath,
