@@ -36,7 +36,7 @@
 
 <p>ProjectScaffold allows to you generate HTML documentation similar to this page using <a href="https://github.com/tpetricek/FSharp.Formatting">FSharp.Formatting</a>.</p>
 
-<p>The <code>docs/tools/generate.fsx</code> file controls the generation of narrative and API documentation.
+<p>The <code>docsraw/tools/generate.fsx</code> file controls the generation of narrative and API documentation.
 For most projects, you'll simply need to edit some values located at the top of the file.</p>
 
 <p>The relevant settings are as follows:</p>
@@ -44,13 +44,13 @@ For most projects, you'll simply need to edit some values located at the top of 
 <ul>
 <li><code>referenceBinaries</code> - A list of the binaries for which documentation should be created. The files listed should each have a corresponding XMLDoc file emitted into the <code>bin</code> folder as part of the build process.</li>
 <li><code>website</code> - The root URL to which the generated documentation should be uploaded. In the included example, this points to the GitHub Pages root for this project.</li>
-<li><code>info</code> - A list of key/value pairs which further describe the details of your project. This list is exporteded to <code>docs/tools/templates/template.cshtml</code> file for data-binding purposes.</li>
+<li><code>info</code> - A list of key/value pairs which further describe the details of your project. This list is exporteded to <code>docsraw/tools/templates/template.cshtml</code> file for data-binding purposes.</li>
 </ul>
 
 <h2><a name="Markdown-files" class="anchor" href="#Markdown-files">Markdown files</a></h2>
 
-<p>The project is configured to convert all <code>*.md</code> and <code>*.fsx</code> files in <code>docs/content</code> to HTML pages and emit the results into <code>docs/output</code>.
-The <code>docs/content/index.fsx</code> file acts as a starting point. Use this file to provide a narrative overview of your project.</p>
+<p>The project is configured to convert all <code>*.md</code> and <code>*.fsx</code> files in <code>docsraw/content</code> to HTML pages and emit the results into <code>docs</code>.
+The <code>docsraw/content/index.fsx</code> file acts as a starting point. Use this file to provide a narrative overview of your project.</p>
 
 <p>You can include <em>Markdown</em> and <strong>actual executable F# code</strong> in the files.</p>
 
@@ -70,7 +70,7 @@ The <code>docs/content/index.fsx</code> file acts as a starting point. Use this 
 
 <p><img src="img/keep-running.png" alt="alt text" title="Keep running in order to edit docs" /></p>
 
-<p>Now open <code>docs/output/index.html</code> and start to edit the files in <code>docs/content</code>. The build script will continuously sync the output automatically; you just have to refresh the browser.</p>
+<p>Now open <code>docs/index.html</code> and start to edit the files in <code>docsraw/content</code>. The build script will continuously sync the output automatically; you just have to refresh the browser.</p>
 
 <p>Press any key in command line window to end the loop.</p>
 
@@ -78,7 +78,7 @@ The <code>docs/content/index.fsx</code> file acts as a starting point. Use this 
 
 <p>ProjectScaffold generates a build target that automatically generates nice looking API docs for your assemblies.</p>
 
-<p>To configure this process look into <code>docs/tools/generate.fsx</code> and look for:</p>
+<p>To configure this process look into <code>docsraw/tools/generate.fsx</code> and look for:</p>
 
 <table class="pre"><tr><td class="lines"><pre class="fssnip">
 <span class="l">1: </span>
@@ -110,30 +110,18 @@ The <code>docs/content/index.fsx</code> file acts as a starting point. Use this 
 
 <h2><a name="Changing-the-layout" class="anchor" href="#Changing-the-layout">Changing the layout</a></h2>
 
-<p>The layout is determined by the <code>docs/tools/templates/template.cshtml</code> file. 
+<p>The layout is determined by the <code>docsraw/tools/templates/template.cshtml</code> file. 
 It uses the Razor templating engine, and leverages jQuery and Bootstrap. 
 Change this file to alter the non-content aspects of your documentation.</p>
 
 <h2><a name="Release-process" class="anchor" href="#Release-process">Release process</a></h2>
 
-<p>Make sure you have a <code>gh-pages</code> branch locally. If it doesn't exist, then just create it.</p>
+<p>By default the <code>docs</code> folder is part of your tracked git source.</p>
 
-<p>In order to release the docs run:</p>
+<p>The build process runs <a href="https://github.com/tpetricek/FSharp.Formatting">FSharp.Formatting</a> building your documentation to the <code>docs</code> folder. 
+The documentation will then be pushed to your branch as part of the release process.</p>
 
-<table class="pre"><tr><td class="lines"><pre class="fssnip">
-<span class="l">1: </span>
-</pre>
-</td>
-<td class="snippet"><pre class="fssnip">
-<span class="o">$</span> <span class="i">build</span> <span class="i">ReleaseDocs</span></pre>
-</td>
-</tr>
-</table>
-
-<p>This will start the build process and <a href="https://github.com/tpetricek/FSharp.Formatting">FSharp.Formatting</a> again. 
-The output will then be pushed to your <code>gh-pages</code> branch where <a href="http://www.github.com">GitHub</a> will pick it up and complete the release process.</p>
-
-<p>The release of the documentation is also done during the <a href="release-process.html">Release process</a>.</p>
+<p>To enable <code>docs</code> as the source of <a href="https://pages.github.com/">GitHub Pages</a> for your project go to your GitHub project settings and enbable <code>master</code> branch as your GitHub pages source.</p>
 
 
         </div>
