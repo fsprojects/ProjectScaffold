@@ -48,7 +48,7 @@ let tags = "##Tags##"
 let solutionFile  = "##ProjectName##.sln"
 
 // Default target configuration
-let configuration = "Release"
+let configuration = "Debug"
 
 // Pattern specifying assemblies to be tested using NUnit
 let testAssemblies = "tests/**/bin" </> configuration </> "*Tests*.dll"
