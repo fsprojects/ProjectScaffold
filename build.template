@@ -180,6 +180,7 @@ Target "NuGet" (fun _ ->
     Paket.Pack(fun p ->
         { p with
             OutputPath = "bin"
+            BuildConfig = configuration
             Version = release.NugetVersion
             ReleaseNotes = toLines release.Notes})
 )
