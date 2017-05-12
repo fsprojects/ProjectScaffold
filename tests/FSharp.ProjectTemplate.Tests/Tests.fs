@@ -18,7 +18,7 @@ module Tests =
                 let result = Library.hello 42
                 Expect.isTrue (result = 42) "Expected True"
 
-        testPropertyWithConfig config10k "whitespace" <|
+            testPropertyWithConfig config10k "whitespace" <|
                 fun  () ->
                     Prop.forAll (Arb.fromGen <| whitespaceString())
                         (fun (x : string) -> 
