@@ -2,7 +2,7 @@
 
 open Expecto
 
-module Tests =
+module RunTests =
 
     [<EntryPoint>]
     let main args =
