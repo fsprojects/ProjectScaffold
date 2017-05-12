@@ -22,6 +22,54 @@ Read the [Getting started tutorial](http://fsprojects.github.io/ProjectScaffold/
 
 Documentation: http://fsprojects.github.io/ProjectScaffold
 
+Tips for migrating existing project to Scaffold format:
+
+    * clone ProjectScaffold to new folder
+    * run the initializing build
+    * delete .git folder
+    * copy intitialized scaffold files and folders to original project folder
+    * git add / commit project -m"first pass migrating to scaffold format" (otherwise git may be confused by next mv)
+    * git mv necessary project file folders into src folder
+    * git commit, and any following cleanup
+
+Build:
+	* the following build targets are available
+
+  - AddLangDocs
+    + Depends on: []
+  - All
+    + Depends on: ["BuildPackage"]
+  - AssemblyInfo
+    + Depends on: []
+  - Build
+    + Depends on: ["AssemblyInfo"; "Configure"]
+  - BuildPackage
+    + Depends on: ["NuGet"]
+  - Clean
+    + Depends on: []
+  - Configure
+    + Depends on: []
+  - CopyBinaries
+    + Depends on: ["Build"]
+  - GenerateDocs
+    + Depends on: ["GenerateReferenceDocs"; "GenerateReferenceDocs"]
+  - GenerateHelp
+    + Depends on: []
+  - GenerateHelpDebug
+    + Depends on: []
+  - GenerateReferenceDocs
+    + Depends on: ["RunTests"; "GenerateHelp"]
+  - KeepRunning
+    + Depends on: ["GenerateHelpDebug"]
+  - NuGet
+    + Depends on: ["GenerateDocs"]
+  - PublishNuget
+    + Depends on: ["BuildPackage"]
+  - Release
+    + Depends on: ["Clean"; "PublishNuget"]
+  - RunTests
+    + Depends on: ["CopyBinaries"]
+
 ## Requirements
 
 ProjectScaffold requires a local git installation. You can download git from [Git Downloads](https://git-scm.com/downloads).
