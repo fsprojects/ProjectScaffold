@@ -82,18 +82,6 @@ module GeneratorsCode =
 
         Gen.listOfLength length <| nonEmptyNonAllWhitespaceString()
 
-    let genFullName() =
-        gen { 
-                let! first = Arb.generate<string option>
-                let! middle = Arb.generate<string list> 
-                let! family = Arb.generate<string option>
-
-                return
-                    FullName.TryParse (first, middle, family, NameOrder.Western, Set.empty<Tag>)
-        }
-        |> Gen.filter Option.isSome
-        |> Gen.map (fun x -> x.Value)
-
     let genDigitsInWhiteSpace () =
         gen {
                 let! frontWhitespace = whitespaceString()
@@ -121,8 +109,10 @@ module GeneratorsCode =
                 let! frontWhitespace = whitespaceString()
                 let! digits = Arb.generate<NonNegativeInt>
                 let! endWhitespace = whitespaceString()
-                return sprintf "%s%s%s" frontWhitespace (validDigits digits length) endWhitespace
+                return sprintf "%s%s%s" frontWhitespace (validDigits digits length) endWhitespace |> Some
         }
+        |> Gen.filter Option.isSome
+        |> Gen.map (fun x -> x.Value)
 
     let inputZip5Plus4() =
         gen {
