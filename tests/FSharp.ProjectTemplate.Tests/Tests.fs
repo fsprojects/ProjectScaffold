@@ -15,7 +15,7 @@ module Tests =
 
         testList "DomainTypes.Tag" [
             testCase "equality" <| fun () ->
-                let result = Library.hello 42
+                let result = 42
                 Expect.isTrue (result = 42) "Expected True"
 
             testPropertyWithConfig config10k "whitespace" <|

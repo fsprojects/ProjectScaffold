@@ -42,15 +42,6 @@ module GeneratorsCode =
     let whiteSpace = 
         List.concat [spaceSeparator; lineSeparator; paragraphSeparator; miscWhitespace]
 
-    let personalServerNonEmptyString() =
-        gen {
-                let! nonEmptyString = Arb.generate<NonEmptyString>
-                return!  
-                    [TrimNonEmptyString.TryParse (nonEmptyString.ToString())]
-                    |> List.choose id
-                    |> Gen.elements
-        }
-
     let nonDigitalString() = 
         gen {  
                 let! a = Arb.generate<NonEmptyString> 
@@ -103,18 +94,6 @@ module GeneratorsCode =
         |> Gen.filter Option.isSome
         |> Gen.map (fun x -> x.Value)
 
-    let genNameAndAffixes() =
-        gen { 
-                let! salutations = Arb.generate<string list>
-                let! personName = Arb.generate<NonEmptyString>
-                let! suffixes = Arb.generate<string list>
-
-                return
-                    NameAndAffixes.TryParse (salutations, personName.ToString(), suffixes, Set.empty<Tag>)
-        }
-        |> Gen.filter Option.isSome
-        |> Gen.map (fun x -> x.Value)
-
     let genDigitsInWhiteSpace () =
         gen {
                 let! frontWhitespace = whitespaceString()
@@ -150,25 +129,6 @@ module GeneratorsCode =
             let! digits = Arb.generate<NonNegativeInt>
             return validDigits digits 9
         }
-
-    let genPhysicalAddress() =
-        gen { 
-                let! streetAddress = Arb.generate<string list> 
-                let! city = Arb.generate<string option>
-                let! state = Arb.generate<string option>
-                let! postalCodeString = Arb.generate<string>
-                let! digits = Arb.generate<NonNegativeInt>
-                let postalCodeZip = validDigits digits 5
-                let! postalCodeZip5Plus4 = inputZip5Plus4()
-                let! country = Arb.generate<string option>
-
-                let! postalCode = Gen.elements [Some postalCodeString; Some postalCodeZip; Some postalCodeZip5Plus4; None]
-
-                return
-                    PhysicalAddress.TryParse (streetAddress, city, state, postalCode, country, Set.empty<Tag>)
-        }
-        |> Gen.filter Option.isSome
-        |> Gen.map (fun x -> x.Value)
 
     let genUsPhone7() =
         gen {
@@ -268,17 +228,10 @@ module GeneratorsCode =
             let symbolValueWhitespace symbol value whiteSpace =
                  sprintf "%s%s%s%s" symbol (defaultArg whiteSpace String.Empty) value (defaultArg whiteSpace String.Empty)
 
-            let acceptedCallingCode = 
-                match callingCodeRaw with
-                | Some uint16 ->
-                    Countries.byCallingCodes.ContainsKey uint16
-                | None ->
-                    false
-
             let phoneNumber = 
                 sprintf "%s%s%s%s%s%s" 
                     (defaultArg whiteSpace1 String.Empty)
-                    (if acceptedCallingCode then (match callingCode with | Some x -> symbolValueWhitespace "+" x whiteSpace2 | None -> String.Empty) else String.Empty)
+                    (match callingCode with | Some x -> symbolValueWhitespace "+" x whiteSpace2 | None -> String.Empty)
                     phone
                     (defaultArg whiteSpace3 String.Empty)
                     (match extension with | Some x -> symbolValueWhitespace "X" x whiteSpace4 | None -> String.Empty)
