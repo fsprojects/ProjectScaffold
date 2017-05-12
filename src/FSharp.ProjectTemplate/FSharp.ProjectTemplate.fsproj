@@ -58,7 +58,7 @@
   <Target Name="AfterBuild">
   </Target>
   -->
-  <Import Project="..\..\.paket\paket.targets" />
+  <Import Project="..\..\paket.targets" />
   <ItemGroup>
     <Compile Include="Library.fs" />
     <None Include="Script.fsx" />
