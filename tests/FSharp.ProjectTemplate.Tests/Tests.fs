@@ -1,10 +1,17 @@
-﻿module FSharp.ProjectScaffold.Tests
+﻿namespace FSharp.ProjectScaffold.Tests
 
-open FSharp.ProjectTemplate
-open NUnit.Framework
+open Expecto
+open FsCheck
 
-[<Test>]
-let ``hello returns 42`` () =
-  let result = Library.hello 42
-  printfn "%i" result
-  Assert.AreEqual(42,result)
+module Tests =
+    let config10k = { FsCheckConfig.defaultConfig with maxTest = 10000}
+
+    [<Tests>]
+    let testSimpleTests =
+
+        testList "DomainTypes.Tag" [
+            testCase "equality" <| fun () ->
+                let result = Library.hello 42
+                Expect.isTrue (result = 42) "Expected True"
+        ]
+
