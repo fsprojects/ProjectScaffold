@@ -6,7 +6,7 @@
     <!-- Download Paket.exe if it does not already exist -->
     <DownloadPaket Condition=" '$(DownloadPaket)' == '' ">true</DownloadPaket>
     <PaketToolsPath>$(MSBuildThisFileDirectory)</PaketToolsPath>
-    <PaketRootPath>$(MSBuildThisFileDirectory)..\</PaketRootPath>
+    <PaketRootPath>$(MSBuildThisFileDirectory)</PaketRootPath>
   </PropertyGroup>
   <PropertyGroup>
     <!-- Paket command -->
