@@ -1,6 +1,10 @@
 frameworks: net45, net46, net461, net462
 source https://nuget.org/api/v2
 
+# The setting below means your libraries will assume a minimum of FSharp.Core 
+# for F# 4.0 (nuget package 4.0.0.1). If you would like to assume a higher minimum
+# then change to 4.1.17 or later.
+
 nuget FSharp.Core ~> 4.0.0.1 strategy: min, redirects: force
 
 group Build
