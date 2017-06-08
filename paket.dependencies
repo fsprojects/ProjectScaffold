@@ -1,3 +1,4 @@
+frameworks: net45, net46, net461, net462
 source https://nuget.org/api/v2
 
 # The setting below means your libraries will assume a minimum of FSharp.Core 
