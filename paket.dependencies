@@ -4,7 +4,7 @@ source https://nuget.org/api/v2
 # for F# 4.0 (nuget package 4.0.0.1). If you would like to assume a higher minimum
 # then change to 4.1.17 or later.
 
-nuget FSharp.Core ~> 4.0.0.1 strategy: min redirects: force
+nuget FSharp.Core ~> 4.0.0.1 strategy: min, redirects: force
 
 group Build
   source https://nuget.org/api/v2
