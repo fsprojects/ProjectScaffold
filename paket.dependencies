@@ -1,6 +1,7 @@
+frameworks: net45, net46, net461, net462
 source https://nuget.org/api/v2
 
-nuget FSharp.Core redirects: force
+nuget FSharp.Core ~> 4.0.0.1 strategy: min redirects: force
 
 group Build
   source https://nuget.org/api/v2
