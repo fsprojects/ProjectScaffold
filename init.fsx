@@ -15,7 +15,6 @@ let checkFSharpInstallation () =
     MSBuildRelease "." "CheckFSharpInstallation" ["CheckFSharpInstallation.fsproj"] |> ignore
     true
   with e ->
-    printfn "%O" e
     false
 
 if File.Exists("CheckFSharpInstallation.fsproj") then
