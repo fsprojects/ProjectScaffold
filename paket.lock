@@ -1,4 +1,4 @@
-FRAMEWORK: NET45, NET46, NET461, NET462
+FRAMEWORK: >= NET45
 NUGET
   remote: https://www.nuget.org/api/v2
     FSharp.Core (4.0.0.1) - redirects: force
