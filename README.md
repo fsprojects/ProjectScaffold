@@ -7,7 +7,6 @@ This project can be used to scaffold a prototypical .NET solution including file
 
 * updates all AssemblyInfo files
 * compiles the application and runs all test projects
-* generates [SourceLinks](https://github.com/ctaggart/SourceLink)
 * generates API docs based on XML document tags
 * generates [documentation based on Markdown files](http://fsprojects.github.io/ProjectScaffold/writing-docs.html)
 * generates [NuGet](http://www.nuget.org) packages

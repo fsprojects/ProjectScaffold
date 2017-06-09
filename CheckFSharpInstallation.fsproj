@@ -16,6 +16,6 @@
     </Otherwise>
   </Choose>
   <Target Name="CheckFSharpInstallation">
-    <Error Text="File Microsoft.FSharp.Targets not found. Is F# correctly installed on this system?" Condition="!Exists('$(FSharpTargetsPath)')" />
+    <Error Text="File Microsoft.FSharp.Targets not found. Is F# correctly installed on this system? I looked in '$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\FSharp\Microsoft.FSharp.Targets' and '$(MSBuildExtensionsPath32)\..\Microsoft SDKs\F#\3.0\Framework\v4.0\Microsoft.FSharp.Targets'" Condition="!Exists('$(FSharpTargetsPath)')" />
   </Target>
 </Project>
