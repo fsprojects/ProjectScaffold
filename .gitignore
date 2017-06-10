@@ -169,12 +169,6 @@ $RECYCLE.BIN/
 # NuGet Packages Directory
 packages/
 
-# Generated documentation folder
-docs/output/
-
-# Temp folder used for publishing docs
-temp/
-
 # Test results produced by build
 TestResults.xml
 
@@ -186,7 +180,7 @@ localpackages/
 paket-files
 *.orig
 .paket/paket.exe
-docs/content/license.md
-docs/content/release-notes.md
+docsraw/content/license.md
+docsraw/content/release-notes.md
 .fake
-docs/tools/FSharp.Formatting.svclog
+docsraw/tools/FSharp.Formatting.svclog

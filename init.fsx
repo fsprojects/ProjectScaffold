@@ -235,7 +235,7 @@ let generate templatePath generatedFilePath =
   print (sprintf "# Generated %s" generatedFilePath)
 
 generate (localFile "build.template") (localFile "build.fsx")
-generate (localFile "docs/tools/generate.template") (localFile "docs/tools/generate.fsx")
+generate (localFile "docsraw/tools/generate.template") (localFile "docsraw/tools/generate.fsx")
 
 //Handle source control
 let isGitRepo () =
