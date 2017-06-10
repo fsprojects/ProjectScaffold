@@ -1,11 +1,18 @@
+framework: >= net45
 source https://nuget.org/api/v2
 
-nuget FSharp.Core redirects: force
+# The setting below means your libraries will assume a minimum target of .NET 4.5 + F# 4.0.
+#
+# To increase the minimum assumed .NET Framework, change the TargetFrameworkVersion in the .fsproj project files.
+#
+# To increase the minimum assumed F# version to F# 4.1, change to 
+#     nuget FSharp.Core ~> 4.1.0 redirects: force
+
+nuget FSharp.Core ~> 4.0.0.1 redirects: force
 
 group Build
   source https://nuget.org/api/v2
   
-  nuget SourceLink.Fake
   nuget FAKE
   nuget FSharp.Formatting
 
