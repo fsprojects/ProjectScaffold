@@ -35,7 +35,7 @@ if File.Exists("CheckFSharpInstallation.fsproj") then
     traceError "then run the build script again."
     failwith "Build script aborted: please install F# and try again."
 
-let dirsWithProjects = ["src";"tests";"docs/content"]
+let dirsWithProjects = ["src";"tests";"docsrc/content"]
                        |> List.map (fun d -> directoryInfo (__SOURCE_DIRECTORY__ @@ d))
 
 // special funtions
@@ -99,7 +99,7 @@ print """
 # two files:
 #
 # build.fsx               This will be your build script
-# docs/tools/generate.fsx This script will generate your
+# docsrc/tools/generate.fsx This script will generate your
 #                         documentation
 #
 # NOTE: Aside from the Project Name, you may leave any
@@ -235,7 +235,7 @@ let generate templatePath generatedFilePath =
   print (sprintf "# Generated %s" generatedFilePath)
 
 generate (localFile "build.template") (localFile "build.fsx")
-generate (localFile "docs/tools/generate.template") (localFile "docs/tools/generate.fsx")
+generate (localFile "docsrc/tools/generate.template") (localFile "docsrc/tools/generate.fsx")
 
 //Handle source control
 let isGitRepo () =
