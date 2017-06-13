@@ -1,3 +1,4 @@
+FRAMEWORK: >= NET45
 NUGET
   remote: https://www.nuget.org/api/v2
     FSharp.Core (4.1.17) - redirects: force
@@ -427,7 +428,7 @@ NUGET
 GROUP Build
 NUGET
   remote: https://www.nuget.org/api/v2
-    FAKE (4.61.2)
+    FAKE (4.61.3)
     FSharp.Compiler.Service (2.0.0.6)
     FSharp.Formatting (2.14.4)
       FSharp.Compiler.Service (2.0.0.6)
@@ -442,7 +443,6 @@ NUGET
       Microsoft.Bcl.Build (>= 1.0.14)
     Octokit (0.24)
       Microsoft.Net.Http  - framework: net10, net11, net20, net30, net35, net40, net40-full
-    SourceLink.Fake (1.1)
 GITHUB
   remote: fsharp/FAKE
     modules/Octokit/Octokit.fsx (43917109af4ef38194d8993215c3e7c862b19d36)

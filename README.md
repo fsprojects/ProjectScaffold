@@ -21,7 +21,7 @@ Read the [Getting started tutorial](http://fsprojects.github.io/ProjectScaffold/
 
 Documentation: http://fsprojects.github.io/ProjectScaffold
 
-Tips for migrating existing project to Scaffold format:
+## Tips for migrating existing project to Scaffold format
 
     * clone ProjectScaffold to new folder
     * run the initializing build
@@ -30,6 +30,8 @@ Tips for migrating existing project to Scaffold format:
     * git add / commit project -m"first pass migrating to scaffold format" (otherwise git may be confused by next mv)
     * git mv necessary project file folders into src folder
     * git commit, and any following cleanup
+
+Be sure to do only ````git mv```` file renames in a single commit. If you try to commit anything else git will treat the renames as file delete / file add and you will loose history on those files.
 
 Build:
 	* the following build targets are available

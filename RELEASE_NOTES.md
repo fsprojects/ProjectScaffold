@@ -4,7 +4,10 @@
 * Expecto testing
 * paket in root folder, other minor custom tweaks
 
-### 1.0 - Unreleased
+### 1.0.1
+* Removed SourceLink
+
+### 1.0 
 * More awesome stuff coming
 * Added SourceLink for Source Indexing PDB
 

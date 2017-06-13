@@ -10,7 +10,32 @@ open System.Collections.Generic
 // It generates the build.fsx and generate.fsx files
 // --------------------------------
 
-let dirsWithProjects = ["src";"tests";"docsraw/content"]
+let checkFSharpInstallation () =
+  try
+    MSBuildRelease "." "CheckFSharpInstallation" ["CheckFSharpInstallation.fsproj"] |> ignore
+    true
+  with e ->
+    false
+
+if File.Exists("CheckFSharpInstallation.fsproj") then
+  if checkFSharpInstallation() then
+    File.Delete "CheckFSharpInstallation.fsproj" // F# is installed, no need to check again if init.fsx gets run a second time somehow
+  else
+    traceError "F# does not seem to be installed."
+    if isMacOS then
+      traceError "Please install F# (see http://fsharp.org/use/mac/ for instructions),"
+    elif isWindows then
+      traceError "Please install F# (see http://fsharp.org/use/windows/ for instructions),"
+    elif isUnix then
+      traceError "Please install the \"fsharp\" package with your system's standard package manager,"
+      if isLinux then
+        traceError "(e.g., \"sudo apt-get install fsharp\" or \"sudo yum install fsharp\"),"
+    else
+      traceError "Please install F# (see http://fsharp.org/ for instructions),"
+    traceError "then run the build script again."
+    failwith "Build script aborted: please install F# and try again."
+
+let dirsWithProjects = ["src";"tests";"docsrc/content"]
                        |> List.map (fun d -> directoryInfo (__SOURCE_DIRECTORY__ @@ d))
 
 // special funtions
@@ -74,7 +99,7 @@ print """
 # two files:
 #
 # build.fsx               This will be your build script
-# docsraw/tools/generate.fsx This script will generate your
+# docsrc/tools/generate.fsx This script will generate your
 #                         documentation
 #
 # NOTE: Aside from the Project Name, you may leave any
@@ -210,7 +235,7 @@ let generate templatePath generatedFilePath =
   print (sprintf "# Generated %s" generatedFilePath)
 
 generate (localFile "build.template") (localFile "build.fsx")
-generate (localFile "docsraw/tools/generate.template") (localFile "docsraw/tools/generate.fsx")
+generate (localFile "docsrc/tools/generate.template") (localFile "docsrc/tools/generate.fsx")
 
 //Handle source control
 let isGitRepo () =
