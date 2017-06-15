@@ -101,6 +101,23 @@
 
 <p>After the initialization has finished you can open, edit, build and test using <code>ProjectName.sln</code>.</p>
 
+<h3><a name="Migrating" class="anchor" href="#Migrating">Migrating an Existing Project</a></h3>
+
+<p>Manual steps for migrating existing project to Scaffold structure:</p>
+
+<ul>
+<li>Clone ProjectScaffold to new folder</li>
+<li>Run the initializing build</li>
+<li>Delete .git folder</li>
+<li>Copy intitialized scaffold files and folders to original project folder</li>
+<li><code>git add / commit project -m"first pass migrating to scaffold structure"</code> (otherwise git will be confused by next <code>mv</code>)</li>
+<li><code>git mv</code> necessary project file folders into src and/or test folder(s)</li>
+<li><code>git commit</code></li>
+<li>... and any following cleanup</li>
+</ul>
+
+<p>Be sure to do only <code>git mv</code> file renames in a single commit. If you try to commit anything else git will treat the renames as file delete / file add and you will loose history on those files.</p>
+
 <h3><a name="Further-topics" class="anchor" href="#Further-topics">Further topics</a></h3>
 
 <ul>
