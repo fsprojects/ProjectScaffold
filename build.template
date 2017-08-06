@@ -136,7 +136,7 @@ Target "Clean" (fun _ ->
 
 Target "Build" (fun _ ->
     !! solutionFile
-    |> MSBuildReleaseExt "" vsProjProps "Rebuild"
+    |> MSBuildReleaseExt "" vsProjProps "Build"
     |> ignore
 )
 
