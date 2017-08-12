@@ -121,10 +121,10 @@ vars.["##Summary##"]     <- promptFor "Summary (a short description)"
 vars.["##Description##"] <- promptFor "Description (longer description used by NuGet)"
 vars.["##Author##"]      <- promptFor "Author"
 vars.["##Tags##"]        <- promptFor "Tags (separated by spaces)"
-vars.["##GitUrl##"]      <- promptAndNormalizeUrlFor (sprintf "Github url (leave blank to use \"%s\")" defaultGitUrl)
-vars.["##GitRawUrl##"]   <- promptAndNormalizeUrlFor (sprintf "Github raw url (leave blank to use \"%s\")" defaultGitRawUrl)
+vars.["##GitUrl##"]      <- Some defaultGitUrl
+vars.["##GitRawUrl##"]   <- Some defaultGitRawUrl
 vars.["##GitHome##"]     <- promptFor "Github User or Organization"
-vars.["##GitName##"]     <- promptFor "Github Project Name (leave blank to use Project Name)"
+vars.["##GitName##"]     <- None
 
 let wantGit     = if inCI 
                     then false
@@ -274,6 +274,14 @@ if isGitRepo () && hasScaffoldOrigin () then
 if wantGit then
   Git.Repository.init __SOURCE_DIRECTORY__ false false
   givenOrigin |> Option.iter (fun url -> setRemote ("origin",url) __SOURCE_DIRECTORY__)
+
+//overwrite release notes
+let releaseNotesContent = [sprintf "#### 0.0.1 - %s" <| DateTime.Now.ToLongDateString(); "* Initial release"]
+overwrite "RELEASE_NOTES.md" releaseNotesContent
+
+//overwrite readme
+let readmeContent = [sprintf "# %s" projectName]
+overwrite "README.md" readmeContent
 
 //Clean up
 File.Delete "init.fsx"
