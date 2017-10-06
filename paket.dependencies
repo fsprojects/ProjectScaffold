@@ -2,6 +2,8 @@ framework: auto-detect
 source https://nuget.org/api/v2
 
 nuget FSharp.Core
+nuget Argu
+nuget FSharpx.Extras
 
 group Build
   source https://nuget.org/api/v2

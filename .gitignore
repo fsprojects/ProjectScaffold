@@ -193,6 +193,7 @@ docsrc/tools/FSharp.Formatting.svclog
 **/paket.exe
 **/paket.bootstrapper.exe
 paket-files
+.paket
 
 # jackfoxy stuff, possibly secrets
 **/load-references-debug.fsx

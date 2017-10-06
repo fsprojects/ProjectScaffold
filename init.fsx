@@ -202,6 +202,7 @@ let replaceContent file =
 let rec filesToReplace dir = seq {
   yield! Directory.GetFiles(dir, "*.?sproj")
   yield! Directory.GetFiles(dir, "*.fs")
+  yield! Directory.GetFiles(dir, "*.fsi")
   yield! Directory.GetFiles(dir, "*.cs")
   yield! Directory.GetFiles(dir, "*.xaml")
   yield! Directory.GetFiles(dir, "*.fsx")

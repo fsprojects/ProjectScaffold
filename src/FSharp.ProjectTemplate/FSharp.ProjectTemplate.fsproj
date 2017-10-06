@@ -61,6 +61,8 @@
   <Import Project="..\..\paket.targets" />
   <ItemGroup>
     <Compile Include="Library.fs" />
+    <Compile Include="CommandLine.fsi" />
+    <Compile Include="CommandLine.fs" />
     <None Include="Script.fsx" />
     <None Include="paket.references" />
     <None Include="paket.template" />
