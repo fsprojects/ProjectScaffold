@@ -180,9 +180,6 @@ module CommandLine =
 
     let getBetween (commandLine : ParseResults<CLIArguments>) =
         try
-
-            let x = commandLine.TryGetResult <@ Between @>
-
             match commandLine.TryGetResult <@ Between @> with
             | Some (dateTime1, dateTime2) ->
                 let dt1 = parseDate "error parsing Between first date" dateTime1
