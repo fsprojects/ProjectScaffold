@@ -63,7 +63,7 @@
     <Compile Include="Library.fs" />
     <Compile Include="CommandLine.fsi" />
     <Compile Include="CommandLine.fs" />
-    <None Include="Script.fsx" />
+    <None Include="Scripts\Script.fsx" />
     <None Include="paket.references" />
     <None Include="paket.template" />
     <Content Include="App.config" />
