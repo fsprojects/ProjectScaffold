@@ -60,6 +60,7 @@
   -->
   <Import Project="..\..\paket.targets" />
   <ItemGroup>
+    <Compile Include="Prelude.fs" />
     <Compile Include="Library.fs" />
     <Compile Include="CommandLine.fsi" />
     <Compile Include="CommandLine.fs" />
