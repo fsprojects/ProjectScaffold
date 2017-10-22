@@ -53,7 +53,7 @@
   <ItemGroup>
     <ProjectReference Include="..\FSharp.ProjectTemplate\FSharp.ProjectTemplate.fsproj">
       <Name>FSharp.ProjectTemplate</Name>
-      <Project>{6cec841b-0205-432a-b7d7-1b7c6dc22d0a}</Project>
+      <Project>{7e90d6ce-a10b-4858-a5bc-41df7250cbca}</Project>
       <Private>True</Private>
     </ProjectReference>
   </ItemGroup>
