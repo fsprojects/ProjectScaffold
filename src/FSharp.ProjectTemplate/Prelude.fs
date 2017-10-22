@@ -8,13 +8,11 @@ open System.Text
 
 module Prelude =
 
-    /// Monadic bind on Result type
     let bind f = 
         function
         | Ok x -> f x
         | Error x -> Error x
 
-    /// Inject a value into the Result type
     let returnM = Ok
 
     type EitherBuilder() =
@@ -22,7 +20,6 @@ module Prelude =
         member this.Bind (m, f) = bind f m
         member this.ReturnFrom m = m
 
-    /// EitherBuilder() on Result type
     let choose = EitherBuilder()
 
     let inline toOption x = 
@@ -32,7 +29,6 @@ module Prelude =
 
     let inline tryWith f x = f x |> toOption
 
-    /// defaultArg parameters reversed
     let argDefault x y =
         defaultArg y x
 
@@ -148,7 +144,7 @@ module Prelude =
         static member TryParseExactWithOptions style provider (formats: string[]) x =
             DateTimeOffset.TryParseExact(x, formats, provider, style) |> toOption
 
-        static member tryPparseExact formats x =
+        static member tryParseExact formats x =
             DateTimeOffset.TryParseExactWithOptions DateTimeStyles.None CultureInfo.InvariantCulture formats x
 
     let formatExceptionDisplay (e:Exception) =
