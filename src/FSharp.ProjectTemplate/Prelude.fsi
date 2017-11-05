@@ -127,6 +127,9 @@ module Prelude =
       static member
         tryParseExact : formats: string array -> x:string -> DateTimeOffset option
 
+    /// bool * 'a -> 'a option
+    val inline toOption : bool * 'a -> 'a option
+    
     /// defaultArg parameters reversed
     val argDefault : x:'a -> y:'a option -> 'a
 
