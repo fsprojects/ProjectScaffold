@@ -11,8 +11,6 @@ open Fake.UserInputHelper
 open Fake.Testing.Expecto
 open System
 open System.IO
-open System
-open System.IO
 open System.Diagnostics
 
 // --------------------------------------------------------------------------------------
