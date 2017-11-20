@@ -274,7 +274,7 @@ let hasScaffoldOrigin () =
   with
     | _ -> false
 
-if isGitRepo () && hasScaffoldOrigin () then
+if isGitRepo () then
   DeleteDir (Git.CommandHelper.findGitDir __SOURCE_DIRECTORY__).FullName
 
 if wantGit then
