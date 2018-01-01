@@ -1,3 +1,9 @@
+### 2.0 -May 13, 2017
+* custom jackfoxy fork
+* F#.formatting documentation output to docs folder for github docs
+* Expecto testing
+* paket in root folder, other minor custom tweaks
+
 ### 1.0.1
 * Removed SourceLink
 

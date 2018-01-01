@@ -1,25 +1,15 @@
-framework: >= net45
 source https://nuget.org/api/v2
+source https://ci.appveyor.com/nuget/fsharp-formatting
 
-# The setting below means your libraries will assume a minimum target of .NET 4.5 + F# 4.0.
-#
-# To increase the minimum assumed .NET Framework, change the TargetFrameworkVersion in the .fsproj project files.
-#
-# To increase the minimum assumed F# version to F# 4.1, change to 
-#     nuget FSharp.Core ~> 4.1.0 redirects: force
+nuget FSharp.Core
+nuget Argu
 
-nuget FSharp.Core ~> 4.0.0.1 redirects: force
+nuget FAKE
+nuget FSharp.Formatting 3.0.0-beta08 beta
 
-group Build
-  source https://nuget.org/api/v2
-  
-  nuget FAKE
-  nuget FSharp.Formatting
+github fsharp/FAKE modules/Octokit/Octokit.fsx
 
-  github fsharp/FAKE modules/Octokit/Octokit.fsx
-
-group Test
-  source https://nuget.org/api/v2
-  
-  nuget NUnit ~> 2
-  nuget NUnit.Runners ~> 2
+nuget Expecto
+nuget Expecto.BenchmarkDotNet
+nuget Expecto.FsCheck
+nuget Expecto.VisualStudio.TestAdapter version_in_path: true

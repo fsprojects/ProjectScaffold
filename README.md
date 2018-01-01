@@ -21,7 +21,6 @@ Read the [Getting started tutorial](http://fsprojects.github.io/ProjectScaffold/
 
 Documentation: http://fsprojects.github.io/ProjectScaffold
 
-
 ## Tips for migrating existing project to Scaffold format
 
     * clone ProjectScaffold to new folder
@@ -33,6 +32,44 @@ Documentation: http://fsprojects.github.io/ProjectScaffold
     * git commit, and any following cleanup
 
 Be sure to do only ````git mv```` file renames in a single commit. If you try to commit anything else git will treat the renames as file delete / file add and you will loose history on those files.
+
+Build:
+	* the following build targets are available
+
+  - AddLangDocs
+    + Depends on: []
+  - All
+    + Depends on: ["BuildPackage"]
+  - AssemblyInfo
+    + Depends on: []
+  - Build
+    + Depends on: ["AssemblyInfo"; "Configure"]
+  - BuildPackage
+    + Depends on: ["NuGet"]
+  - Clean
+    + Depends on: []
+  - Configure
+    + Depends on: []
+  - CopyBinaries
+    + Depends on: ["Build"]
+  - GenerateDocs
+    + Depends on: ["GenerateReferenceDocs"; "GenerateReferenceDocs"]
+  - GenerateHelp
+    + Depends on: []
+  - GenerateHelpDebug
+    + Depends on: []
+  - GenerateReferenceDocs
+    + Depends on: ["RunTests"; "GenerateHelp"]
+  - KeepRunning
+    + Depends on: ["GenerateHelpDebug"]
+  - NuGet
+    + Depends on: ["GenerateDocs"]
+  - PublishNuget
+    + Depends on: ["BuildPackage"]
+  - Release
+    + Depends on: ["Clean"; "PublishNuget"]
+  - RunTests
+    + Depends on: ["CopyBinaries"]
 
 ## Requirements
 
