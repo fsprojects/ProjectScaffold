@@ -104,9 +104,8 @@ vars.["##GitName##"]     <- None
 let wantGit     = if inCI 
                     then false
                     else promptYesNo "Initialize git repo"
-let givenOrigin = if wantGit
-                    then promptForNoSpaces "Origin (url of git remote; blank to skip)"
-                    else None
+                    
+let givenOrigin = None
 
 //Basic settings
 let solutionTemplateName = "FSharp.ProjectScaffold"
@@ -267,8 +266,6 @@ overwrite "README.md" readmeContent
 //Clean up
 File.Delete "init.fsx"
 
-print "attempting dotnet restore"
+print "dotnet restore"
 
 DotNetCli.Restore id
-
-print "dotnet restore complete"
