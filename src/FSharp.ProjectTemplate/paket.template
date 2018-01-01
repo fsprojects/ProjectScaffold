@@ -1,4 +1,5 @@
-type project
+type file
+id ##ProjectName##
 title
     ##ProjectName##
 owners
@@ -13,8 +14,10 @@ licenseUrl
     ##GitUrl##/##GitHome##/##GitName##/blob/master/LICENSE.txt
 requireLicenseAcceptance
     false
+language
+    F#
 copyright
-    Copyright 2015
+    Copyright 2017
 tags
     ##Tags##
 summary
@@ -22,4 +25,5 @@ summary
 description
     ##Description##
 
-
+files
+	../../bin/##ProjectName## ==> lib
