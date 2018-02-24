@@ -189,9 +189,7 @@ docsrc/tools/FSharp.Formatting.svclog
 # FAKE cruft
 .fake
 
-# paket executables and cruft
-**/paket.exe
-**/paket.bootstrapper.exe
+# paket cruft
 paket-files
 .paket
 
