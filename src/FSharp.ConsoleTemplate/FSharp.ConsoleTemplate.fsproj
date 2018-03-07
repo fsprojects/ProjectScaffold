@@ -10,6 +10,8 @@
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="CommandLine.fsi" />
+    <Compile Include="CommandLine.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
   <ItemGroup>

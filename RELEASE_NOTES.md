@@ -1,3 +1,7 @@
+### 3.0 -March 7, 2018
+* custom jackfoxy fork
+* netstandard2.0 and multitargeting
+
 ### 2.0 -May 13, 2017
 * custom jackfoxy fork
 * F#.formatting documentation output to docs folder for github docs

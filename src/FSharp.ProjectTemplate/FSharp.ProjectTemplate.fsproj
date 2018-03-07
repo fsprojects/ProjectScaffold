@@ -14,8 +14,6 @@
     <Compile Include="Prelude.fsi" />
     <Compile Include="Prelude.fs" />
     <Compile Include="Library.fs" />
-    <Compile Include="CommandLine.fsi" />
-    <Compile Include="CommandLine.fs" />
     <None Include="Scripts\Script.fsx" />
     <None Include="paket.references" />
     <None Include="paket.template" />
