@@ -3,6 +3,7 @@ module internal FSharp.ProjectTemplate.Prelude
 
 open Microsoft.FSharp.Core.Printf
 open System
+open System.Collections.Generic
 open System.Globalization
 open System.Reflection
 open System.Text
@@ -145,6 +146,13 @@ type DateTimeOffset with
 
     static member tryParseExact formats x =
         DateTimeOffset.TryParseExactWithOptions DateTimeStyles.None CultureInfo.InvariantCulture formats x
+
+type IDictionary<'Key, 'Value> with
+    member inline this.TryFind(key) =
+        tryWith this.TryGetValue key 
+
+    member inline this.GetValueOrDefault(key, defaultValue) = 
+        this.TryFind(key) |> defaultArg <| defaultValue
 
 let formatExceptionDisplay (e:Exception) =
     let sb = StringBuilder()
