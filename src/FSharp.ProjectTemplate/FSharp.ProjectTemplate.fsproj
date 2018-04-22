@@ -11,8 +11,8 @@
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Prelude.fsi" />
     <Compile Include="Prelude.fs" />
+    <Compile Include="UOM.fs" />
     <Compile Include="Library.fs" />
     <None Include="Scripts\Script.fsx" />
     <None Include="paket.references" />
