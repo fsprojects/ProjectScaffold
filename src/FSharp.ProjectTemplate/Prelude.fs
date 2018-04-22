@@ -4,6 +4,7 @@ module FSharp.ProjectTemplate.Prelude
 open Microsoft.FSharp.Core.Printf
 open System
 open System.Collections.Generic
+open System.Diagnostics
 open System.Globalization
 open System.Reflection
 open System.Text
@@ -188,3 +189,38 @@ let formatExceptionDisplay (e:Exception) =
             then printException e.InnerException (count + 1)
     printException e 1
     sb.ToString()
+
+let runProcess filename args startDir = 
+    let procStartInfo = 
+        ProcessStartInfo(
+            RedirectStandardOutput = true,
+            RedirectStandardError = true,
+            UseShellExecute = false,
+            FileName = filename,
+            Arguments = args
+        )
+    match startDir with | Some d -> procStartInfo.WorkingDirectory <- d | _ -> ()
+
+    let outputs = System.Collections.Generic.List<string>()
+    let errors = System.Collections.Generic.List<string>()
+    let outputHandler f (_sender:obj) (args:DataReceivedEventArgs) = f args.Data
+
+    use p = new Process(StartInfo = procStartInfo)
+    p.OutputDataReceived.AddHandler(DataReceivedEventHandler (outputHandler outputs.Add))
+    p.ErrorDataReceived.AddHandler(DataReceivedEventHandler (outputHandler errors.Add))
+
+    let started = 
+        try
+            p.Start()
+        with | ex ->
+            ex.Data.Add("filename", filename)
+            reraise()
+    if not started then
+        failwithf "Failed to start process %s" filename
+    
+    p.BeginOutputReadLine()
+    p.BeginErrorReadLine()
+    p.WaitForExit()
+
+    let cleanOut l = l |> Seq.filter (String.IsNullOrEmpty >> not)
+    cleanOut outputs,cleanOut errors
