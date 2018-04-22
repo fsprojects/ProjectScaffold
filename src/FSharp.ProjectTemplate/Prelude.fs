@@ -1,5 +1,5 @@
 ﻿[<AutoOpen>]
-module internal FSharp.ProjectTemplate.Prelude
+module FSharp.ProjectTemplate.Prelude
 
 open Microsoft.FSharp.Core.Printf
 open System
@@ -22,12 +22,12 @@ type EitherBuilder() =
 
 let choose = EitherBuilder()
 
-let inline toOption x = 
+let inline internal toOption x = 
     match x with
     | true, v -> Some v
     | _       -> None
 
-let inline tryWith f x = f x |> toOption
+let inline internal tryWith f x = f x |> toOption
 
 let argDefault x y =
     defaultArg y x
