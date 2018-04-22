@@ -8,17 +8,17 @@ open System.Globalization
 open System.Reflection
 open System.Text
 
-let bind f = 
+let private bind f = 
     function
     | Ok x -> f x
     | Error x -> Error x
 
-let returnM = Ok
+let private returnM = Ok
 
 type EitherBuilder() =
-    member this.Return a = returnM a
-    member this.Bind (m, f) = bind f m
-    member this.ReturnFrom m = m
+    member __.Return a = returnM a
+    member __.Bind (m, f) = bind f m
+    member __.ReturnFrom m = m
 
 let choose = EitherBuilder()
 
