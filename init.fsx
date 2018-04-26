@@ -235,10 +235,10 @@ let setRemote (name,url) workingDir =
     | x -> traceException x
 
 let isRemote (name,url) value =
-  let remote = getRegEx <| sprintf @"^%s\s+(https?:\/\/|git@)github.com(\/|:)%s\s+\(push\)$" name url
+  let remote = getRegEx <| sprintf @"^%s\s+(https?:\/\/|git@)github.com(\/|:)%s(\.git)?\s+\(push\)$" name url
   remote.IsMatch value
 
-let isScaffoldRemote = isRemote ("origin","fsprojects/ProjectScaffold.git")
+let isScaffoldRemote = isRemote ("origin","fsprojects/ProjectScaffold")
 
 let hasScaffoldOrigin () =
   try
