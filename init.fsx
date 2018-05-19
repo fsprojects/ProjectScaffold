@@ -250,6 +250,14 @@ if wantGit then
   Git.Repository.init __SOURCE_DIRECTORY__ false false
   givenOrigin |> Option.iter (fun url -> setRemote ("origin",url) __SOURCE_DIRECTORY__)
 
+//overwrite release notes
+let releaseNotesContent = [sprintf "#### 0.0.1 - %s" <| DateTime.Now.ToLongDateString(); "* Initial release"]
+overwrite "RELEASE_NOTES.md" releaseNotesContent
+
+//overwrite readme
+let readmeContent = [sprintf "# %s" projectName]
+overwrite "README.md" readmeContent
+
 //Clean up
 File.Delete "init.fsx"
 
