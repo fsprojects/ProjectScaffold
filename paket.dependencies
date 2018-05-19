@@ -7,7 +7,7 @@ nuget FSharp.Core
 nuget Argu
 
 nuget FAKE
-nuget FSharp.Formatting 3.0.0-beta08 beta
+nuget FSharp.Formatting prerelease
 
 github fsharp/FAKE modules/Octokit/Octokit.fsx
 
