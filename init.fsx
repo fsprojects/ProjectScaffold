@@ -111,6 +111,7 @@ let givenOrigin = if wantGit
 //Basic settings
 let solutionTemplateName = "FSharp.ProjectScaffold"
 let projectTemplateName = "FSharp.ProjectTemplate"
+let consoleTemplateName = "FSharp.ConsoleTemplate"
 let oldProjectGuid = "7E90D6CE-A10B-4858-A5BC-41DF7250CBCA"
 let projectGuid = Guid.NewGuid().ToString()
 let oldTestProjectGuid = "E789C72A-5CFD-436B-8EF1-61AA2852A89F"
@@ -125,6 +126,8 @@ let projectName =
   match vars.["##ProjectName##"] with
   | Some p -> p.Replace(" ", "")
   | None -> "ProjectScaffold"
+  
+let consoleName = sprintf "%sConsole" projectName
 let solutionFile = localFile (projectName + ".sln")
 move templateSolutionFile solutionFile
 
@@ -135,11 +138,11 @@ dirsWithProjects
     pd
     |> subDirectories
     |> Array.collect (fun d -> filesInDirMatching "*.?sproj" d)
-    |> Array.iter (fun f -> f.MoveTo(f.Directory.FullName @@ (f.Name.Replace(projectTemplateName, projectName))))
+    |> Array.iter (fun f -> f.MoveTo(f.Directory.FullName @@ (f.Name.Replace(projectTemplateName, projectName).Replace(consoleTemplateName, consoleName))))
     // project directories
     pd
     |> subDirectories
-    |> Array.iter (fun d -> d.MoveTo(pd.FullName @@ (d.Name.Replace(projectTemplateName, projectName))))
+    |> Array.iter (fun d -> d.MoveTo(pd.FullName @@ (d.Name.Replace(projectTemplateName, projectName).Replace(consoleTemplateName, consoleName))))
     )
 
 //Now that everything is renamed, we need to update the content of some files
@@ -157,6 +160,7 @@ let overwrite file content = File.WriteAllLines(file, content |> Seq.toArray); f
 let replaceContent file =
   File.ReadAllLines(file) |> Array.toSeq
   |> replace projectTemplateName projectName
+  |> replace consoleTemplateName consoleName
   |> replace (oldProjectGuid.ToLowerInvariant()) (projectGuid.ToLowerInvariant())
   |> replace (oldTestProjectGuid.ToLowerInvariant()) (testProjectGuid.ToLowerInvariant())
   |> replace (oldProjectGuid.ToUpperInvariant()) (projectGuid.ToUpperInvariant())
@@ -177,6 +181,7 @@ let replaceContent file =
 let rec filesToReplace dir = seq {
   yield! Directory.GetFiles(dir, "*.?sproj")
   yield! Directory.GetFiles(dir, "*.fs")
+  yield! Directory.GetFiles(dir, "*.fsi")
   yield! Directory.GetFiles(dir, "*.cs")
   yield! Directory.GetFiles(dir, "*.xaml")
   yield! Directory.GetFiles(dir, "*.fsx")
@@ -196,6 +201,7 @@ let generate templatePath generatedFilePath =
   let newContent =
     File.ReadAllLines(templatePath) |> Array.toSeq
     |> replace "##ProjectName##" projectName
+    |> replace "##ConsoleName##" consoleName
     |> replaceWithVarOrMsg "##Summary##" "Project has no summmary; update build.fsx"
     |> replaceWithVarOrMsg "##Description##" "Project has no description; update build.fsx"
     |> replaceWithVarOrMsg "##Author##" "Update Author in build.fsx"
