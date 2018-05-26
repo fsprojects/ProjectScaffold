@@ -1,4 +1,4 @@
-#r @"packages/build/FAKE/tools/FakeLib.dll"
+#r @"packages/FAKE/tools/FakeLib.dll"
 open Fake
 open System
 open System.IO
@@ -9,31 +9,6 @@ open System.Collections.Generic
 // This file is run the first time that you run build.sh/build.cmd
 // It generates the build.fsx and generate.fsx files
 // --------------------------------
-
-let checkFSharpInstallation () =
-  try
-    MSBuildRelease "." "CheckFSharpInstallation" ["CheckFSharpInstallation.fsproj"] |> ignore
-    true
-  with e ->
-    false
-
-if File.Exists("CheckFSharpInstallation.fsproj") then
-  if checkFSharpInstallation() then
-    File.Delete "CheckFSharpInstallation.fsproj" // F# is installed, no need to check again if init.fsx gets run a second time somehow
-  else
-    traceError "F# does not seem to be installed."
-    if isMacOS then
-      traceError "Please install F# (see http://fsharp.org/use/mac/ for instructions),"
-    elif isWindows then
-      traceError "Please install F# (see http://fsharp.org/use/windows/ for instructions),"
-    elif isUnix then
-      traceError "Please install the \"fsharp\" package with your system's standard package manager,"
-      if isLinux then
-        traceError "(e.g., \"sudo apt-get install fsharp\" or \"sudo yum install fsharp\"),"
-    else
-      traceError "Please install F# (see http://fsharp.org/ for instructions),"
-    traceError "then run the build script again."
-    failwith "Build script aborted: please install F# and try again."
 
 let dirsWithProjects = ["src";"tests";"docsrc/content"]
                        |> List.map (fun d -> directoryInfo (__SOURCE_DIRECTORY__ @@ d))
@@ -136,6 +111,7 @@ let givenOrigin = if wantGit
 //Basic settings
 let solutionTemplateName = "FSharp.ProjectScaffold"
 let projectTemplateName = "FSharp.ProjectTemplate"
+let consoleTemplateName = "FSharp.ConsoleTemplate"
 let oldProjectGuid = "7E90D6CE-A10B-4858-A5BC-41DF7250CBCA"
 let projectGuid = Guid.NewGuid().ToString()
 let oldTestProjectGuid = "E789C72A-5CFD-436B-8EF1-61AA2852A89F"
@@ -150,6 +126,8 @@ let projectName =
   match vars.["##ProjectName##"] with
   | Some p -> p.Replace(" ", "")
   | None -> "ProjectScaffold"
+  
+let consoleName = sprintf "%sConsole" projectName
 let solutionFile = localFile (projectName + ".sln")
 move templateSolutionFile solutionFile
 
@@ -160,11 +138,11 @@ dirsWithProjects
     pd
     |> subDirectories
     |> Array.collect (fun d -> filesInDirMatching "*.?sproj" d)
-    |> Array.iter (fun f -> f.MoveTo(f.Directory.FullName @@ (f.Name.Replace(projectTemplateName, projectName))))
+    |> Array.iter (fun f -> f.MoveTo(f.Directory.FullName @@ (f.Name.Replace(projectTemplateName, projectName).Replace(consoleTemplateName, consoleName))))
     // project directories
     pd
     |> subDirectories
-    |> Array.iter (fun d -> d.MoveTo(pd.FullName @@ (d.Name.Replace(projectTemplateName, projectName))))
+    |> Array.iter (fun d -> d.MoveTo(pd.FullName @@ (d.Name.Replace(projectTemplateName, projectName).Replace(consoleTemplateName, consoleName))))
     )
 
 //Now that everything is renamed, we need to update the content of some files
@@ -182,6 +160,7 @@ let overwrite file content = File.WriteAllLines(file, content |> Seq.toArray); f
 let replaceContent file =
   File.ReadAllLines(file) |> Array.toSeq
   |> replace projectTemplateName projectName
+  |> replace consoleTemplateName consoleName
   |> replace (oldProjectGuid.ToLowerInvariant()) (projectGuid.ToLowerInvariant())
   |> replace (oldTestProjectGuid.ToLowerInvariant()) (testProjectGuid.ToLowerInvariant())
   |> replace (oldProjectGuid.ToUpperInvariant()) (projectGuid.ToUpperInvariant())
@@ -202,6 +181,7 @@ let replaceContent file =
 let rec filesToReplace dir = seq {
   yield! Directory.GetFiles(dir, "*.?sproj")
   yield! Directory.GetFiles(dir, "*.fs")
+  yield! Directory.GetFiles(dir, "*.fsi")
   yield! Directory.GetFiles(dir, "*.cs")
   yield! Directory.GetFiles(dir, "*.xaml")
   yield! Directory.GetFiles(dir, "*.fsx")
@@ -221,6 +201,7 @@ let generate templatePath generatedFilePath =
   let newContent =
     File.ReadAllLines(templatePath) |> Array.toSeq
     |> replace "##ProjectName##" projectName
+    |> replace "##ConsoleName##" consoleName
     |> replaceWithVarOrMsg "##Summary##" "Project has no summmary; update build.fsx"
     |> replaceWithVarOrMsg "##Description##" "Project has no description; update build.fsx"
     |> replaceWithVarOrMsg "##Author##" "Update Author in build.fsx"
@@ -275,5 +256,15 @@ if wantGit then
   Git.Repository.init __SOURCE_DIRECTORY__ false false
   givenOrigin |> Option.iter (fun url -> setRemote ("origin",url) __SOURCE_DIRECTORY__)
 
+//overwrite release notes
+let releaseNotesContent = [sprintf "#### 0.0.1 - %s" <| DateTime.Now.ToLongDateString(); "* Initial release"]
+overwrite "RELEASE_NOTES.md" releaseNotesContent
+
+//overwrite readme
+let readmeContent = [sprintf "# %s" projectName]
+overwrite "README.md" readmeContent
+
 //Clean up
 File.Delete "init.fsx"
+
+print "dotnet restore"
