@@ -18,17 +18,17 @@ nuget Fake.DotNet.Cli
 nuget Fake.DotNet.MSBuild
 nuget Fake.DotNet.Paket
 nuget Fake.DotNet.Testing.Expecto
-nuget Fake.Api.GitHub
+nuget Fake.Tools.Git
 nuget Fake.IO.FileSystem //"
 #load "./.fake/build.fsx/intellisense.fsx"
 
-open Fake.Api
 open Fake.Core
 open Fake.DotNet
 open Fake.DotNet.Testing
 open Fake.IO
 open Fake.IO.FileSystemOperators
 open Fake.IO.Globbing.Operators
+open Fake.Tools
 
 // --------------------------------------------------------------------------------------
 // START TODO: Provide project-specific details below
@@ -191,32 +191,25 @@ Target.create "PublishNuget" (fun _ ->
 // Generate the documentation
 
 let fakeCommand = "fake"
-let fakeStartInfo script workingDirectory args fsiargs environmentVars =
+let fakeStartInfo script workingDirectory fsiargs target =
     (fun (info: ProcStartInfo) ->
         
-        // TODO
-        // let extraVars =
-        //     [ ("MSBuild", MSBuild.msBuildExe)
-        //       ("GIT", GitHub.CommandHelper.gitPath)
-        //       ("FSI", fsiPath) ]
-
         let environment =
-            environmentVars
-            // |> Seq.append extraVars
-            |> Map.ofSeq
+            [ ("MSBuild", MSBuild.msBuildExe)
+              ("GIT", Git.CommandHelper.gitPath) ]
 
         { info with
             FileName = fakeCommand
-            Arguments = sprintf "%s --fsiargs -d:FAKE %s \"%s\"" args fsiargs script
-            WorkingDirectory = workingDirectory
-            Environment = environment })
-           
+            Arguments = sprintf "run --fsiargs \"%s\" \"%s\" --target %s" fsiargs script target
+            WorkingDirectory = workingDirectory }
+        |> Process.setEnvironmentVariables environment 
+    )
 
 /// Run the given buildscript with FAKE.exe
 let executeFAKEWithOutput workingDirectory script fsiargs envArgs =
     let exitCode =
         Process.execRaw
-            (fakeStartInfo script workingDirectory "" fsiargs envArgs)
+            (fakeStartInfo script workingDirectory fsiargs envArgs)
             System.TimeSpan.MaxValue false ignore ignore
     System.Threading.Thread.Sleep 1000
     exitCode
@@ -224,7 +217,7 @@ let executeFAKEWithOutput workingDirectory script fsiargs envArgs =
 // Documentation
 let buildDocumentationTarget fsiargs target =
     Trace.trace (sprintf "Building documentation (%s), this could take some time, please wait..." target)
-    let exit = executeFAKEWithOutput "docsrc/tools" "generate.fsx" fsiargs ["target", target]
+    let exit = executeFAKEWithOutput "docsrc/tools" "generate.fsx" fsiargs target
     if exit <> 0 then
         failwith "generating reference documentation failed"
     ()
