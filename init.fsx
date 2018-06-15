@@ -1,8 +1,13 @@
-#r @"packages/FAKE/tools/FakeLib.dll"
-open Fake
-open System
-open System.IO
+#r "paket: groupref FakeBuild //"
+
+#load "./.fake/init.fsx/intellisense.fsx"
+
 open System.Collections.Generic
+open System.IO
+open Fake.Core
+open Fake.IO
+open Fake.IO.FileSystemOperators
+open Fake.Tools
 
 // --------------------------------
 // init.fsx
@@ -11,7 +16,7 @@ open System.Collections.Generic
 // --------------------------------
 
 let dirsWithProjects = ["src";"tests";"docsrc/content"]
-                       |> List.map (fun d -> directoryInfo (__SOURCE_DIRECTORY__ @@ d))
+                       |> List.map (fun d -> DirectoryInfo (__SOURCE_DIRECTORY__ @@ d))
 
 // special funtions
 // many whom might be replaceable with FAKE functions
@@ -32,14 +37,14 @@ let buildTemplatePath = localFile "build.template"
 let outputPath = localFile "build.fsx"
 
 let prompt (msg:string) =
-  Console.Write(msg)
-  Console.ReadLine().Trim()
+  System.Console.Write(msg)
+  System.Console.ReadLine().Trim()
   |> function | "" -> None | s -> Some s
   |> Option.map (fun s -> s.Replace ("\"","\\\""))
 let runningOnAppveyor =
-  not <| String.IsNullOrEmpty(Environment.GetEnvironmentVariable("CI"))
+  not <| System.String.IsNullOrEmpty(Environment.environVar("CI"))
 let runningOnTravis =
-  not <| String.IsNullOrEmpty(Environment.GetEnvironmentVariable("TRAVIS"))
+  not <| System.String.IsNullOrEmpty(Environment.environVar("TRAVIS"))
 let inCI = runningOnAppveyor || runningOnTravis
 let promptFor friendlyName =
   if inCI then Some "CONTINUOUSINTEGRATION"
@@ -48,13 +53,13 @@ let rec promptForNoSpaces friendlyName =
   match promptFor friendlyName with
   | None -> None
   | Some s when not <| String.exists (fun c -> c = ' ') s -> Some s
-  | _ -> Console.WriteLine("Sorry, spaces are disallowed"); promptForNoSpaces friendlyName
+  | _ -> System.Console.WriteLine("Sorry, spaces are disallowed"); promptForNoSpaces friendlyName
 let rec promptYesNo msg =
   match prompt (sprintf "%s [Yn]: " msg) with
   | None
   | Some "Y" | Some "y" -> true
   | Some "N" | Some "n" -> false
-  | _ -> Console.WriteLine("Sorry, invalid answer"); promptYesNo msg
+  | _ -> System.Console.WriteLine("Sorry, invalid answer"); promptYesNo msg
 
 failfUnlessExists buildTemplatePath "Cannot find build template file %s"
   (Path.GetFullPath buildTemplatePath)
@@ -112,9 +117,9 @@ let solutionTemplateName = "FSharp.ProjectScaffold"
 let projectTemplateName = "FSharp.ProjectTemplate"
 let consoleTemplateName = "FSharp.ConsoleTemplate"
 let oldProjectGuid = "7E90D6CE-A10B-4858-A5BC-41DF7250CBCA"
-let projectGuid = Guid.NewGuid().ToString()
+let projectGuid = System.Guid.NewGuid().ToString()
 let oldTestProjectGuid = "E789C72A-5CFD-436B-8EF1-61AA2852A89F"
-let testProjectGuid = Guid.NewGuid().ToString()
+let testProjectGuid = System.Guid.NewGuid().ToString()
 
 //Rename solution file
 let templateSolutionFile = localFile (sprintf "%s.sln" solutionTemplateName)
@@ -135,12 +140,12 @@ dirsWithProjects
 |> List.iter (fun pd ->
     // project files
     pd
-    |> subDirectories
-    |> Array.collect (fun d -> filesInDirMatching "*.?sproj" d)
+    |> DirectoryInfo.getSubDirectories
+    |> Array.collect (fun d -> DirectoryInfo.getMatchingFiles "*.?sproj" d)
     |> Array.iter (fun f -> f.MoveTo(f.Directory.FullName @@ (f.Name.Replace(projectTemplateName, projectName).Replace(consoleTemplateName, consoleName))))
     // project directories
     pd
-    |> subDirectories
+    |> DirectoryInfo.getSubDirectories
     |> Array.iter (fun d -> d.MoveTo(pd.FullName @@ (d.Name.Replace(projectTemplateName, projectName).Replace(consoleTemplateName, consoleName))))
     )
 
@@ -215,7 +220,6 @@ let generate templatePath generatedFilePath =
   print (sprintf "# Generated %s" generatedFilePath)
 
 generate (localFile "build.template") (localFile "build.fsx")
-generate (localFile "docsrc/tools/generate.template") (localFile "docsrc/tools/generate.fsx")
 
 //Handle source control
 let isGitRepo () =
@@ -225,17 +229,17 @@ let isGitRepo () =
   with
     | _ -> false
 
-let setRemote (name,url) workingDir =
+let setRemote (name,url) _ =
   try
     let cmd = sprintf "remote add %s %s" name url
     match Git.CommandHelper.runGitCommand __SOURCE_DIRECTORY__ cmd with
-    | true ,_,_ -> tracefn "Successfully add remote '%s' = '%s'" name url
-    | false,_,x -> traceError <| sprintf "Couldn't add remote: %s" x
+    | true ,_,_ -> Trace.tracefn "Successfully add remote '%s' = '%s'" name url
+    | false,_,x -> Trace.traceError <| sprintf "Couldn't add remote: %s" x
   with
-    | x -> traceException x
+    | x -> Trace.traceException x
 
 let isRemote (name,url) value =
-  let remote = getRegEx <| sprintf @"^%s\s+(https?:\/\/|git@)github.com(\/|:)%s(\.git)?\s+\(push\)$" name url
+  let remote = String.getRegEx <| sprintf @"^%s\s+(https?:\/\/|git@)github.com(\/|:)%s(\.git)?\s+\(push\)$" name url
   remote.IsMatch value
 
 let isScaffoldRemote = isRemote ("origin","fsprojects/ProjectScaffold")
@@ -249,14 +253,14 @@ let hasScaffoldOrigin () =
     | _ -> false
 
 if isGitRepo () then
-  DeleteDir (Git.CommandHelper.findGitDir __SOURCE_DIRECTORY__).FullName
+  Shell.deleteDir (Git.CommandHelper.findGitDir __SOURCE_DIRECTORY__).FullName
 
 if wantGit then
   Git.Repository.init __SOURCE_DIRECTORY__ false false
   givenOrigin |> Option.iter (fun url -> setRemote ("origin",url) __SOURCE_DIRECTORY__)
 
 //overwrite release notes
-let releaseNotesContent = [sprintf "#### 0.0.1 - %s" <| DateTime.Now.ToLongDateString(); "* Initial release"]
+let releaseNotesContent = [sprintf "#### 0.0.1 - %s" <| System.DateTime.Now.ToLongDateString(); "* Initial release"]
 overwrite "RELEASE_NOTES.md" releaseNotesContent
 
 //overwrite readme
@@ -266,6 +270,6 @@ overwrite "README.md" readmeContent
 //Clean up
 File.Delete "init.fsx"
 
-print "dotnet restore"
+//print "dotnet restore"
 
-DotNetCli.Restore id
+//DotNetCli.Restore id
