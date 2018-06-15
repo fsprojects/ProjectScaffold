@@ -191,7 +191,6 @@ docsrc/tools/FSharp.Formatting.svclog
 
 # paket cruft
 paket-files
-.paket
 
 # jackfoxy stuff, possibly secrets
 **/load-references-debug.fsx
