@@ -246,8 +246,8 @@ let copyFiles () =
     Directory.ensure (output @@ "content")
     Shell.copyRecursive (formatting @@ "styles") (output @@ "content") true 
     |> Trace.logItems "Copying styles and scripts: "
-        
-Target.create "Docs" (fun _ ->
+
+ let copyBaseDocs () =
     File.delete "docsrc/content/release-notes.md"
     Shell.copyFile "docsrc/content/" "RELEASE_NOTES.md"
     Shell.rename "docsrc/content/release-notes.md" "docsrc/content/RELEASE_NOTES.md"
@@ -255,8 +255,10 @@ Target.create "Docs" (fun _ ->
     File.delete "docsrc/content/license.md"
     Shell.copyFile "docsrc/content/" "LICENSE.txt"
     Shell.rename "docsrc/content/license.md" "docsrc/content/LICENSE.txt"
+           
+Target.create "Docs" (fun _ ->
+    copyBaseDocs ()
 
-    
     DirectoryInfo.getSubDirectories (DirectoryInfo.ofPath templates)
     |> Seq.iter (fun d ->
                     let name = d.Name
@@ -296,6 +298,12 @@ let generateHelp fail debug =
     with
     | e when not fail ->
         Trace.traceImportant "generating help documentation failed"
+
+Target.create "GenerateDocsDebug" (fun _ ->
+    copyBaseDocs ()
+
+    generateHelp true true
+)
 
 Target.create "KeepRunning" (fun _ ->
     use watcher = !! "docsrc/content/**/*.*" |> ChangeWatcher.run (fun changes ->
@@ -380,11 +388,11 @@ Target.create "All" ignore
   ==> "BuildPackage"
   ==> "All"
 
-"GenerateHelp"
+"Docs"
   ==> "GenerateReferenceDocs"
   ==> "GenerateDocs"
 
-"GenerateHelpDebug"
+"GenerateDocsDebug"
   ==> "KeepRunning"
 
 "Clean"
