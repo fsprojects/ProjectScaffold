@@ -247,7 +247,7 @@ let copyFiles () =
     Shell.copyRecursive (formatting @@ "styles") (output @@ "content") true 
     |> Trace.logItems "Copying styles and scripts: "
 
- let copyBaseDocs () =
+let copyBaseDocs () =
     File.delete "docsrc/content/release-notes.md"
     Shell.copyFile "docsrc/content/" "RELEASE_NOTES.md"
     Shell.rename "docsrc/content/release-notes.md" "docsrc/content/RELEASE_NOTES.md"
