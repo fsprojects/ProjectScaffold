@@ -342,9 +342,6 @@ Target.create "AddLangDocs" (fun _ ->
 // --------------------------------------------------------------------------------------
 // Release Scripts
 
-#load "paket-files/fsharp/FAKE/modules/Octokit/Octokit.fsx"
-open Octokit
-
 Target.create "Release" (fun _ ->
     let user =
         match getBuildParam "github-user" with

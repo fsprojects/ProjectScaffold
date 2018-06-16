@@ -10,8 +10,6 @@ nuget Expecto.BenchmarkDotNet
 nuget Expecto.FsCheck
 nuget Expecto.VisualStudio.TestAdapter version_in_path: true
 
-github fsharp/FAKE modules/Octokit/Octokit.fsx
-
 clitool dotnet-fake
 
 group Formatting
