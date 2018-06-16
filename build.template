@@ -14,6 +14,7 @@ open Fake.IO
 open Fake.IO.FileSystemOperators
 open Fake.IO.Globbing.Operators
 open Fake.DotNet.Testing
+open Fake.Tools
 
 // --------------------------------------------------------------------------------------
 // START TODO: Provide project-specific details below
@@ -160,7 +161,7 @@ Target.create "NuGet" (fun _ ->
 )
 
 Target.create "PublishNuget" (fun _ ->
-    Paket.Push(fun p ->
+    Paket.push(fun p ->
         { p with
             PublishUrl = "https://www.nuget.org"
             WorkingDir = "bin" })
@@ -285,9 +286,20 @@ Target.create "Docs" (fun _ ->
                 Template = docTemplate } )
 )
 
+let generateHelp fail debug =
+    let args =
+        if debug then "--define:HELP"
+        else "--define:RELEASE --define:HELP"
+    try
+        //buildDocumentationTarget args "Default"
+        Trace.traceImportant "Help generated"
+    with
+    | e when not fail ->
+        Trace.traceImportant "generating help documentation failed"
+
 Target.create "KeepRunning" (fun _ ->
-    use watcher = !! "docsrc/content/**/*.*" |> WatchChanges (fun changes ->
-         generateHelp' true true
+    use watcher = !! "docsrc/content/**/*.*" |> ChangeWatcher.run (fun changes ->
+         generateHelp true true
     )
 
     traceImportant "Waiting for help edits. Press any key to stop."
@@ -297,7 +309,7 @@ Target.create "KeepRunning" (fun _ ->
     watcher.Dispose()
 )
 
-Target.create "GenerateDocs" DoNothing
+Target.create "GenerateDocs" ignore
 
 let createIndexFsx lang =
     let content = """(*** hide ***)
@@ -334,7 +346,7 @@ Target.create "AddLangDocs" (fun _ ->
             failwithf "Documents for specified language '%s' have already been added." lang
 
         Directory.ensure langTemplateDir
-        Copy langTemplateDir [ templateDir </> templateFileName ]
+        Shell.copy [ templateDir </> templateFileName ]
 
         createIndexFsx lang)
 )
@@ -372,12 +384,12 @@ Target.create "Release" (fun _ ->
     |> Async.RunSynchronously
 )
 
-Target.create "BuildPackage" DoNothing
+Target.create "BuildPackage" ignore
 
 // --------------------------------------------------------------------------------------
 // Run all targets by default. Invoke 'build <Target>' to override
 
-Target.create "All" DoNothing
+Target.create "All" ignore
 
 "AssemblyInfo"
   ==> "Build"
