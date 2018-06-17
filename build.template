@@ -138,7 +138,7 @@ Target "Build" (fun _ ->
     DotNetCli.Restore id
     
     !! solutionFile
-    |> MSBuildReleaseExt "" vsProjProps "Rebuild"
+    |> MSBuildReleaseExt "" vsProjProps "Build"
     |> ignore
 )
 
