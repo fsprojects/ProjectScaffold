@@ -9,10 +9,6 @@ open System.Globalization
 open System.Reflection
 open System.Text
 
-/// "Apples,Oranges,Bananas" / ','
-let (/) (s : string) (sep : char) =
-    s.Split([|sep|])
-
 let private bind f = 
     function
     | Ok x -> f x
