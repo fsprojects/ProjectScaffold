@@ -13,7 +13,7 @@
     </CoreBuildDependsOn>
   </PropertyGroup>
   <Target Name="Build">
-    <Exec IgnoreStandardErrorWarningFormat="true" Command="dotnet fake build" WorkingDirectory="$(RepoRootDir)" />
+    <Exec IgnoreStandardErrorWarningFormat="true" Command="fake build" WorkingDirectory="$(RepoRootDir)" />
   </Target>
   <Target Name="Pack">
   </Target>
