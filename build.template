@@ -138,19 +138,53 @@ Target.create "CleanDocs" (fun _ ->
 // --------------------------------------------------------------------------------------
 // Build library & test project
 
+Target.create "Restore" (fun _ ->
+    solutionFile
+    |> DotNet.restore id
+)
+
 Target.create "Build" (fun _ ->
-    solutionFile 
-    |> DotNet.build (fun p -> 
+    (*solutionFile
+    |> DotNet.build (fun p ->
         { p with
-            Configuration = buildConfiguration })
+            Configuration = buildConfiguration })*)
+    let setParams (defaults:MSBuildParams) =
+        { defaults with
+            Verbosity = Some(Quiet)
+            Targets = ["Build"]
+            Properties =
+                [
+                    "Optimize", "True"
+                    "DebugSymbols", "True"
+                    "Configuration", configuration
+                ]
+         }
+    MSBuild.build setParams solutionFile
 )
 
 // --------------------------------------------------------------------------------------
 // Run the unit tests using test runner
 
 Target.create "RunTests" (fun _ ->
-    !! testAssemblies
-    |> Expecto.run id
+    let assemblies = !! testAssemblies
+
+    let setParams f =
+        match Environment.isWindows with
+        | true ->
+            fun p ->
+                { p with
+                    FileName = f}
+        | false ->
+            fun p ->
+                { p with
+                    FileName = "mono"
+                    Arguments = f }
+    assemblies
+    |> Seq.map (fun f ->
+        Process.execSimple (setParams f) System.TimeSpan.MaxValue
+    )
+    |>Seq.reduce (+)
+    |> (fun i -> if i > 0 then failwith "")
 )
 
 // --------------------------------------------------------------------------------------
@@ -200,7 +234,7 @@ let root = website
 let referenceBinaries = []
 
 let layoutRootsAll = new System.Collections.Generic.Dictionary<string, string list>()
-layoutRootsAll.Add("en",[   templates; 
+layoutRootsAll.Add("en",[   templates;
                             formatting @@ "templates"
                             formatting @@ "templates/reference" ])
 
@@ -208,11 +242,11 @@ Target.create "ReferenceDocs" (fun _ ->
     Directory.ensure (output @@ "reference")
 
     let binaries () =
-        let manuallyAdded = 
-            referenceBinaries 
+        let manuallyAdded =
+            referenceBinaries
             |> List.map (fun b -> bin @@ b)
-   
-        let conventionBased = 
+
+        let conventionBased =
             DirectoryInfo.getSubDirectories <| DirectoryInfo bin
             |> Array.collect (fun d ->
                 let name, dInfo =
@@ -226,9 +260,9 @@ Target.create "ReferenceDocs" (fun _ ->
                         d.Name, net47Bin.[0]
 
                 dInfo.GetFiles()
-                |> Array.filter (fun x -> 
+                |> Array.filter (fun x ->
                     x.Name.ToLower() = (sprintf "%s.dll" name).ToLower())
-                |> Array.map (fun x -> x.FullName) 
+                |> Array.map (fun x -> x.FullName)
                 )
             |> List.ofArray
 
@@ -245,12 +279,12 @@ Target.create "ReferenceDocs" (fun _ ->
 )
 
 let copyFiles () =
-    Shell.copyRecursive files output true 
+    Shell.copyRecursive files output true
     |> Trace.logItems "Copying file: "
     Directory.ensure (output @@ "content")
-    Shell.copyRecursive (formatting @@ "styles") (output @@ "content") true 
+    Shell.copyRecursive (formatting @@ "styles") (output @@ "content") true
     |> Trace.logItems "Copying styles and scripts: "
-        
+
 Target.create "Docs" (fun _ ->
     File.delete "docsrc/content/release-notes.md"
     Shell.copyFile "docsrc/content/" "RELEASE_NOTES.md"
@@ -260,7 +294,7 @@ Target.create "Docs" (fun _ ->
     Shell.copyFile "docsrc/content/" "LICENSE.txt"
     Shell.rename "docsrc/content/license.md" "docsrc/content/LICENSE.txt"
 
-    
+
     DirectoryInfo.getSubDirectories (DirectoryInfo.ofPath templates)
     |> Seq.iter (fun d ->
                     let name = d.Name
@@ -270,7 +304,7 @@ Target.create "Docs" (fun _ ->
                                        formatting @@ "templates"
                                        formatting @@ "templates/reference" ]))
     copyFiles ()
-    
+
     for dir in  [ content; ] do
         let langSpecificPath(lang, path:string) =
             path.Split([|'/'; '\\'|], System.StringSplitOptions.RemoveEmptyEntries)
@@ -284,7 +318,7 @@ Target.create "Docs" (fun _ ->
         FSFormatting.createDocs (fun args ->
             { args with
                 Source = content
-                OutputDirectory = output 
+                OutputDirectory = output
                 LayoutRoots = layoutRoots
                 ProjectParameters  = ("root", root)::info
                 Template = docTemplate } )
@@ -347,6 +381,7 @@ Target.create "All" ignore
 
 "Clean"
   ==> "AssemblyInfo"
+  ==> "Restore"
   ==> "Build"
   ==> "CopyBinaries"
   ==> "RunTests"
