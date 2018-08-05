@@ -13,7 +13,6 @@ open Fake.DotNet
 open Fake.IO
 open Fake.IO.FileSystemOperators
 open Fake.IO.Globbing.Operators
-open Fake.DotNet.Testing
 open Fake.Tools
 open Fake.Api
 
@@ -327,39 +326,36 @@ Target.create "Docs" (fun _ ->
 // --------------------------------------------------------------------------------------
 // Release Scripts
 
-//#load "paket-files/fsharp/FAKE/modules/Octokit/Octokit.fsx"
-//open Octokit
-
 Target.create "Release" (fun _ ->
     // not fully converted from  FAKE 4
 
-    //let user =
-    //    match getBuildParam "github-user" with
-    //    | s when not (String.isNullOrWhiteSpace s) -> s
-    //    | _ -> getUserInput "Username: "
-    //let pw =
-    //    match getBuildParam "github-pw" with
-    //    | s when not (String.isNullOrWhiteSpace s) -> s
-    //    | _ -> getUserPassword "Password: "
-    //let remote =
-    //    Git.CommandHelper.getGitResult "" "remote -v"
-    //    |> Seq.filter (fun (s: string) -> s.EndsWith("(push)"))
-    //    |> Seq.tryFind (fun (s: string) -> s.Contains(gitOwner + "/" + gitName))
-    //    |> function None -> gitHome + "/" + gitName | Some (s: string) -> s.Split().[0]
+    let user =
+        match Environment.environVarOrDefault "github-user" "" with
+        | s when not (String.isNullOrWhiteSpace s) -> s
+        | _ -> UserInput.getUserInput "Username: "
+    let pw =
+        match Environment.environVarOrDefault "github-pw" "" with
+        | s when not (String.isNullOrWhiteSpace s) -> s
+        | _ -> UserInput.getUserPassword "Password: "
+    let remote =
+        Git.CommandHelper.getGitResult "" "remote -v"
+        |> Seq.filter (fun (s: string) -> s.EndsWith("(push)"))
+        |> Seq.tryFind (fun (s: string) -> s.Contains(gitOwner + "/" + gitName))
+        |> function None -> gitHome + "/" + gitName | Some (s: string) -> s.Split().[0]
 
-    //Git.Staging.stageAll ""
-    //Git.Commit.exec "" (sprintf "Bump version to %s" release.NugetVersion)
-    //Git.Branches.pushBranch "" remote (Git.Information.getBranchName "")
+    Git.Staging.stageAll ""
+    Git.Commit.exec "" (sprintf "Bump version to %s" release.NugetVersion)
+    Git.Branches.pushBranch "" remote (Git.Information.getBranchName "")
 
-    //Git.Branches.tag "" release.NugetVersion
-    //Git.Branches.pushTag "" remote release.NugetVersion
+    Git.Branches.tag "" release.NugetVersion
+    Git.Branches.pushTag "" remote release.NugetVersion
 
-    //// release on github
-    //GitHub.createClient user pw
-    //|> createDraft gitOwner gitName release.NugetVersion (release.SemVer.PreRelease <> None) release.Notes
-    //// TODO: |> uploadFile "PATH_TO_FILE"
-    //|> releaseDraft
-    //|> Async.RunSynchronously
+    // release on github
+    GitHub.createClient user pw
+    |> GitHub.draftNewRelease gitOwner gitName release.NugetVersion (release.SemVer.PreRelease <> None) release.Notes
+    // TODO: |> GitHub.uploadFile "PATH_TO_FILE"
+    |> GitHub.publishDraft
+    |> Async.RunSynchronously
 
     // using simplified FAKE 5 release for now
 
