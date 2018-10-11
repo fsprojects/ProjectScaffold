@@ -375,7 +375,7 @@ Target.create "BuildPackage" ignore
 Target.create "GenerateDocs" ignore
 
 // --------------------------------------------------------------------------------------
-// Run all targets by default. Invoke 'build <Target>' to override
+// Run all targets by default. Invoke 'build -t <Target>' to override
 
 Target.create "All" ignore
 
