@@ -27,6 +27,10 @@ FAKE:
 
 The first thing to do is to [clone](https://github.com/fsprojects/ProjectScaffold.git) or [copy](https://github.com/fsprojects/ProjectScaffold/archive/master.zip) the ProjectScaffold repository to your developer workspace. This will eventually be your solution folder. Feel free to rename ProjectScaffold folder to your liking.
 
+You will need to have either a global or local installation of the [FAKE](https://fake.build/) build tool, in order to run the build scripts. More detailed instructions can be found [here](https://fake.build/fake-gettingstarted.html). If you want to perform a global installation, and you have .NET Core 2.1 or later installed, run:
+
+    $ dotnet tool install fake-cli -g
+
 ### Initializing
 
 In order to generate your project first run:

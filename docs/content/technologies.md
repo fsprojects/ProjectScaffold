@@ -5,7 +5,7 @@
 | Area                      |  Technologies                             |
 |:--------------------------|:------------------------------------------|
 | Platforms                 | Linux, Windows, OSX                       |
-| Build Automation          | [FAKE](http://fsharp.github.io/FAKE/)     |
+| Build Automation          | [FAKE](https://fake.build/)               |
 | Unit Testing              | [NUnit](http://www.nunit.org/)            |
 | Package Formats           | NuGet packages                            |
 | Dependency Manager        | [Paket](http://fsprojects.github.io/Paket/) |
