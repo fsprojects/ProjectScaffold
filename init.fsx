@@ -33,8 +33,8 @@ let move p1 p2 =
   else
     failwithf "Could not move %s to %s" p1 p2
 let localFile f = combine f __SOURCE_DIRECTORY__
-let buildTemplatePath = localFile "build.template"
-let outputPath = localFile "build.fsx"
+let buildTemplateDir f = combine f (sprintf "%s\src\Build" __SOURCE_DIRECTORY__ )
+let buildTemplatePath = buildTemplateDir "build.template"
 
 let prompt (msg:string) =
   System.Console.Write(msg)
@@ -146,7 +146,10 @@ dirsWithProjects
     // project directories
     pd
     |> DirectoryInfo.getSubDirectories
-    |> Array.iter (fun d -> d.MoveTo(pd.FullName @@ (d.Name.Replace(projectTemplateName, projectName).Replace(consoleTemplateName, consoleName))))
+    |> Array.filter (fun d -> d.Name.Contains("content") |> not)
+    |> Array.iter (fun d -> 
+                      printfn "mystery pd %s" pd.FullName
+                      d.MoveTo(pd.FullName @@ (d.Name.Replace(projectTemplateName, projectName).Replace(consoleTemplateName, consoleName))))
     )
 
 //Now that everything is renamed, we need to update the content of some files
@@ -219,7 +222,7 @@ let generate templatePath generatedFilePath =
   File.Delete(templatePath)
   print (sprintf "# Generated %s" generatedFilePath)
 
-generate (localFile "build.template") (localFile "build.fsx")
+generate (buildTemplateDir "build.template") (buildTemplateDir "Tasks.fs")
 
 //Handle source control
 let isGitRepo () =

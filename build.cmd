@@ -1,9 +1,12 @@
 @echo off
 cls
 
-dotnet restore build.proj
-
-IF NOT EXIST build.fsx (
-  dotnet fake init.fsx
+.paket\paket.exe restore -s
+if errorlevel 1 (
+  exit /b %errorlevel%
 )
-dotnet fake build %*
+
+IF EXIST init.fsx (
+  fake -v run init.fsx
+)
+dotnet run --project src\Build\Build.fsproj %*

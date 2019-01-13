@@ -6,5 +6,8 @@
 set -eu
 set -o pipefail
 
-dotnet restore build.proj
-dotnet fake "$@"
+if [ -f init.fsx ]; then
+    fake run init.fsx
+fi
+
+dotnet run --project src/Build/Build.fsproj %*
