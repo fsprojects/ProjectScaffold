@@ -146,9 +146,8 @@ dirsWithProjects
     // project directories
     pd
     |> DirectoryInfo.getSubDirectories
-    |> Array.filter (fun d -> d.Name.Contains("content") |> not)
+    |> Array.filter (fun d -> d.Name.Contains("content") |> not && d.Name.ToLower().Contains("build") |> not)
     |> Array.iter (fun d -> 
-                      printfn "mystery pd %s" pd.FullName
                       d.MoveTo(pd.FullName @@ (d.Name.Replace(projectTemplateName, projectName).Replace(consoleTemplateName, consoleName))))
     )
 
