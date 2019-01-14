@@ -7,6 +7,6 @@ if errorlevel 1 (
 )
 
 IF EXIST init.fsx (
-  fake -v run init.fsx
+  fake run init.fsx
 )
 dotnet run --project src\Build\Build.fsproj %*
