@@ -1,6 +1,4 @@
-version 5.186.3
 framework: auto-detect
-
 source https://nuget.org/api/v2
 
 nuget FSharp.Core

@@ -78,7 +78,7 @@ print """
 # Please answer a few questions and we will generate
 # two files:
 #
-# build.fsx               This will be your build script
+# Tasks.fs               This will be your build script
 # docsrc/tools/generate.fsx This script will generate your
 #                         documentation
 #
@@ -271,7 +271,3 @@ overwrite "README.md" readmeContent
 
 //Clean up
 File.Delete "init.fsx"
-
-//print "dotnet restore"
-
-//DotNetCli.Restore id

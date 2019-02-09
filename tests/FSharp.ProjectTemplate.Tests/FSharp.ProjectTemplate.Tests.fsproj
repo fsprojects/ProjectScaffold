@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net47</TargetFramework>
+    <TargetFrameworks>netcoreapp2.1;net472</TargetFrameworks>
     <RootNamespace>FSharp.ProjectTemplate.Tests</RootNamespace>
     <AssemblyName>FSharp.ProjectTemplate.Tests</AssemblyName>
     <Name>FSharp.ProjectTemplate.Tests</Name>
