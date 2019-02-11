@@ -35,6 +35,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{ED8079DD
 EndProject
 Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "FSharp.ProjectTemplate.Tests", "tests\FSharp.ProjectTemplate.Tests\FSharp.ProjectTemplate.Tests.fsproj", "{E789C72A-5CFD-436B-8EF1-61AA2852A89F}"
 EndProject
+Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "Benchmark.Tests", "tests\Benchmark.Tests\Benchmark.Tests.fsproj", "{C81D8FD2-8F8F-42C4-8366-89B3C358B598}"
+EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "git", "git", "{078A9C52-DDC1-46F4-9235-9E6C89C87AFD}"
 	ProjectSection(SolutionItems) = preProject
 		.gitattributes = .gitattributes
@@ -75,6 +77,10 @@ Global
 		{F5E70CCA-E905-4531-9BFF-DAFE4F67C736}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F5E70CCA-E905-4531-9BFF-DAFE4F67C736}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F5E70CCA-E905-4531-9BFF-DAFE4F67C736}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C81D8FD2-8F8F-42C4-8366-89B3C358B598}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C81D8FD2-8F8F-42C4-8366-89B3C358B598}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C81D8FD2-8F8F-42C4-8366-89B3C358B598}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C81D8FD2-8F8F-42C4-8366-89B3C358B598}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

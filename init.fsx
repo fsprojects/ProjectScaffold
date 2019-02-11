@@ -121,6 +121,11 @@ let projectGuid = System.Guid.NewGuid().ToString()
 let oldTestProjectGuid = "E789C72A-5CFD-436B-8EF1-61AA2852A89F"
 let testProjectGuid = System.Guid.NewGuid().ToString()
 
+let oldConsoleProjectGuid = "B7339FEC-0891-4DF8-8BB5-0B806A64F32F"
+let consoleProjectGuid = System.Guid.NewGuid().ToString()
+let oldBenchmarkProjectGuid = "C81D8FD2-8F8F-42C4-8366-89B3C358B598"
+let benchmarkProjectGuid = System.Guid.NewGuid().ToString()
+
 //Rename solution file
 let templateSolutionFile = localFile (sprintf "%s.sln" solutionTemplateName)
 failfUnlessExists templateSolutionFile "Cannot find solution file template %s"
@@ -142,11 +147,14 @@ dirsWithProjects
     pd
     |> DirectoryInfo.getSubDirectories
     |> Array.collect (fun d -> DirectoryInfo.getMatchingFiles "*.?sproj" d)
+    |> Array.filter (fun f ->
+       f.Name.ToLower().Contains("benchmark") |> not
+    )
     |> Array.iter (fun f -> f.MoveTo(f.Directory.FullName @@ (f.Name.Replace(projectTemplateName, projectName).Replace(consoleTemplateName, consoleName))))
     // project directories
     pd
     |> DirectoryInfo.getSubDirectories
-    |> Array.filter (fun d -> d.Name.Contains("content") |> not && d.Name.ToLower().Contains("build") |> not)
+    |> Array.filter (fun d -> d.Name.Contains("content") |> not && d.Name.ToLower().Contains("build") |> not && d.Name.ToLower().Contains("benchmark") |> not)
     |> Array.iter (fun d -> 
                       d.MoveTo(pd.FullName @@ (d.Name.Replace(projectTemplateName, projectName).Replace(consoleTemplateName, consoleName))))
     )
@@ -169,8 +177,12 @@ let replaceContent file =
   |> replace consoleTemplateName consoleName
   |> replace (oldProjectGuid.ToLowerInvariant()) (projectGuid.ToLowerInvariant())
   |> replace (oldTestProjectGuid.ToLowerInvariant()) (testProjectGuid.ToLowerInvariant())
+  |> replace (oldConsoleProjectGuid.ToLowerInvariant()) (consoleProjectGuid.ToLowerInvariant())
+  |> replace (oldBenchmarkProjectGuid.ToLowerInvariant()) (benchmarkProjectGuid.ToLowerInvariant())
   |> replace (oldProjectGuid.ToUpperInvariant()) (projectGuid.ToUpperInvariant())
   |> replace (oldTestProjectGuid.ToUpperInvariant()) (testProjectGuid.ToUpperInvariant())
+  |> replace (oldConsoleProjectGuid.ToUpperInvariant()) (consoleProjectGuid.ToUpperInvariant())
+  |> replace (oldBenchmarkProjectGuid.ToUpperInvariant()) (benchmarkProjectGuid.ToUpperInvariant())
   |> replace solutionTemplateName projectName
   |> replaceWithVarOrMsg "##Author##" "Author not set"
   |> replaceWithVarOrMsg "##Description##" "Description not set"
@@ -196,7 +208,9 @@ let rec filesToReplace dir = seq {
 }
 
 [solutionFile] @ (dirsWithProjects
-    |> List.collect (fun d -> d.FullName |> filesToReplace |> List.ofSeq))
+|> List.collect (fun d -> 
+    d.FullName |> filesToReplace |> List.ofSeq)
+)
 |> List.map replaceContent
 |> List.iter print
 
