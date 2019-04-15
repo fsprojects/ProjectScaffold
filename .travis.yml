@@ -14,8 +14,8 @@ install:
 
 before_install:
   - chmod +x build.sh
- 
-  matrix:
+
+matrix:
   include:
     - os: linux # Ubuntu 14.04
       dist: trusty
@@ -26,6 +26,6 @@ before_install:
       dotnet : 2.1.300
       dist: trusty
       sudo: required
-      
-script: 
-  - ./build.sh All
+
+script:
+  - ./build.sh
