@@ -4,6 +4,6 @@ cls
 dotnet restore build.proj
 
 IF NOT EXIST build.fsx (
-  fake run init.fsx
+  fake.cmd run init.fsx
 )
-fake build %*
+fake.cmd build %*
