@@ -23,7 +23,6 @@ nuget Fake.DotNet.FSFormatting
 
 group Formatting
 source https://nuget.org/api/v2
-source https://ci.appveyor.com/nuget/fsharp-formatting
 
-nuget FSharp.Formatting prerelease
-nuget FSharp.Formatting.CommandTool prerelease
+nuget FSharp.Formatting
+nuget FSharp.Formatting.CommandTool
