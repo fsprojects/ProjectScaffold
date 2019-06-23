@@ -12,4 +12,8 @@ if [ ! -f build.fsx ]; then
     fake run init.fsx
 fi
 
-fake build $@
+if [[ $# -eq 0 ]] ; then
+    fake build
+else
+    fake build $@
+fi
