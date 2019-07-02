@@ -32,7 +32,7 @@ Documentation: http://fsprojects.github.io/ProjectScaffold
     * git mv necessary project file folders into src folder
     * git commit, and any following cleanup
 
-Be sure to do only ````git mv```` file renames in a single commit. If you try to commit anything else git will treat the renames as file delete / file add and you will loose history on those files.
+Be sure to do only ````git mv```` file renames in a single commit. If you try to commit anything else git will treat the renames as file delete / file add and you will lose history on those files.
 
 ## Requirements
 
