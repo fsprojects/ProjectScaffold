@@ -20,6 +20,9 @@ Documentation
   <div class="span1"></div>
 </div>
 
+Use Fable Femto to manage npm packages
+https://fable.io/blog/Introducing-Femto.html
+
 Example
 -------
 
