@@ -9,6 +9,8 @@ open Fake.IO
 open Fake.IO.FileSystemOperators
 open Fake.IO.Globbing.Operators
 open Fake.DotNet.Testing
+open Fake.JavaScript
+open Fake.Tools.Git
 open Fake.Tools
 
 // Information about the project is used
@@ -71,6 +73,77 @@ let (|Fsproj|Csproj|Vbproj|Shproj|) (projFileName:string) =
     | f when f.EndsWith("vbproj") -> Vbproj
     | f when f.EndsWith("shproj") -> Shproj
     | _                           -> failwith (sprintf "Project file %s not supported. Unknown project type." projFileName)
+    
+let serverPath = Path.getFullName "./src/Server"
+let clientPath = Path.getFullName "./src/Client"
+let clientDeployPath = Path.combine clientPath "deploy"
+let deployDir = Path.getFullName "./deploy"
+
+let projectsToBuild =
+    [|
+        Path.getFullName "./src/Server"
+        Path.getFullName <| sprintf "./src/%s" project
+        Path.getFullName <| sprintf "./src/%sConsole" project
+        Path.getFullName <| sprintf "./tests/%s.Tests" project
+        Path.getFullName "./tests/Benchmark.Tests"
+    |]
+
+let platformTool tool winTool =
+    let tool = if Environment.isUnix then tool else winTool
+    match ProcessUtils.tryFindFileOnPath tool with
+    | Some t -> t
+    | _ ->
+        let errorMsg =
+            tool + " was not found in path. " +
+            "Please install it and make sure it's available from your path. " +
+            "See https://safe-stack.github.io/docs/quickstart/#install-pre-requisites for more info"
+        failwith errorMsg
+
+type JsPackageManager = 
+    | NPM
+    | YARN
+    member this.RestoreTool =
+        match this with
+        | NPM -> platformTool "npm" "npm.cmd"
+        | YARN -> platformTool "yarn" "yarn.cmd"
+    member this.RunTool =
+        match this with
+        | NPM -> platformTool "npx" "npx.cmd"
+        | YARN -> platformTool "yarn" "yarn.cmd"
+    member this.ArgsInstall =
+        match this with
+        | NPM -> "install"
+        | YARN -> "install --frozen-lockfile"
+
+let getJsPackageManager () = 
+    match Environment.environVarOrDefault "jsPackageManager" "yarn" with
+    | "npm" -> NPM
+    | "yarn" | _ -> YARN
+
+let nodeTool = platformTool "node" "node.exe"
+
+let runTool cmd args workingDir =
+    let arguments = args |> String.split ' ' |> Arguments.OfArgs
+    Command.RawCommand (cmd, arguments)
+    |> CreateProcess.fromCommand
+    |> CreateProcess.withWorkingDirectory workingDir
+    |> CreateProcess.ensureExitCode
+    |> Proc.run
+    |> ignore
+
+let runDotNet cmd workingDir =
+    let result =
+        DotNet.exec (DotNet.Options.withWorkingDirectory workingDir) cmd ""
+    if result.ExitCode <> 0 then failwithf "'dotnet %s' failed in %s" cmd workingDir
+
+let openBrowser url =
+    //https://github.com/dotnet/corefx/issues/10361
+    Command.ShellCommand url
+    |> CreateProcess.fromCommand
+    |> CreateProcess.ensureExitCodeWithMessage "opening browser failed"
+    |> Proc.run
+    |> ignore
+
 
 let createAndGetDefault () =
     let clean = BuildTask.create "Clean" [] {
@@ -78,12 +151,22 @@ let createAndGetDefault () =
         let testBin = sprintf "%s/bin" testFolder
         let benchmarkTestBin = "tests/Benchmark.Tests/bin"
 
-        Shell.cleanDirs ["bin"; "temp"; projectBin; testBin; benchmarkTestBin]
+        Shell.cleanDirs ["bin/Release"; "temp"; projectBin; testBin; benchmarkTestBin]
         }
 
     let cleanDocs = BuildTask.create "CleanDocs" [] {
         Shell.cleanDirs ["docs/reference"; "docs"]
         }
+        
+    let installClient = BuildTask.create "InstallClient" [] {
+        let jsPackageManager = getJsPackageManager ()
+
+        printfn "Node version:"
+        runTool nodeTool "--version" __SOURCE_DIRECTORY__
+        printfn "Npm version:"
+        runTool jsPackageManager.RestoreTool "--version"  __SOURCE_DIRECTORY__
+        runTool jsPackageManager.RestoreTool "install" __SOURCE_DIRECTORY__
+    }
 
     // Generate assembly info files with the right version & up-to-date information
     let assemblyInfo = BuildTask.create "AssemblyInfo" [clean] {
@@ -95,7 +178,7 @@ let createAndGetDefault () =
                 AssemblyInfo.FileVersion releaseNotes.AssemblyVersion
                 AssemblyInfo.Configuration configuration ]
 
-        let getProjectDetails projectPath =
+        let getProjectDetails (projectPath :string) =
             let projectName = System.IO.Path.GetFileNameWithoutExtension(projectPath)
             ( projectPath,
                 projectName,
@@ -119,11 +202,17 @@ let createAndGetDefault () =
     // --------------------------------------------------------------------------------------
     // Build library & test project
 
-    let build = BuildTask.create "Build" [assemblyInfo] {
-        solutionFile 
-        |> DotNet.build (fun p -> 
-            { p with
-                Configuration = buildConfiguration })
+    let build = BuildTask.create "Build" [installClient;assemblyInfo] {
+        let jsPackageManager = getJsPackageManager ()
+        
+        projectsToBuild
+        |> Array.iter (fun x -> 
+            DotNet.build (fun p ->
+                { p with
+                    Configuration = buildConfiguration }) x
+        )
+                
+        runTool jsPackageManager.RunTool "webpack-cli -p" __SOURCE_DIRECTORY__
     }
 
     // Copies binaries from default VS location to expected bin folder
@@ -133,8 +222,37 @@ let createAndGetDefault () =
     let copyBinaries = BuildTask.create "CopyBinaries" [build] {
         !! "src/**/*.??proj"
         -- "src/**/*.shproj"
-        |>  Seq.map (fun f -> ((System.IO.Path.GetDirectoryName f) </> "bin" </> configuration, "bin" </> (System.IO.Path.GetFileNameWithoutExtension f)))
-        |>  Seq.iter (fun (fromDir, toDir) -> Shell.copyDir toDir fromDir (fun _ -> true))
+        |> Seq.map (fun f -> ((System.IO.Path.GetDirectoryName f) </> "bin" </> configuration, "bin" </> (System.IO.Path.GetFileNameWithoutExtension f)))
+        |> Seq.filter (fun (fromDir, toDir) -> fromDir.ToLower().Contains("client") |> not)
+        |> Seq.iter (fun (fromDir, toDir) -> Shell.copyDir toDir fromDir (fun _ -> true))
+    }
+
+    let run = BuildTask.create "Run" [build] {
+        let jsPackageManager = getJsPackageManager ()
+        
+        let server = async {
+            runDotNet "watch run" serverPath
+        }
+        let client = async {
+            runTool jsPackageManager.RunTool "webpack-dev-server" __SOURCE_DIRECTORY__
+        }
+        let browser = async {
+            do! Async.Sleep 5000
+            openBrowser "http://localhost:8080"
+        }
+
+        let vsCodeSession = Environment.hasEnvironVar "vsCodeSession"
+        let safeClientOnly = Environment.hasEnvironVar "safeClientOnly"
+
+        let tasks =
+            [ if not safeClientOnly then yield server
+              yield client
+              if not vsCodeSession then yield browser ]
+
+        tasks
+        |> Async.Parallel
+        |> Async.RunSynchronously
+        |> ignore
     }
 
 
@@ -195,12 +313,12 @@ let createAndGetDefault () =
     // Generate the documentation
 
     // Paths with template/source/output locations
-    let bin        = __SOURCE_DIRECTORY__ @@ "..\\..\\bin"
-    let content    = __SOURCE_DIRECTORY__ @@ "..\\..\\docsrc\\content"
-    let output     = __SOURCE_DIRECTORY__ @@ "..\\..\\docs"
-    let files      = __SOURCE_DIRECTORY__ @@ "..\\..\\docsrc\\files"
-    let templates  = __SOURCE_DIRECTORY__ @@ "..\\..\\docsrc\\tools\\templates"
-    let formatting = __SOURCE_DIRECTORY__ @@ "..\\..\\packages\\formatting\\FSharp.Formatting"
+    let bin        = __SOURCE_DIRECTORY__ @@ ".\\bin"
+    let content    = __SOURCE_DIRECTORY__ @@ ".\\docsrc\\content"
+    let output     = __SOURCE_DIRECTORY__ @@ ".\\docs"
+    let files      = __SOURCE_DIRECTORY__ @@ ".\\docsrc\\files"
+    let templates  = __SOURCE_DIRECTORY__ @@ ".\\docsrc\\tools\\templates"
+    let formatting = __SOURCE_DIRECTORY__ @@ ".\\packages\\formatting\\FSharp.Formatting"
     let docTemplate = "docpage.cshtml"
 
     let github_release_user = Environment.environVarOrDefault "github_release_user" gitOwner
@@ -231,7 +349,7 @@ let createAndGetDefault () =
         Shell.copyRecursive (formatting @@ "styles") (output @@ "content") true 
         |> Trace.logItems "Copying styles and scripts: "
         
-    let replace t r (lines:seq<string>) =
+    let replace (t : string) r (lines:seq<string>) =
         seq {
             for s in lines do
                 if s.Contains(t) then 

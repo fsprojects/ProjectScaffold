@@ -10,4 +10,4 @@ if [ -f init.fsx ]; then
     fake run init.fsx
 fi
 
-dotnet run --project src/Build/Build.fsproj %*
+dotnet run --project Build.fsproj %*

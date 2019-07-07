@@ -1,0 +1,30 @@
+{
+    "private": true,
+    "devDependencies": {
+        "@babel/core": "^7.2.0",
+        "@babel/plugin-transform-runtime": "^7.2.0",
+        "@babel/polyfill": "^7.0.0",
+        "@babel/preset-env": "^7.2.0",
+        "@babel/runtime": "^7.2.0",
+        "babel-loader": "^8.0.0",
+        "copy-webpack-plugin": "^4.6.0",
+        "css-loader": "^2.0.1",
+        "fable-compiler": "^2.1.8",
+        "fable-loader": "^2.1.1",
+        "html-webpack-plugin": "^3.2.0",
+        "mini-css-extract-plugin": "^0.5.0",
+        "react": "16.5.2",
+        "react-dom": "16.5.2",
+        "remotedev": "^0.2.9",
+        "sass": "^1.15.2",
+        "sass-loader": "^7.1.0",
+        "style-loader": "^0.23.1",
+        "webpack": "^4.27.1",
+        "webpack-cli": "^3.1.2",
+        "webpack-dev-server": "^3.1.14",
+        "whatwg-fetch": "^3.0.0"
+    },
+    "dependencies": {
+        "recharts": "^1.4.2"
+    }
+}

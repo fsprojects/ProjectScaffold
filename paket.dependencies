@@ -1,5 +1,5 @@
 framework: auto-detect
-source https://nuget.org/api/v2
+source https://api.nuget.org/v3/index.json
 
 nuget FSharp.Core
 nuget Argu
@@ -9,6 +9,8 @@ nuget Expecto.BenchmarkDotNet
 nuget Expecto.FsCheck
 nuget Expecto.VisualStudio.TestAdapter version_in_path: true
 
+nuget Fake.JavaScript.Npm
+nuget Fake.JavaScript.Yarn
 nuget BlackFox.Fake.BuildTask
 nuget Fake.Core.Target
 nuget Fake.IO.FileSystem
@@ -22,7 +24,37 @@ nuget Fake.DotNet.Testing.Expecto
 nuget Fake.DotNet.FSFormatting
 
 group Formatting
-source https://nuget.org/api/v2
+	source https://api.nuget.org/v3/index.json
 
-nuget FSharp.Formatting
-nuget FSharp.Formatting.CommandTool
+	nuget FSharp.Formatting
+	nuget FSharp.Formatting.CommandTool
+
+group Server
+    source https://api.nuget.org/v3/index.json
+    framework: netcoreapp2.2
+    storage: none
+
+    nuget FSharp.Core
+    nuget Saturn
+    nuget Thoth.Json.Giraffe
+    nuget FSharp.Data
+
+group Client
+    source https://api.nuget.org/v3/index.json
+    framework: netstandard2.0
+    storage: none
+
+    nuget Fable.Core
+    nuget Fable.Elmish
+    nuget Fable.Elmish.Debugger
+    nuget Fable.Elmish.React
+    nuget Fable.Elmish.HMR
+	nuget Fable.Fetch
+    nuget Fable.React
+    nuget Fulma 
+    nuget Fable.Recharts
+    nuget Fable.FontAwesome
+    nuget Fable.FontAwesome.Free
+
+    clitool dotnet-fable
+	nuget Thoth.Fetch

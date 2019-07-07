@@ -111,6 +111,7 @@ AppPackages/
 
 # VSCode
 .vscode/
+.ionide/
 
 # Others
 sql/
@@ -123,6 +124,9 @@ ClientBin/
 *.[Pp]ublish.xml
 *.pfx
 *.publishsettings
+
+node_modules/
+src/Server/Properties/
 
 # RIA/Silverlight projects
 Generated_Code/

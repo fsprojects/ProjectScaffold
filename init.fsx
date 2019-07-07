@@ -33,7 +33,7 @@ let move p1 p2 =
   else
     failwithf "Could not move %s to %s" p1 p2
 let localFile f = combine f __SOURCE_DIRECTORY__
-let buildTemplateDir f = combine f (sprintf "%s\src\Build" __SOURCE_DIRECTORY__ )
+let buildTemplateDir f = combine f __SOURCE_DIRECTORY__
 let buildTemplatePath = buildTemplateDir "build.template"
 
 let prompt (msg:string) =
@@ -149,12 +149,21 @@ dirsWithProjects
     |> Array.collect (fun d -> DirectoryInfo.getMatchingFiles "*.?sproj" d)
     |> Array.filter (fun f ->
        f.Name.ToLower().Contains("benchmark") |> not
+       && f.Name.ToLower().Contains("client") |> not
+       && f.Name.ToLower().Contains("server") |> not
     )
     |> Array.iter (fun f -> f.MoveTo(f.Directory.FullName @@ (f.Name.Replace(projectTemplateName, projectName).Replace(consoleTemplateName, consoleName))))
     // project directories
     pd
     |> DirectoryInfo.getSubDirectories
-    |> Array.filter (fun d -> d.Name.Contains("content") |> not && d.Name.ToLower().Contains("build") |> not && d.Name.ToLower().Contains("benchmark") |> not)
+    |> Array.filter (fun d -> 
+      d.Name.Contains("content") |> not 
+      && d.Name.ToLower().Contains("build") |> not 
+      && d.Name.ToLower().Contains("benchmark") |> not
+      && d.Name.ToLower().Contains("client") |> not
+      && d.Name.ToLower().Contains("server") |> not
+      && d.Name.ToLower().Contains("shared") |> not
+    )
     |> Array.iter (fun d -> 
                       d.MoveTo(pd.FullName @@ (d.Name.Replace(projectTemplateName, projectName).Replace(consoleTemplateName, consoleName))))
     )
