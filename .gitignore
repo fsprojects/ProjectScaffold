@@ -18,6 +18,7 @@
 x64/
 [Bb]in/
 [Oo]bj/
+[Dd]eploy/
 
 # MSTest test Results
 [Tt]est[Rr]esult*/
