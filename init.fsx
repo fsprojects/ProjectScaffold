@@ -33,7 +33,7 @@ let move p1 p2 =
   else
     failwithf "Could not move %s to %s" p1 p2
 let localFile f = combine f __SOURCE_DIRECTORY__
-let buildTemplateDir f = combine f __SOURCE_DIRECTORY__
+let buildTemplateDir f = combine f <| sprintf "%s/%s" __SOURCE_DIRECTORY__ ".build"
 let buildTemplatePath = buildTemplateDir "build.template"
 
 let prompt (msg:string) =

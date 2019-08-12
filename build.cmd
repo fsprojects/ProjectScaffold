@@ -9,4 +9,4 @@ if errorlevel 1 (
 IF EXIST init.fsx (
   fake run init.fsx
 )
-dotnet run --project Build.fsproj %*
+dotnet run --project --configuration Release --project .\.build\Build.fsproj %*
