@@ -155,6 +155,16 @@ type IDictionary<'Key, 'Value> with
     member inline this.GetValueOrDefault(key, defaultValue) = 
         this.TryFind(key) |> defaultArg <| defaultValue
 
+let memoize f =
+    let cache = new Dictionary<_, _>()
+    (fun x ->
+        match cache.TryFind x with
+        | Some v -> v
+        | None -> 
+            let v = f x
+            cache.Add (x, v)
+            v )
+
 let formatExceptionDisplay (e:Exception) =
     let sb = StringBuilder()
     let delimeter = String.replicate 50 "*"
