@@ -153,6 +153,95 @@ let binToClean() =
     |> Seq.map id
     |> Seq.toArray
 
+let buildConfiguration = DotNet.Custom <| Environment.environVarOrDefault "configuration" configuration
+
+let tests() = 
+    !! testAssemblies
+    |> Seq.filter (fun x -> x.ToLower().Contains("benchmark") |> not)
+    |> Expecto.run id
+
+// --------------------------------------------------------------------------------------
+// Generate the documentation
+
+// Paths with template/source/output locations
+let bin        = __SOURCE_DIRECTORY__ @@ "..\\bin"
+let content    = __SOURCE_DIRECTORY__ @@ "..\\docsrc\\content"
+let output     = __SOURCE_DIRECTORY__ @@ "..\\docs"
+let files      = __SOURCE_DIRECTORY__ @@ "..\\docsrc\\files"
+let templates  = __SOURCE_DIRECTORY__ @@ "..\\docsrc\\tools\\templates"
+let formatting = __SOURCE_DIRECTORY__ @@ "..\\packages\\formatting\\FSharp.Formatting"
+let docTemplate = "docpage.cshtml"
+
+let github_release_user = Environment.environVarOrDefault "github_release_user" gitOwner
+let githubLink = sprintf "https://github.com/%s/%s" github_release_user gitName
+
+let info =
+    [ 
+        "project-name", project
+        "project-author", author
+        "project-summary", summary
+        "project-github", githubLink
+        "project-nuget", sprintf "http://nuget.org/packages%s" website 
+    ]
+
+let root = website
+
+let referenceBinaries = []
+
+let layoutRootsAll = new System.Collections.Generic.Dictionary<string, string list>()
+layoutRootsAll.Add("en",[   templates; 
+                            formatting @@ "templates"
+                            formatting @@ "templates/reference" ])
+
+let copyFiles () =
+    Shell.copyRecursive files output true 
+    |> Trace.logItems "Copying file: "
+    Directory.ensure (output @@ "content")
+    Shell.copyRecursive (formatting @@ "styles") (output @@ "content") true 
+    |> Trace.logItems "Copying styles and scripts: "
+    
+let replace (t : string) r (lines:seq<string>) =
+    seq {
+        for s in lines do
+            if s.Contains(t) then 
+                yield s.Replace(t, r)
+            else yield s }
+
+let postProcessDocs doc =
+    let dirInfo = DirectoryInfo.ofPath output
+
+    let filePath = System.IO.Path.Combine(dirInfo.FullName, doc)
+    let newContent =
+        File.ReadAllLines filePath
+        |> Array.toSeq
+        //|> replace "t1X2B62Xt1" "t<sub>1</sub> → t<sub>1</sub>"
+        //|> replace "t1Xt2X2B62Xt1xXt2" "t<sub>1</sub> t<sub>2</sub> → t<sub>1</sub>&#39; t<sub>2</sub>"
+        //|> replace "t2X2B62Xt2" "t<sub>2</sub> → t<sub>2</sub>"
+        //|> replace "v1Xt2X2B62Xv1Xt2x" "v<sub>1</sub> t<sub>2</sub> → v<sub>1</sub> t<sub>2</sub>&#39;"
+        //|> replace "Yt12Y" "t<sub>12</sub>"
+        //|> replace "Xv2X2B62" " v<sub>2</sub> →"
+        //|> replace "Yv2Y" "v<sub>2</sub>"
+        //|> replace @"22A6" "⊢"
+        //|> replace @"21B6" "↦"
+    File.WriteAllLines(filePath, newContent)
+
+    let filePath = System.IO.Path.Combine(dirInfo.FullName, "index.html")
+    let newContent =
+        File.ReadAllLines filePath
+        |> Array.toSeq
+        //|> replace "<h2>global Namespace</h2>" ""
+    File.WriteAllLines(filePath, newContent)
+
+let postProcessReferenceDocs doc =
+    let dirInfo = DirectoryInfo.ofPath <| sprintf "%s/%s" output "reference"
+
+    let filePath = System.IO.Path.Combine(dirInfo.FullName, doc)
+    let newContent =
+        File.ReadAllLines filePath
+        |> Array.toSeq
+        //|> replace "<h2>global Namespace</h2>" ""
+    File.WriteAllLines(filePath, newContent)
+
 let createAndGetDefault () =
     let clean = BuildTask.create "Clean" [] {
         [|
@@ -212,7 +301,33 @@ let createAndGetDefault () =
             )
     }
 
-    let buildConfiguration = DotNet.Custom <| Environment.environVarOrDefault "configuration" configuration
+    // --------------------------------------------------------------------------------------
+    // Build library & test project
+
+    let build = BuildTask.create "Build" [installClient;assemblyInfo] {
+        let jsPackageManager = getJsPackageManager ()
+        
+        projectsToBuild
+        |> Array.iter (fun x -> 
+            DotNet.build (fun p ->
+                { p with
+                    Configuration = buildConfiguration }) x
+        )
+                
+        runTool jsPackageManager.RunTool "webpack-cli -p" __SOURCE_DIRECTORY__
+    }
+
+    // Copies binaries from default VS location to expected bin folder
+    // But keeps a subdirectory structure for each project in the
+    // src folder to support multiple project outputs
+    //Target.create "CopyBinaries" (fun _ ->
+    let copyBinaries = BuildTask.create "CopyBinaries" [build] {
+        !! "**/src/**/*.??proj"
+        -- "**/src/**/*.shproj"
+        |> Seq.map (fun f -> ((System.IO.Path.GetDirectoryName f) </> "bin" </> configuration, "bin" </> (System.IO.Path.GetFileNameWithoutExtension f)))
+        |> Seq.filter (fun (fromDir, toDir) -> fromDir.ToLower().Contains("client") |> not)
+        |> Seq.iter (fun (fromDir, toDir) -> Shell.copyDir toDir fromDir (fun _ -> true))
+    }
 
     let run = BuildTask.create "Run" [build] {
         let jsPackageManager = getJsPackageManager ()
@@ -243,40 +358,7 @@ let createAndGetDefault () =
     }
 
     // --------------------------------------------------------------------------------------
-    // Build library & test project
-
-    let build = BuildTask.create "Build" [installClient;assemblyInfo] {
-        let jsPackageManager = getJsPackageManager ()
-        
-        projectsToBuild
-        |> Array.iter (fun x -> 
-            DotNet.build (fun p ->
-                { p with
-                    Configuration = buildConfiguration }) x
-        )
-                
-        runTool jsPackageManager.RunTool "webpack-cli -p" __SOURCE_DIRECTORY__
-    }
-
-    // Copies binaries from default VS location to expected bin folder
-    // But keeps a subdirectory structure for each project in the
-    // src folder to support multiple project outputs
-    //Target.create "CopyBinaries" (fun _ ->
-    let copyBinaries = BuildTask.create "CopyBinaries" [build] {
-        !! "**/src/**/*.??proj"
-        -- "**/src/**/*.shproj"
-        |> Seq.map (fun f -> ((System.IO.Path.GetDirectoryName f) </> "bin" </> configuration, "bin" </> (System.IO.Path.GetFileNameWithoutExtension f)))
-        |> Seq.filter (fun (fromDir, toDir) -> fromDir.ToLower().Contains("client") |> not)
-        |> Seq.iter (fun (fromDir, toDir) -> Shell.copyDir toDir fromDir (fun _ -> true))
-    }
-
-    // --------------------------------------------------------------------------------------
     // Run the unit tests using test runner
-
-    let tests() = 
-        !! testAssemblies
-        |> Seq.filter (fun x -> x.ToLower().Contains("benchmark") |> not)
-        |> Expecto.run id
 
     let runTests = BuildTask.create "RunTests" [copyBinaries] {
         tests()
@@ -322,88 +404,6 @@ let createAndGetDefault () =
                 WorkingDir = "bin" })
 
     }
-
-    // --------------------------------------------------------------------------------------
-    // Generate the documentation
-
-    // Paths with template/source/output locations
-    let bin        = __SOURCE_DIRECTORY__ @@ "..\\bin"
-    let content    = __SOURCE_DIRECTORY__ @@ "..\\docsrc\\content"
-    let output     = __SOURCE_DIRECTORY__ @@ "..\\docs"
-    let files      = __SOURCE_DIRECTORY__ @@ "..\\docsrc\\files"
-    let templates  = __SOURCE_DIRECTORY__ @@ "..\\docsrc\\tools\\templates"
-    let formatting = __SOURCE_DIRECTORY__ @@ "..\\packages\\formatting\\FSharp.Formatting"
-    let docTemplate = "docpage.cshtml"
-
-    let github_release_user = Environment.environVarOrDefault "github_release_user" gitOwner
-    let githubLink = sprintf "https://github.com/%s/%s" github_release_user gitName
-
-    let info =
-        [ 
-            "project-name", project
-            "project-author", author
-            "project-summary", summary
-            "project-github", githubLink
-            "project-nuget", sprintf "http://nuget.org/packages%s" website 
-        ]
-
-    let root = website
-
-    let referenceBinaries = []
-
-    let layoutRootsAll = new System.Collections.Generic.Dictionary<string, string list>()
-    layoutRootsAll.Add("en",[   templates; 
-                                formatting @@ "templates"
-                                formatting @@ "templates/reference" ])
-
-    let copyFiles () =
-        Shell.copyRecursive files output true 
-        |> Trace.logItems "Copying file: "
-        Directory.ensure (output @@ "content")
-        Shell.copyRecursive (formatting @@ "styles") (output @@ "content") true 
-        |> Trace.logItems "Copying styles and scripts: "
-        
-    let replace (t : string) r (lines:seq<string>) =
-        seq {
-            for s in lines do
-                if s.Contains(t) then 
-                    yield s.Replace(t, r)
-                else yield s }
-
-    let postProcessDocs doc =
-        let dirInfo = DirectoryInfo.ofPath output
-
-        let filePath = System.IO.Path.Combine(dirInfo.FullName, doc)
-        let newContent =
-            File.ReadAllLines filePath
-            |> Array.toSeq
-            //|> replace "t1X2B62Xt1" "t<sub>1</sub> → t<sub>1</sub>"
-            //|> replace "t1Xt2X2B62Xt1xXt2" "t<sub>1</sub> t<sub>2</sub> → t<sub>1</sub>&#39; t<sub>2</sub>"
-            //|> replace "t2X2B62Xt2" "t<sub>2</sub> → t<sub>2</sub>"
-            //|> replace "v1Xt2X2B62Xv1Xt2x" "v<sub>1</sub> t<sub>2</sub> → v<sub>1</sub> t<sub>2</sub>&#39;"
-            //|> replace "Yt12Y" "t<sub>12</sub>"
-            //|> replace "Xv2X2B62" " v<sub>2</sub> →"
-            //|> replace "Yv2Y" "v<sub>2</sub>"
-            //|> replace @"22A6" "⊢"
-            //|> replace @"21B6" "↦"
-        File.WriteAllLines(filePath, newContent)
-
-        let filePath = System.IO.Path.Combine(dirInfo.FullName, "index.html")
-        let newContent =
-            File.ReadAllLines filePath
-            |> Array.toSeq
-            //|> replace "<h2>global Namespace</h2>" ""
-        File.WriteAllLines(filePath, newContent)
-
-    let postProcessReferenceDocs doc =
-        let dirInfo = DirectoryInfo.ofPath <| sprintf "%s/%s" output "reference"
-
-        let filePath = System.IO.Path.Combine(dirInfo.FullName, doc)
-        let newContent =
-            File.ReadAllLines filePath
-            |> Array.toSeq
-            //|> replace "<h2>global Namespace</h2>" ""
-        File.WriteAllLines(filePath, newContent)
 
     let docsOnly = BuildTask.create "DocsOnly" [cleanDocs] {
         File.delete "docsrc/content/release-notes.md"
