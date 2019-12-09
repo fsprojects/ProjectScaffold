@@ -188,6 +188,33 @@ let root = website
 
 let referenceBinaries = []
 
+let theRun() =
+    let jsPackageManager = getJsPackageManager ()
+    
+    let server = async {
+        runDotNet "watch run" serverPath
+    }
+    let client = async {
+        runTool jsPackageManager.RunTool "webpack-dev-server" __SOURCE_DIRECTORY__
+    }
+    let browser = async {
+        do! Async.Sleep 5000
+        openBrowser "http://localhost:8080"
+    }
+
+    let vsCodeSession = Environment.hasEnvironVar "vsCodeSession"
+    let safeClientOnly = Environment.hasEnvironVar "safeClientOnly"
+
+    let tasks =
+        [ if not safeClientOnly then yield server
+            yield client
+            if not vsCodeSession then yield browser ]
+
+    tasks
+    |> Async.Parallel
+    |> Async.RunSynchronously
+    |> ignore
+
 let layoutRootsAll = new System.Collections.Generic.Dictionary<string, string list>()
 layoutRootsAll.Add("en",[   templates; 
                             formatting @@ "templates"
@@ -270,6 +297,7 @@ let createAndGetDefault () =
         printfn "Npm version:"
         runTool jsPackageManager.RestoreTool "--version"  __SOURCE_DIRECTORY__
         runTool jsPackageManager.RestoreTool "install" __SOURCE_DIRECTORY__
+        runDotNet "restore" clientPath
     }
 
     // Generate assembly info files with the right version & up-to-date information
@@ -329,32 +357,13 @@ let createAndGetDefault () =
         |> Seq.iter (fun (fromDir, toDir) -> Shell.copyDir toDir fromDir (fun _ -> true))
     }
 
-    let run = BuildTask.create "Run" [build] {
-        let jsPackageManager = getJsPackageManager ()
-        
-        let server = async {
-            runDotNet "watch run" serverPath
-        }
-        let client = async {
-            runTool jsPackageManager.RunTool "webpack-dev-server" __SOURCE_DIRECTORY__
-        }
-        let browser = async {
-            do! Async.Sleep 5000
-            openBrowser "http://localhost:8080"
-        }
+    let run = BuildTask.create "Run" [build; InstallClient] {
+        theRun()
+    }
 
-        let vsCodeSession = Environment.hasEnvironVar "vsCodeSession"
-        let safeClientOnly = Environment.hasEnvironVar "safeClientOnly"
-
-        let tasks =
-            [ if not safeClientOnly then yield server
-              yield client
-              if not vsCodeSession then yield browser ]
-
-        tasks
-        |> Async.Parallel
-        |> Async.RunSynchronously
-        |> ignore
+    let runNoBuild = BuildTask.create "RunNoBuild" [installClient] {
+        runDotNet "build" serverPath
+        theRun()
     }
 
     // --------------------------------------------------------------------------------------
