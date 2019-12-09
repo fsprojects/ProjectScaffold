@@ -4,13 +4,13 @@ open BlackFox.Fake
 open System.IO
 open System.Collections.Generic
 open Fake.Core
-open Fake.DotNet
+//open Fake.DotNet
 open Fake.IO
 open Fake.IO.FileSystemOperators
-open Fake.IO.Globbing.Operators
-open Fake.DotNet.Testing
-open Fake.JavaScript
-open Fake.Tools.Git
+//open Fake.IO.Globbing.Operators
+//open Fake.DotNet.Testing
+//open Fake.JavaScript
+//open Fake.Tools.Git
 open Fake.Tools
 
 let [<Literal>] defaultGitUrl = "https://github.com"
@@ -294,11 +294,11 @@ let main argv =
 
     //overwrite release notes
     let releaseNotesContent = [sprintf "#### 0.0.1 - %s" <| System.DateTime.Now.ToLongDateString(); "* Initial release"]
-    overwrite "RELEASE_NOTES.md" releaseNotesContent
+    overwrite "RELEASE_NOTES.md" releaseNotesContent |> ignore
 
     //overwrite readme
     let readmeContent = [sprintf "# %s" projectName]
-    overwrite "README.md" readmeContent
+    overwrite "README.md" readmeContent |> ignore
 
     //Clean up
     File.Delete "init.fsproj"

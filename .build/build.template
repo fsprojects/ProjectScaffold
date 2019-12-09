@@ -44,7 +44,7 @@ let solutionFile  = "##ProjectName##.sln"
 let configuration = "Release"
 
 // Pattern specifying assemblies to be tested using Expecto
-let testAssemblies = "tests/**/bin/Release/net472/*Tests.exe"
+let testAssemblies = "tests/**/bin/Release/**/*Tests.exe"
 
 // Git configuration (used for publishing documentation in gh-pages branch)
 // The profile where the project is posted
@@ -214,34 +214,6 @@ let createAndGetDefault () =
 
     let buildConfiguration = DotNet.Custom <| Environment.environVarOrDefault "configuration" configuration
 
-    // --------------------------------------------------------------------------------------
-    // Build library & test project
-
-    let build = BuildTask.create "Build" [installClient;assemblyInfo] {
-        let jsPackageManager = getJsPackageManager ()
-        
-        projectsToBuild
-        |> Array.iter (fun x -> 
-            DotNet.build (fun p ->
-                { p with
-                    Configuration = buildConfiguration }) x
-        )
-                
-        runTool jsPackageManager.RunTool "webpack-cli -p" __SOURCE_DIRECTORY__
-    }
-
-    // Copies binaries from default VS location to expected bin folder
-    // But keeps a subdirectory structure for each project in the
-    // src folder to support multiple project outputs
-    //Target.create "CopyBinaries" (fun _ ->
-    let copyBinaries = BuildTask.create "CopyBinaries" [build] {
-        !! "**/src/**/*.??proj"
-        -- "**/src/**/*.shproj"
-        |> Seq.map (fun f -> ((System.IO.Path.GetDirectoryName f) </> "bin" </> configuration, "bin" </> (System.IO.Path.GetFileNameWithoutExtension f)))
-        |> Seq.filter (fun (fromDir, toDir) -> fromDir.ToLower().Contains("client") |> not)
-        |> Seq.iter (fun (fromDir, toDir) -> Shell.copyDir toDir fromDir (fun _ -> true))
-    }
-
     let run = BuildTask.create "Run" [build] {
         let jsPackageManager = getJsPackageManager ()
         
@@ -270,6 +242,33 @@ let createAndGetDefault () =
         |> ignore
     }
 
+    // --------------------------------------------------------------------------------------
+    // Build library & test project
+
+    let build = BuildTask.create "Build" [installClient;assemblyInfo] {
+        let jsPackageManager = getJsPackageManager ()
+        
+        projectsToBuild
+        |> Array.iter (fun x -> 
+            DotNet.build (fun p ->
+                { p with
+                    Configuration = buildConfiguration }) x
+        )
+                
+        runTool jsPackageManager.RunTool "webpack-cli -p" __SOURCE_DIRECTORY__
+    }
+
+    // Copies binaries from default VS location to expected bin folder
+    // But keeps a subdirectory structure for each project in the
+    // src folder to support multiple project outputs
+    //Target.create "CopyBinaries" (fun _ ->
+    let copyBinaries = BuildTask.create "CopyBinaries" [build] {
+        !! "**/src/**/*.??proj"
+        -- "**/src/**/*.shproj"
+        |> Seq.map (fun f -> ((System.IO.Path.GetDirectoryName f) </> "bin" </> configuration, "bin" </> (System.IO.Path.GetFileNameWithoutExtension f)))
+        |> Seq.filter (fun (fromDir, toDir) -> fromDir.ToLower().Contains("client") |> not)
+        |> Seq.iter (fun (fromDir, toDir) -> Shell.copyDir toDir fromDir (fun _ -> true))
+    }
 
     // --------------------------------------------------------------------------------------
     // Run the unit tests using test runner
