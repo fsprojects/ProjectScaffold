@@ -6,7 +6,10 @@ if errorlevel 1 (
   exit /b %errorlevel%
 )
 
-IF EXIST init.fsx (
-  fake run init.fsx
+IF EXIST init.fsproj (
+  yarn add webpack-cli --dev
+  dotnet run --project .\init.fsproj %*
 )
+
+dotnet restore
 dotnet run --project --configuration Release --project .\.build\Build.fsproj %*

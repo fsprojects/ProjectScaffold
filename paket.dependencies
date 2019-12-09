@@ -7,7 +7,8 @@ nuget Argu
 nuget Expecto
 nuget Expecto.BenchmarkDotNet
 nuget Expecto.FsCheck
-nuget Expecto.VisualStudio.TestAdapter version_in_path: true
+nuget Microsoft.NET.Test.Sdk
+nuget YoloDev.Expecto.TestSdk
 
 nuget Fake.JavaScript.Npm
 nuget Fake.JavaScript.Yarn
@@ -31,30 +32,36 @@ group Formatting
 
 group Server
     source https://api.nuget.org/v3/index.json
-    framework: netcoreapp2.2
+    framework: auto-detect
     storage: none
 
     nuget FSharp.Core
-    nuget Saturn
-    nuget Thoth.Json.Giraffe
+
     nuget FSharp.Data
+    nuget Fable.Core ~> 3
+    nuget Saturn ~> 0.10
+    nuget Thoth.Json 3.3
+    nuget Thoth.Json.Giraffe ~> 2
 
 group Client
     source https://api.nuget.org/v3/index.json
-    framework: netstandard2.0
+    framework: auto-detect
     storage: none
 
-    nuget Fable.Core
-    nuget Fable.Elmish
-    nuget Fable.Elmish.Debugger
-    nuget Fable.Elmish.React
-    nuget Fable.Elmish.HMR
-	nuget Fable.Fetch
-    nuget Fable.React
-    nuget Fulma 
-    nuget Fable.Recharts
-    nuget Fable.FontAwesome
-    nuget Fable.FontAwesome.Free
+    nuget FSharp.Core
+    
+    nuget Fable.Core ~> 3
+    nuget Fable.Elmish ~> 3
+    nuget Fable.Elmish.Debugger ~> 3
+    nuget Fable.Elmish.React  ~> 3
+    nuget Fable.Elmish.HMR ~> 4
+	nuget Fable.Fetch ~> 2
+    nuget Fable.React ~> 5
+    nuget Fulma ~> 2
+    nuget Fable.Recharts ~> 1
+    nuget Fable.FontAwesome ~> 2
+    nuget Fable.FontAwesome.Free ~> 2
 
-    clitool dotnet-fable
-	nuget Thoth.Fetch
+    clitool dotnet-fable 2.0.11
+	nuget Thoth.Fetch ~> 1
+	nuget Thoth.Json 3.3

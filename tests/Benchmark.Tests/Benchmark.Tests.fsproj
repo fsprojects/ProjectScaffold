@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 <PropertyGroup>
-  <TargetFrameworks>net472</TargetFrameworks>
+  <TargetFramework>netcoreapp3.1</TargetFramework>
   <RootNamespace>Benchmark.Tests</RootNamespace>
   <AssemblyName>Benchmark.Tests</AssemblyName>
   <Name>Benchmark.Tests</Name>
