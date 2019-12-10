@@ -362,7 +362,7 @@ let createAndGetDefault () =
         |> Seq.iter (fun (fromDir, toDir) -> Shell.copyDir toDir fromDir (fun _ -> true))
     }
 
-    let run = BuildTask.create "Run" [build; InstallClient] {
+    let run = BuildTask.create "Run" [build; installClient] {
         theRun()
     }
 
