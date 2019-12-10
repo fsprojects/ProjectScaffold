@@ -7,7 +7,7 @@ if errorlevel 1 (
 )
 
 IF EXIST init.fsproj (
-  yarn add webpack-cli --dev
+  yarn add webpack-cli@3.1.2 --dev
   dotnet run --project .\init.fsproj %*
 )
 
