@@ -58,6 +58,11 @@ let website = sprintf "/%s" "##GitName##"
 
 let testFolder = sprintf "../tests/%s.Tests" project
 
+let serverPath = Path.getFullName "./src/Server"
+let clientPath = Path.getFullName "./src/Client"
+let clientDeployPath = Path.combine clientPath "deploy"
+let deployDir = Path.getFullName "./deploy"
+
 // --------------------------------------------------------------------------------------
 // END TODO: The rest of the file includes standard build steps
 // --------------------------------------------------------------------------------------
@@ -374,10 +379,6 @@ let createAndGetDefault () =
     }
 
     let runTestsOnly = BuildTask.create "RunTestsOnly" [] {
-        "tests/LambdaCalc.Tests/LambdaCalc.Tests.fsproj"
-        |> DotNet.build (fun p -> 
-            { p with
-                Configuration = buildConfiguration })
         tests()
     }
 
