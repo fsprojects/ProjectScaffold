@@ -152,7 +152,7 @@ let globToArray x =
 let binToClean() =
     !! "**/bin"
     -- ".build/bin"
-    -- "node_modules/webpack-cli/bin"
+    -- "node_modules/**/bin"
     |> Seq.map id
     |> Seq.toArray
 
@@ -275,10 +275,6 @@ let postProcessReferenceDocs doc =
 let createAndGetDefault () =
     let clean = BuildTask.create "Clean" [] {
         [|
-            globToArray "**/src/**/bin"
-            globToArray "**/src/**/obj"
-            globToArray "**/tests/**/bin"
-            globToArray "**/tests/**/obj"
             binToClean()
             [| 
                 "temp"
