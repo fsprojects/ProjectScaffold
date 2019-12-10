@@ -152,7 +152,7 @@ let globToArray x =
 let binToClean() =
     !! "**/bin"
     -- ".build/bin"
-    -- "node_modules/**/bin"
+    -- "node_modules"
     |> Seq.map id
     |> Seq.toArray
 
