@@ -78,8 +78,6 @@ let (|Fsproj|Csproj|Vbproj|Shproj|) (projFileName:string) =
     | f when f.EndsWith("vbproj") -> Vbproj
     | f when f.EndsWith("shproj") -> Shproj
     | _                           -> failwith (sprintf "Project file %s not supported. Unknown project type." projFileName)
-    
-let serverPath = Path.getFullName "../src/Server"
 
 let projectsToBuild =
     [|
