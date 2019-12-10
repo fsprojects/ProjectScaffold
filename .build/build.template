@@ -149,13 +149,6 @@ let globToArray x =
     |> Seq.map id
     |> Seq.toArray
 
-let binToClean() =
-    !! "**/bin"
-    -- ".build/bin"
-    -- "node_modules"
-    |> Seq.map id
-    |> Seq.toArray
-
 let buildConfiguration = DotNet.Custom <| Environment.environVarOrDefault "configuration" configuration
 
 let tests() = 
@@ -275,7 +268,10 @@ let postProcessReferenceDocs doc =
 let createAndGetDefault () =
     let clean = BuildTask.create "Clean" [] {
         [|
-            binToClean()
+            globToArray "**/src/**/bin"
+            globToArray "**/src/**/obj"
+            globToArray "**/tests/**/bin"
+            globToArray "**/tests/**/obj"
             [| 
                 "temp"
             |]
